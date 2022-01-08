@@ -1,0 +1,16 @@
+.nav {
+    grid-area: n;
+    background-color: lightcoral;
+    padding: 10px;
+}
+
+.item {
+    color: royalblue;
+    text-decoration: none;
+    font-size: 25px;
+ }
+
+.active {
+    color: whitesmoke;
+    text-decoration: none;
+}
