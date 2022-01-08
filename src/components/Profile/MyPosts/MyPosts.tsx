@@ -5,15 +5,20 @@ import {Post} from "./Post/Post";
 
 export function MyPost() {
     return (
-        <div>
-            <div>My Posts</div>
+        <div className={s.postsBlock}>
+            <h3>My Posts</h3>
             <div>
-                <textarea></textarea>
-                <button>Add post</button>
+                <div className={s.postsBlock}>
+                    <textarea></textarea>
+                </div>
+                <div className={s.postsBlock}>
+                    <button>Add post</button>
+                </div>
             </div>
-            <Post message={'Hi'} likeCount={12}/>
-            <Post message={'Hello'} likeCount={1}/>
-            <Post message={'Good morning'} likeCount={35}/>
+            <div className={s.posts}>
+                <Post message={'Hi'} likeCount={12}/>
+                <Post message={'Hello'} likeCount={1}/>
+            </div>
         </div>
     )
 };
