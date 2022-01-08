@@ -5,7 +5,6 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 
 
-
 export function Profile() {
     return (
         <div>

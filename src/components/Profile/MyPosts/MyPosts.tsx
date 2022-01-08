@@ -1,6 +1,14 @@
 import React from "react";
-import s from './MyPosts.module.css'
+import s from './../Profile.module.css'
 import {Post} from "./Post/Post";
+
+
+
+export type PostType = {
+    id: number
+    message: string
+    likeCount: number
+}
 
 
 export function MyPost() {
@@ -23,11 +31,7 @@ export function MyPost() {
                 </div>
             </div>
             <div className={s.posts}>
-                {/*
-                <Post message={postsData[0].message} likeCount={postsData[0].likeCount}/>
-                <Post message={postsData[1].message} likeCount={postsData[1].likeCount}/>
-                <Post message={postsData[2].message} likeCount={postsData[2].likeCount}/>*/}
-                {postsData.map(p => <Post message={p.message} likeCount={p.likeCount}/>)}
+                {postsData.map(p => <Post id={p.id} message={p.message} likeCount={p.likeCount}/>)}
             </div>
         </div>
     )
