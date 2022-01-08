@@ -6,9 +6,9 @@ import {Post} from "./Post/Post";
 export function MyPost() {
 
     let postsData = [
-        {id:1, message: 'Hi', likeCount: 12},
-        {id:1, message: 'Hello', likeCount: 6},
-        {id:1, message: 'guten Tag', likeCount: 0},
+        {id: 1, message: 'Hi', likeCount: 12},
+        {id: 1, message: 'Hello', likeCount: 6},
+        {id: 1, message: 'guten Tag', likeCount: 0},
     ]
 
     return (
@@ -23,9 +23,11 @@ export function MyPost() {
                 </div>
             </div>
             <div className={s.posts}>
+                {/*
                 <Post message={postsData[0].message} likeCount={postsData[0].likeCount}/>
                 <Post message={postsData[1].message} likeCount={postsData[1].likeCount}/>
-                <Post message={postsData[2].message} likeCount={postsData[2].likeCount}/>
+                <Post message={postsData[2].message} likeCount={postsData[2].likeCount}/>*/}
+                {postsData.map(p => <Post message={p.message} likeCount={p.likeCount}/>)}
             </div>
         </div>
     )
