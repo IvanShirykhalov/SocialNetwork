@@ -9,8 +9,8 @@ export function ProfileInfo() {
     return (
         <div>
             <div>
-                <img
-                    src={'https://cdn.pixabay.com/photo/2016/06/02/02/33/triangles-1430105__480.png'}/>
+{/*                <img
+                    src={'https://ak.picdn.net/shutterstock/videos/9100523/thumb/10.jpg'}/>*/}
             </div>
             <div className={s.descriptionBlock}>ava</div>
         </div>

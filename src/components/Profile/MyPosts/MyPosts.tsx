@@ -11,11 +11,6 @@ export type MyPostPostType = {
 
 export function MyPost(props: postsPropsType) {
 
-/*    let posts = [
-        {id: 1, message: 'Hi', likeCount: 12},
-        {id: 1, message: 'Hello', likeCount: 6},
-        {id: 1, message: 'guten Tag', likeCount: 0},
-    ]*/
 
     return (
         <div className={s.postsBlock}>

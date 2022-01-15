@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import {App} from './App';
 import reportWebVitals from './reportWebVitals';
-import {propsDialogItemType, propsMessageType} from "./components/Dialogs/Dialogs";
 import {MyPostPostType} from "./components/Profile/MyPosts/MyPosts";
+import {propsDialogItemType} from "./components/Dialogs/DialogItem/DialogItem";
+import {propsMessageType} from "./components/Dialogs/Message/Message";
 
-export type propsType = {
+export type PropsType = {
     dialogs: Array<propsDialogItemType>
     messages: Array<propsMessageType>
     posts: Array<MyPostPostType>
@@ -15,7 +16,7 @@ export type propsType = {
 let posts = [
     {id: 1, message: 'Hi', likeCount: 12},
     {id: 1, message: 'Hello', likeCount: 6},
-    {id: 1, message: 'guten Tag', likeCount: 0},
+    {id: 1, message: 'Aloha', likeCount: 0},
 ]
 let dialogs = [
     {id: 1, name: 'Stephen'},
@@ -36,12 +37,8 @@ let messages = [
 
 ReactDOM.render(
   <React.StrictMode>
-    <App posts={posts} messages={messages}  dialogs={dialogs}/>
+    <App posts={posts} messages={messages} dialogs={dialogs}/>
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
