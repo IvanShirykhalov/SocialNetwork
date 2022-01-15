@@ -8,7 +8,7 @@ export function Post(props: MyPostPostType) {
 
         <div className={s.item}>
             <img
-                src={'https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png'}/>
+                src={'https://cdn-icons-png.flaticon.com/512/921/921055.png'}/>
             {props.message}
             <div><span>like {props.likeCount}</span></div>
 
