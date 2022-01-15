@@ -4,10 +4,12 @@ import {DialogItem, propsDialogItemType} from "./DialogItem/DialogItem";
 import {Message, propsMessageType} from "./Message/Message";
 
 
-
 export type DialogsPropsType = {
-    dialogs: Array<propsDialogItemType>
-    messages: Array<propsMessageType>
+    dialogsState: {
+        dialogs: Array<propsDialogItemType>
+        messages: Array<propsMessageType>
+    }
+
 }
 
 export function Dialogs(props: DialogsPropsType) {
@@ -15,10 +17,10 @@ export function Dialogs(props: DialogsPropsType) {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {props.dialogs.map(d=> <DialogItem name={d.name} id={d.id}/>)}
+                {props.dialogsState.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)}
             </div>
             <div className={s.messages}>
-                {props.messages.map(m => <Message message={m.message}/>)}
+                {props.dialogsState.messages.map(m => <Message message={m.message}/>)}
             </div>
         </div>
     )

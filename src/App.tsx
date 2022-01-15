@@ -8,21 +8,20 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {PropsType} from "./index";
 
 
-
 export function App(props: PropsType) {
 
     return (
         <BrowserRouter>
-        <div className={'appWrapper'}>
-            <Header/>
-            <Navbar/>
-            <div className={'appWrapperContent'}>
-                <Routes>
-                    <Route path="/messages" element= {<Dialogs messages={props.messages} dialogs={props.dialogs}/>}/>
-                    <Route path="/profile" element={<Profile posts={props.posts}/>}/>
-                </Routes>
+            <div className={'appWrapper'}>
+                <Header/>
+                <Navbar/>
+                <div className={'appWrapperContent'}>
+                    <Routes>
+                        <Route path="/messages" element={<Dialogs dialogsState={props.state.dialogsPage}/>}/>
+                        <Route path="/profile" element={<Profile profileState={props.state.profilePage}/>}/>
+                    </Routes>
+                </div>
             </div>
-        </div>
         </BrowserRouter>
     );
 }

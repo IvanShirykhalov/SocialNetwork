@@ -24,7 +24,7 @@ export function MyPost(props: postsPropsType) {
                 </div>
             </div>
             <div className={s.posts}>
-                {props.posts.map(p => <Post id={p.id} message={p.message} likeCount={p.likeCount}/>)}
+                {props.profileState.posts.map(p => <Post id={p.id} message={p.message} likeCount={p.likeCount}/>)}
             </div>
         </div>
     )
