@@ -1,15 +1,18 @@
 import React from "react";
-import s from './Profile.module.css'
-import {MyPost} from "./MyPosts/MyPosts";
+import {MyPost, MyPostPostType} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
+export type postsPropsType = {
+    posts: Array<MyPostPostType>
+}
+
+export function Profile(props: postsPropsType) {
 
 
-export function Profile() {
     return (
         <div>
             <ProfileInfo/>
-            <MyPost/>
+            <MyPost posts={props.posts}/>
         </div>
 
     )
