@@ -1,9 +1,44 @@
+export type propsMessageType = {
+    message: string
+}
+
+export type postsPropsType = {
+    addPost: (postMessage: string)=> void
+    profileState: {
+        posts: Array<MyPostPostType>
+    }
+}
+
+export type propsDialogItemType = {
+    name: string
+    id: number
+}
+
+export type MyPostPostType = {
+    id: number
+    message: string
+    likeCount: number
+}
+
+export type PropsType = {
+    addPost: (postMessage: string)=> void
+    state: {
+        dialogsPage: {
+            dialogs: Array<propsDialogItemType>
+            messages: Array<propsMessageType>
+        }
+        profilePage: {
+            posts: Array<MyPostPostType>
+        }
+    }
+}
+
 export let state = {
     profilePage: {
         posts: [
             {id: 1, message: 'Hi', likeCount: 12},
-            {id: 1, message: 'Hello', likeCount: 6},
-            {id: 1, message: 'Aloha', likeCount: 0},
+            {id: 2, message: 'Hello', likeCount: 6},
+            {id: 3, message: 'Aloha', likeCount: 0},
         ],
     },
     dialogsPage: {
@@ -24,4 +59,14 @@ export let state = {
             {id: 6, name: 'Erik'},
         ],
     },
+}
+
+export const addPost = (postMessage: string) =>{
+    const newPost: MyPostPostType = {
+        id: new Date().getTime(),
+        message: postMessage,
+        likeCount: 0
+    }
+
+    state.profilePage.posts.push(newPost)
 }
