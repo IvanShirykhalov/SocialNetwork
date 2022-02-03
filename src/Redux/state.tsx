@@ -1,19 +1,22 @@
 import {MyPostPostType} from "../components/Profile/MyPosts/MyPosts";
 import {propsDialogItemType} from "../components/Dialogs/DialogItem/DialogItem";
 import {propsMessageType} from "../components/Dialogs/Message/Message";
-import {rerenderEntireTree} from "../index";
+import {rerenderEntireTree} from "../render";
+
+export type RootStateType = {
+
+    dialogsPage: {
+        dialogs: Array<propsDialogItemType>
+        messages: Array<propsMessageType>
+    }
+    profilePage: {
+        posts: Array<MyPostPostType>
+
+    }
+}
 
 export type PropsType = {
-    state: {
-        dialogsPage: {
-            dialogs: Array<propsDialogItemType>
-            messages: Array<propsMessageType>
-        }
-        profilePage: {
-            posts: Array<MyPostPostType>
-
-        }
-    }
+    state: RootStateType
     addPost: (message: string) => void
 }
 
