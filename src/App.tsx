@@ -5,7 +5,8 @@ import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import {PropsType} from "./Redux/State";
+import {PropsType} from "./index";
+
 
 
 
@@ -20,7 +21,7 @@ export function App(props: PropsType) {
                     <Routes>
                         <Route path="/messages" element={<Dialogs dialogsState={props.state.dialogsPage}/>}/>
                         <Route path="/profile" element={<Profile profileState={props.state.profilePage}
-                                                                 addPost={props.addPost}/>}/>
+                                                                 AddPost={props.addPost}/>}/>
                     </Routes>
                 </div>
             </div>

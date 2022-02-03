@@ -1,17 +1,23 @@
 import React from "react";
 import s from './../Profile.module.css'
 import {Post} from "./Post/Post";
-import {postsPropsType} from "../../../Redux/State";
+import {postsPropsType} from "../Profile";
 
-
-
+export type MyPostPostType = {
+    id: number
+    message: string
+    likeCount: number
+}
 
 export function MyPost(props: postsPropsType) {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    let addPost = () => {
-        alert(newPostElement.current?.value)
+    const addPost = () => {
+        if (newPostElement.current) {
+            props.AddPost(newPostElement.current.value)
+
+        }
     }
 
     return (

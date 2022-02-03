@@ -1,27 +1,9 @@
-export type propsMessageType = {
-    message: string
-}
-
-export type postsPropsType = {
-    addPost: (postMessage: string)=> void
-    profileState: {
-        posts: Array<MyPostPostType>
-    }
-}
-
-export type propsDialogItemType = {
-    name: string
-    id: number
-}
-
-export type MyPostPostType = {
-    id: number
-    message: string
-    likeCount: number
-}
+import {MyPostPostType} from "../components/Profile/MyPosts/MyPosts";
+import {propsDialogItemType} from "../components/Dialogs/DialogItem/DialogItem";
+import {propsMessageType} from "../components/Dialogs/Message/Message";
+import {rerenderEntireTree} from "../index";
 
 export type PropsType = {
-    addPost: (postMessage: string)=> void
     state: {
         dialogsPage: {
             dialogs: Array<propsDialogItemType>
@@ -29,16 +11,18 @@ export type PropsType = {
         }
         profilePage: {
             posts: Array<MyPostPostType>
+
         }
     }
+    addPost: (message: string) => void
 }
 
 export let state = {
     profilePage: {
         posts: [
             {id: 1, message: 'Hi', likeCount: 12},
-            {id: 2, message: 'Hello', likeCount: 6},
-            {id: 3, message: 'Aloha', likeCount: 0},
+            {id: 1, message: 'Hello', likeCount: 6},
+            {id: 1, message: 'Aloha', likeCount: 0},
         ],
     },
     dialogsPage: {
@@ -61,12 +45,12 @@ export let state = {
     },
 }
 
-export const addPost = (postMessage: string) =>{
+export const AddPost = (message: string) => {
     const newPost: MyPostPostType = {
         id: new Date().getTime(),
-        message: postMessage,
+        message,
         likeCount: 0
     }
-
     state.profilePage.posts.push(newPost)
+    rerenderEntireTree();
 }
