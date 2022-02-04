@@ -1,7 +1,8 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import s from './../Profile.module.css'
 import {Post} from "./Post/Post";
 import {postsPropsType} from "../Profile";
+
 
 export type MyPostPostType = {
     id: number
@@ -9,15 +10,15 @@ export type MyPostPostType = {
     likeCount: number
 }
 
+
 export function MyPost(props: postsPropsType) {
 
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
-
     const addPost = () => {
-        if (newPostElement.current) {
-            props.AddPost(newPostElement.current.value)
+        props.AddPost(props.newTextPost)
+    }
 
-        }
+    const onPosChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.ChangeNewText(e.currentTarget.value)
     }
 
     return (
@@ -25,7 +26,7 @@ export function MyPost(props: postsPropsType) {
             <h3>My Posts</h3>
             <div>
                 <div className={s.postsBlock}>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea onChange={onPosChange} value={props.newTextPost}/>
                 </div>
                 <div className={s.postsBlock}>
                     <button onClick={addPost}>Add post</button>

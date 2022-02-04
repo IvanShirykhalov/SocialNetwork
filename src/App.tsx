@@ -5,14 +5,10 @@ import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import {PropsType} from "./Redux/state";
+import {AddPost, ChangeNewText, state} from "./Redux/state";
 
 
-
-
-
-
-export function App(props: PropsType) {
+export function App() {
 
     return (
         <BrowserRouter>
@@ -21,9 +17,11 @@ export function App(props: PropsType) {
                 <Navbar/>
                 <div className={'appWrapperContent'}>
                     <Routes>
-                        <Route path="/messages" element={<Dialogs dialogsState={props.state.dialogsPage}/>}/>
-                        <Route path="/profile" element={<Profile profileState={props.state.profilePage}
-                                                                 AddPost={props.addPost}/>}/>
+                        <Route path="/messages" element={<Dialogs dialogsState={state.dialogsPage}/>}/>
+                        <Route path="/profile" element={<Profile profileState={state.profilePage}
+                                                                 newTextPost={state.profilePage.newTextPost}
+                                                                 ChangeNewText={ChangeNewText}
+                                                                 AddPost={AddPost}/>}/>
                     </Routes>
                 </div>
             </div>

@@ -10,22 +10,20 @@ export type RootStateType = {
         messages: Array<propsMessageType>
     }
     profilePage: {
+        newTextPost: string
         posts: Array<MyPostPostType>
 
     }
 }
 
-export type PropsType = {
-    state: RootStateType
-    addPost: (message: string) => void
-}
 
 export let state = {
     profilePage: {
+        newTextPost: '',
         posts: [
             {id: 1, message: 'Hi', likeCount: 12},
-            {id: 1, message: 'Hello', likeCount: 6},
-            {id: 1, message: 'Aloha', likeCount: 0},
+/*            {id: 1, message: 'Hello', likeCount: 6},
+            {id: 1, message: 'Aloha', likeCount: 0},*/
         ],
     },
     dialogsPage: {
@@ -48,12 +46,18 @@ export let state = {
     },
 }
 
-export const AddPost = (message: string) => {
+export const AddPost = () => {
     const newPost: MyPostPostType = {
         id: new Date().getTime(),
-        message,
+        message: state.profilePage.newTextPost,
         likeCount: 0
     }
     state.profilePage.posts.push(newPost)
-    rerenderEntireTree();
+    state.profilePage.newTextPost = ''
+    rerenderEntireTree(state);
+}
+
+export const ChangeNewText = (newText: string) => {
+    state.profilePage.newTextPost = newText
+    rerenderEntireTree(state);
 }
