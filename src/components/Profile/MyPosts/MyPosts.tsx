@@ -16,11 +16,13 @@ export type MyPostPostType = {
 export function MyPost(props: postsPropsType) {
 
     const addPost = () => {
-        props.AddPost(props.newTextPost)
+        /*props.AddPost(props.newTextPost)*/
+        props.dispatch({type: "ADD-POST", newTextPost: props.newTextPost})
     }
 
     const onPosChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        store.ChangeNewText(e.currentTarget.value)
+        /*store.ChangeNewText(e.currentTarget.value)*/
+        props.dispatch({type: "CHANGE-NEW-TEXT", newText: e.currentTarget.value})
     }
 
     return (

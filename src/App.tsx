@@ -25,8 +25,8 @@ export function App(props: AppPropsType) {
                         <Route path="/messages" element={<Dialogs dialogsState={state.dialogsPage}/>}/>
                         <Route path="/profile" element={<Profile profileState={state.profilePage}
                                                                  newTextPost={state.profilePage.newTextPost}
-                                                                 ChangeNewText={props.store.ChangeNewText.bind(props.store)}
-                                                                 AddPost={props.store.AddPost.bind(props.store)}/>}/>
+                                                                 dispatch={props.store.dispatch.bind(props.store)}
+                                                                 />}/>
                     </Routes>
                 </div>
             </div>

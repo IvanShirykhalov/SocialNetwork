@@ -14,14 +14,24 @@ export type StateType = {
     }
 }
 
+type AddPostActionType = {
+    type: 'ADD-POST'
+    newTextPost: string
+}
+
+type ChangeNewTextActionType = {
+    type: 'CHANGE-NEW-TEXT'
+    newText: string
+}
+
+export type ActionsType = ChangeNewTextActionType | AddPostActionType
+
 export type RootStateType = {
     _state: StateType
     _callSubscriber: () => void
     gerStore: () => StateType
     subscribe: (observer: () => void) => void
-/*    AddPost: () => void
-    ChangeNewText: (newText: string) => void*/
-    dispatch: (action: any) => void
+    dispatch: (action: ActionsType) => void
 
 }
 
@@ -66,16 +76,16 @@ export let store: RootStateType = {
 
 
     dispatch(action) {
-        if (action.type === 'ADD-Post') {
+        if (action.type === 'ADD-POST') {
             const newPost: MyPostPostType = {
                 id: new Date().getTime(),
-                message: this._state.profilePage.newTextPost,
+                message: action.newTextPost,
                 likeCount: 0
             }
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.newTextPost = ''
             this._callSubscriber();
-        } else if (action.type === 'CHANGE-NEW-NEXT') {
+        } else if (action.type === 'CHANGE-NEW-TEXT') {
             this._state.profilePage.newTextPost = action.newText
             this._callSubscriber();
         }
