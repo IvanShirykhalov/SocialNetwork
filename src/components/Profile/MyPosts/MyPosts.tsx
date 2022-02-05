@@ -2,6 +2,7 @@ import React, {ChangeEvent} from "react";
 import s from './../Profile.module.css'
 import {Post} from "./Post/Post";
 import {postsPropsType} from "../Profile";
+import {Button, TextField} from "@mui/material";
 
 
 export type MyPostPostType = {
@@ -26,10 +27,10 @@ export function MyPost(props: postsPropsType) {
             <h3>My Posts</h3>
             <div>
                 <div className={s.postsBlock}>
-                    <textarea onChange={onPosChange} value={props.newTextPost}/>
+                    <TextField onChange={onPosChange} value={props.newTextPost}/>
                 </div>
                 <div className={s.postsBlock}>
-                    <button onClick={addPost}>Add post</button>
+                    <Button onClick={addPost}>Add post</Button>
                 </div>
             </div>
             <div className={s.posts}>

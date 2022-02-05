@@ -1,7 +1,11 @@
 import {MyPostPostType} from "../components/Profile/MyPosts/MyPosts";
 import {propsDialogItemType} from "../components/Dialogs/DialogItem/DialogItem";
 import {propsMessageType} from "../components/Dialogs/Message/Message";
-import {rerenderEntireTree} from "../render";
+
+
+let rerenderEntireTree = (state: RootStateType) => {
+    console.log('State changed')
+}
 
 export type RootStateType = {
 
@@ -22,8 +26,7 @@ export let state = {
         newTextPost: '',
         posts: [
             {id: 1, message: 'Hi', likeCount: 12},
-/*            {id: 1, message: 'Hello', likeCount: 6},
-            {id: 1, message: 'Aloha', likeCount: 0},*/
+            {id: 1, message: 'Hello', likeCount: 6},
         ],
     },
     dialogsPage: {
@@ -60,4 +63,8 @@ export const AddPost = () => {
 export const ChangeNewText = (newText: string) => {
     state.profilePage.newTextPost = newText
     rerenderEntireTree(state);
+}
+
+export const subscribe = (observer: any) => {
+    rerenderEntireTree = observer
 }
