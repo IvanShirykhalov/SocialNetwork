@@ -1,7 +1,8 @@
 import React from "react";
 import {MyPost, MyPostPostType} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ChangeNewText} from "../../Redux/state";
+import {store} from "../../Redux/state";
+
 
 export type postsPropsType = {
     newTextPost: string
@@ -19,9 +20,9 @@ export function Profile(props: postsPropsType) {
         <div>
             <ProfileInfo/>
             <MyPost profileState={props.profileState}
-                    AddPost={props.AddPost}
+                    AddPost={props.AddPost.bind(store.AddPost)}
                     newTextPost={props.newTextPost}
-                    ChangeNewText={ChangeNewText}
+                    ChangeNewText={props.ChangeNewText.bind(store.ChangeNewText)}
             />
         </div>
 

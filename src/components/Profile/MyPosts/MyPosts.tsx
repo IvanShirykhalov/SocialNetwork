@@ -3,6 +3,7 @@ import s from './../Profile.module.css'
 import {Post} from "./Post/Post";
 import {postsPropsType} from "../Profile";
 import {Button, TextField} from "@mui/material";
+import {store} from "../../../Redux/state";
 
 
 export type MyPostPostType = {
@@ -19,7 +20,7 @@ export function MyPost(props: postsPropsType) {
     }
 
     const onPosChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.ChangeNewText(e.currentTarget.value)
+        store.ChangeNewText(e.currentTarget.value)
     }
 
     return (
