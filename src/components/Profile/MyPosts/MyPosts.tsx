@@ -3,7 +3,8 @@ import s from './../Profile.module.css'
 import {Post} from "./Post/Post";
 import {postsPropsType} from "../Profile";
 import {Button, TextField} from "@mui/material";
-import {store} from "../../../Redux/state";
+import {addPostAC, onPostChangeAC} from "../../../Redux/state";
+
 
 
 export type MyPostPostType = {
@@ -13,16 +14,20 @@ export type MyPostPostType = {
 }
 
 
+
+
 export function MyPost(props: postsPropsType) {
 
     const addPost = () => {
         /*props.AddPost(props.newTextPost)*/
-        props.dispatch({type: "ADD-POST", newTextPost: props.newTextPost})
+        /*props.dispatch({type: "ADD-POST", newTextPost: props.newTextPost})*/
+        props.dispatch(addPostAC(props.newTextPost))
     }
 
     const onPosChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         /*store.ChangeNewText(e.currentTarget.value)*/
-        props.dispatch({type: "CHANGE-NEW-TEXT", newText: e.currentTarget.value})
+        /*props.dispatch({type: "CHANGE-NEW-TEXT", newText: e.currentTarget.value})*/
+        props.dispatch(onPostChangeAC(e.currentTarget.value))
     }
 
     return (

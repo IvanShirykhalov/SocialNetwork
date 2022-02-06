@@ -26,6 +26,22 @@ type ChangeNewTextActionType = {
 
 export type ActionsType = ChangeNewTextActionType | AddPostActionType
 
+export const addPostAC = (newTextPost: string): AddPostActionType => {
+    return {
+        type: "ADD-POST",
+        newTextPost: newTextPost
+
+    }
+}
+
+export const onPostChangeAC = (newText: string): ChangeNewTextActionType => {
+    return {
+        type: "CHANGE-NEW-TEXT",
+        newText: newText
+    }
+}
+
+
 export type RootStateType = {
     _state: StateType
     _callSubscriber: () => void
