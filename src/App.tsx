@@ -22,11 +22,14 @@ export function App(props: AppPropsType) {
                 <Navbar/>
                 <div className={'appWrapperContent'}>
                     <Routes>
-                        <Route path="/messages" element={<Dialogs dialogsState={state.dialogsPage}/>}/>
+                        <Route path="/messages" element={<Dialogs dialogsState={state.dialogsPage}
+                                                                  dispatch={props.store.dispatch.bind(props.store)}
+                                                                  newTextMessage={state.dialogsPage.newMessageText}
+                        />}/>
                         <Route path="/profile" element={<Profile profileState={state.profilePage}
                                                                  newTextPost={state.profilePage.newTextPost}
                                                                  dispatch={props.store.dispatch.bind(props.store)}
-                                                                 />}/>
+                        />}/>
                     </Routes>
                 </div>
             </div>
