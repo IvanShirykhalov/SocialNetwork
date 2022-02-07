@@ -1,8 +1,8 @@
 import {MyPostPostType} from "../components/Profile/MyPosts/MyPosts";
 import {propsDialogItemType} from "../components/Dialogs/DialogItem/DialogItem";
 import {propsMessageType} from "../components/Dialogs/Message/Message";
-import {profileReducer} from "./profileReducer";
-import {dialogsReducer} from "./dialogsReducer";
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
 
 export type dialogsPageType = {
     dialogs: Array<propsDialogItemType>
@@ -11,7 +11,7 @@ export type dialogsPageType = {
 }
 export type profilePageType = {
     posts: Array<MyPostPostType>
-        newTextPost: string
+    newTextPost: string
 }
 
 export type StateType = {
@@ -26,50 +26,23 @@ export type RootStateType = {
     dispatch: (action: ActionsType) => void
 
 }
-type UpdateNewMessageText = {
+export type UpdateNewMessageText = {
     type: 'NEW-MESSAGE-TEXT'
     newMessageText: string
 }
-type AddPostActionType = {
+export type AddPostActionType = {
     type: 'ADD-POST'
     newTextPost: string
 }
-type ChangeNewTextActionType = {
+export type ChangeNewTextActionType = {
     type: 'CHANGE-NEW-TEXT'
     newText: string
 }
-type sendMessage = {
+export type sendMessage = {
     type: 'SEND-MESSAGE'
     newMessageText: string
 }
 export type ActionsType = ChangeNewTextActionType | AddPostActionType | UpdateNewMessageText | sendMessage
-
-
-export const addPostAC = (newTextPost: string): AddPostActionType => {
-    return {
-        type: "ADD-POST",
-        newTextPost: newTextPost
-
-    }
-}
-export const onPostChangeAC = (newText: string): ChangeNewTextActionType => {
-    return {
-        type: "CHANGE-NEW-TEXT",
-        newText: newText
-    }
-}
-export const newMessageTextAC = (newMessageText: string): UpdateNewMessageText => {
-    return {
-        type: "NEW-MESSAGE-TEXT",
-        newMessageText: newMessageText
-    }
-}
-export const sendMessageAC = (newMessageText: string): sendMessage => {
-    return {
-        type: "SEND-MESSAGE",
-        newMessageText: newMessageText
-    }
-}
 
 
 export let store: RootStateType = {
@@ -120,30 +93,30 @@ export let store: RootStateType = {
         this._callSubscriber()
 
 
-/*                if (action.type === 'ADD-POST') {
-                    const newPost: MyPostPostType = {
-                        id: new Date().getTime(),
-                        message: action.newTextPost,
-                        likeCount: 0
-                    }
-                    this._state.profilePage.posts.push(newPost)
-                    this._state.profilePage.newTextPost = ''
-                    this._callSubscriber();
-                } else if (action.type === 'CHANGE-NEW-TEXT') {
-                    this._state.profilePage.newTextPost = action.newText
-                    this._callSubscriber();
-                } else if (action.type === 'NEW-MESSAGE-TEXT') {
-                    this._state.dialogsPage.newMessageText = action.newMessageText
-                    this._callSubscriber();
-                } else if (action.type === 'SEND-MESSAGE') {
-                    const newMessage: propsMessageType = {
-                        id: new Date().getTime(),
-                        message: action.newMessageText
-                    }
-                    this._state.dialogsPage.messages.push(newMessage)
-                    this._state.dialogsPage.newMessageText = ''
-                    this._callSubscriber()
-                }*/
+        /*                if (action.type === 'ADD-POST') {
+                            const newPost: MyPostPostType = {
+                                id: new Date().getTime(),
+                                message: action.newTextPost,
+                                likeCount: 0
+                            }
+                            this._state.profilePage.posts.push(newPost)
+                            this._state.profilePage.newTextPost = ''
+                            this._callSubscriber();
+                        } else if (action.type === 'CHANGE-NEW-TEXT') {
+                            this._state.profilePage.newTextPost = action.newText
+                            this._callSubscriber();
+                        } else if (action.type === 'NEW-MESSAGE-TEXT') {
+                            this._state.dialogsPage.newMessageText = action.newMessageText
+                            this._callSubscriber();
+                        } else if (action.type === 'SEND-MESSAGE') {
+                            const newMessage: propsMessageType = {
+                                id: new Date().getTime(),
+                                message: action.newMessageText
+                            }
+                            this._state.dialogsPage.messages.push(newMessage)
+                            this._state.dialogsPage.newMessageText = ''
+                            this._callSubscriber()
+                        }*/
 
     }
 

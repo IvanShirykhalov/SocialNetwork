@@ -3,7 +3,8 @@ import s from './../Profile.module.css'
 import {Post} from "./Post/Post";
 import {postsPropsType} from "../Profile";
 import {Button, TextField} from "@mui/material";
-import {addPostAC, onPostChangeAC} from "../../../Redux/state";
+import {addPostAC, onPostChangeAC} from "../../../Redux/profileReducer";
+
 
 
 
