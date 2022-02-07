@@ -4,17 +4,19 @@ import {propsMessageType} from "../components/Dialogs/Message/Message";
 import {profileReducer} from "./profileReducer";
 import {dialogsReducer} from "./dialogsReducer";
 
+export type dialogsPageType = {
+    dialogs: Array<propsDialogItemType>
+    messages: Array<propsMessageType>
+    newMessageText: string
+}
+export type profilePageType = {
+    posts: Array<MyPostPostType>
+        newTextPost: string
+}
 
 export type StateType = {
-    dialogsPage: {
-        dialogs: Array<propsDialogItemType>
-        messages: Array<propsMessageType>
-        newMessageText: string
-    }
-    profilePage: {
-        posts: Array<MyPostPostType>
-        newTextPost: string
-    }
+    dialogsPage: dialogsPageType
+    profilePage: profilePageType
 }
 export type RootStateType = {
     _state: StateType
@@ -111,7 +113,6 @@ export let store: RootStateType = {
 
 
     dispatch(action) {
-
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
 
