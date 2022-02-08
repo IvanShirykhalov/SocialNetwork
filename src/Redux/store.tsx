@@ -1,8 +1,7 @@
 import {MyPostPostType} from "../components/Profile/MyPosts/MyPosts";
 import {propsDialogItemType} from "../components/Dialogs/DialogItem/DialogItem";
 import {propsMessageType} from "../components/Dialogs/Message/Message";
-import profileReducer from "./profileReducer";
-import dialogsReducer from "./dialogsReducer";
+
 
 export type dialogsPageType = {
     dialogs: Array<propsDialogItemType>
@@ -86,37 +85,11 @@ export let store: RootStateType = {
 
 
     dispatch(action) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        //this._state.profilePage = profileReducer(this._state.profilePage, action)
+        //this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
 
 
         this._callSubscriber()
-
-
-        /*                if (action.type === 'ADD-POST') {
-                            const newPost: MyPostPostType = {
-                                id: new Date().getTime(),
-                                message: action.newTextPost,
-                                likeCount: 0
-                            }
-                            this._state.profilePage.posts.push(newPost)
-                            this._state.profilePage.newTextPost = ''
-                            this._callSubscriber();
-                        } else if (action.type === 'CHANGE-NEW-TEXT') {
-                            this._state.profilePage.newTextPost = action.newText
-                            this._callSubscriber();
-                        } else if (action.type === 'NEW-MESSAGE-TEXT') {
-                            this._state.dialogsPage.newMessageText = action.newMessageText
-                            this._callSubscriber();
-                        } else if (action.type === 'SEND-MESSAGE') {
-                            const newMessage: propsMessageType = {
-                                id: new Date().getTime(),
-                                message: action.newMessageText
-                            }
-                            this._state.dialogsPage.messages.push(newMessage)
-                            this._state.dialogsPage.newMessageText = ''
-                            this._callSubscriber()
-                        }*/
 
     }
 

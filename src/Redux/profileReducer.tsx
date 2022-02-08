@@ -1,8 +1,28 @@
-import {ActionsType, AddPostActionType, ChangeNewTextActionType, profilePageType, StateType} from "./state";
 import {MyPostPostType} from "../components/Profile/MyPosts/MyPosts";
 
 
-const profileReducer = (state: profilePageType, action: ActionsType) => {
+export type AddPostActionType = {
+    type: 'ADD-POST'
+    newTextPost: string
+}
+export type ChangeNewTextActionType = {
+    type: 'CHANGE-NEW-TEXT'
+    newText: string
+}
+export type profilePageType = {
+    posts: Array<MyPostPostType>
+    newTextPost: string
+}
+
+const initialStore: profilePageType = {
+    newTextPost: '',
+    posts: [
+        {id: 1, message: 'Hi', likeCount: 12},
+        {id: 1, message: 'Hello', likeCount: 6},
+    ],
+}
+
+const profileReducer = (state = initialStore, action: AddPostActionType | ChangeNewTextActionType) => {
     switch (action.type) {
         case 'ADD-POST':
             const newPost: MyPostPostType = {

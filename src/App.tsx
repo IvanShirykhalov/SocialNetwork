@@ -5,7 +5,7 @@ import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import {RootStateType} from "./Redux/state";
+import {RootStateType} from "./Redux/store";
 
 type AppPropsType = {
     store: RootStateType
