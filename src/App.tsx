@@ -33,6 +33,7 @@ export const App = (props: AppPropsType) => {
                         <Route path="/profile" element={<Profile profileState={state.profilePage}
                                                                  newTextPost={state.profilePage.newTextPost}
                                                                  dispatch={props.store.dispatch.bind(props.store)}
+                                                                 store={props.store}
                         />}/>
                     </Routes>
                 </div>
