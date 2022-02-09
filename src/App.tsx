@@ -9,6 +9,7 @@ import {Store} from "redux";
 import {StoreType} from "./Redux/redux-store";
 import {AddPostActionType, ChangeNewTextActionType} from "./Redux/profileReducer";
 import {sendMessage, UpdateNewMessageText} from "./Redux/dialogsReducer";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 export type ActionsType = ChangeNewTextActionType | AddPostActionType | UpdateNewMessageText | sendMessage
 type AppPropsType = {
@@ -26,14 +27,17 @@ export const App = (props: AppPropsType) => {
                 <Navbar/>
                 <div className={'appWrapperContent'}>
                     <Routes>
-                        <Route path="/messages" element={<Dialogs dialogsState={state.dialogsPage}
-                                                                  dispatch={props.store.dispatch.bind(props.store)}
-                                                                  newTextMessage={state.dialogsPage.newMessageText}
-                        />}/>
-                        <Route path="/profile" element={<Profile profileState={state.profilePage}
-                                                                 newTextPost={state.profilePage.newTextPost}
-                                                                 dispatch={props.store.dispatch.bind(props.store)}
+                        <Route path="/messages"
+                               element={<DialogsContainer messageText={state.dialogsPage.newMessageText}
+                                                          store={props.store}
+                                   /*dialogsState={state.dialogsPage}
+                                   dispatch={props.store.dispatch.bind(props.store)}*/
+                               />}/>
+                        <Route path="/profile" element={<Profile newTextPost={state.profilePage.newTextPost}
                                                                  store={props.store}
+                            /*dispatch={props.store.dispatch.bind(props.store)}*/
+                            /*profileState={state.profilePage}*/
+
                         />}/>
                     </Routes>
                 </div>

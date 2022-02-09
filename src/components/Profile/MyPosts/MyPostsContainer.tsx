@@ -8,11 +8,12 @@ import {MyPost} from "./MyPosts";
 
 export function MyPostContainer(props: postsPropsType) {
 
-    const store = props.store.getState()
+    const state = props.store.getState()
 
     const addPost = () => {
         /*props.AddPost(props.newTextPost)*/
         /*props.dispatch({type: "ADD-POST", newTextPost: props.newTextPost})*/
+        /*props.store.dispatch(addPostAC(props.newTextPost))*/
         props.store.dispatch(addPostAC(props.newTextPost))
 
     }
@@ -20,6 +21,7 @@ export function MyPostContainer(props: postsPropsType) {
     const onPosChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         /*store.ChangeNewText(e.currentTarget.value)*/
         /*props.dispatch({type: "CHANGE-NEW-TEXT", newText: e.currentTarget.value})*/
+        /*props.store.dispatch(onPostChangeAC(e.currentTarget.value))*/
         props.store.dispatch(onPostChangeAC(e.currentTarget.value))
     }
 
@@ -41,9 +43,10 @@ export function MyPostContainer(props: postsPropsType) {
         <MyPost addPost={addPost}
                 onPostChange={onPosChange}
                 newTextPost={props.newTextPost}
+                profileState={state.profilePage}
                 /*newTextPost={props.dialogsPage.newMessageText}*/
                 /*profileState={props.profileState}*/
-                profileState={store.profilePage}
+
         />
     )
 };
