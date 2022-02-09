@@ -1,11 +1,12 @@
 import React from "react";
 import s from './Post.module.css'
-import {MyPostPostType} from "../MyPosts";
+import {MyPostType} from "../../../../Redux/profileReducer";
 
 
 
 
-export function Post(props: MyPostPostType) {
+
+export function Post(props: MyPostType) {
     return (
 
         <div className={s.item}>
