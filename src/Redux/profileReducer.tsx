@@ -1,4 +1,5 @@
 import {MyPostPostType} from "../components/Profile/MyPosts/MyPosts";
+import {ActionsType} from "./store";
 
 
 export type AddPostActionType = {
@@ -22,7 +23,7 @@ const initialStore: profilePageType = {
     ],
 }
 
-const profileReducer = (state = initialStore, action: AddPostActionType | ChangeNewTextActionType) => {
+const profileReducer = (state = initialStore, action: ActionsType) => {
     switch (action.type) {
         case 'ADD-POST':
             const newPost: MyPostPostType = {

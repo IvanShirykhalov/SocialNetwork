@@ -1,11 +1,13 @@
 import React from 'react';
 import './index.css';
-import {store} from "./Redux/store";
 import ReactDOM from 'react-dom';
 import {App} from './App';
 
+import {Store} from "redux";
+import {store, StoreType} from "./Redux/redux-store";
 
-export const rerenderEntireTree = () => {
+
+export const rerenderEntireTree = (store: Store<StoreType, any>) => {
     ReactDOM.render(
         <React.StrictMode>
             <App store={store}/>
@@ -15,5 +17,5 @@ export const rerenderEntireTree = () => {
 }
 
 
-rerenderEntireTree();
-store.subscribe(rerenderEntireTree)
+rerenderEntireTree(store);
+store.subscribe(() =>rerenderEntireTree(store))

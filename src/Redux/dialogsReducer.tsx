@@ -1,5 +1,6 @@
 import {propsMessageType} from "../components/Dialogs/Message/Message";
 import {propsDialogItemType} from "../components/Dialogs/DialogItem/DialogItem";
+import {ActionsType} from "./store";
 
 
 export type UpdateNewMessageText = {
@@ -35,7 +36,7 @@ const initialStore: dialogsPageType =  {
 
 }
 
-const dialogsReducer = (state = initialStore, action:UpdateNewMessageText | sendMessage) => {
+const dialogsReducer = (state = initialStore, action: ActionsType) => {
     switch (action.type) {
         case 'NEW-MESSAGE-TEXT':
             state.newMessageText = action.newMessageText

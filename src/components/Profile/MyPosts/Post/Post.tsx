@@ -10,7 +10,7 @@ export function Post(props: MyPostPostType) {
 
         <div className={s.item}>
             <img
-                src={'https://cdn-icons-png.flaticon.com/128/4600/4600204.png'} alt={' '}/>
+                src={'https://cdn-icons.flaticon.com/png/128/4691/premium/4691213.png?token=exp=1644418406~hmac=13c31db1927c47e71e9374b9bf85d99a'} alt={' '}/>
             {props.message}
             <div><span>like {props.likeCount}</span></div>
 

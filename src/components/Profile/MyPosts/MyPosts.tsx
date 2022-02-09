@@ -33,7 +33,7 @@ export function MyPost(props: postsPropsType) {
 
     return (
         <div className={s.postsBlock}>
-            <h3>My Posts</h3>
+            {/*<h3>My Posts</h3>*/}
             <div>
                 <div className={s.postsBlock}>
                     <TextField onChange={onPosChange} value={props.newTextPost}/>
