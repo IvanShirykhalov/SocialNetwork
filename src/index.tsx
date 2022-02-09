@@ -1,13 +1,13 @@
 import React from 'react';
 import './index.css';
 import ReactDOM from 'react-dom';
-import {App} from './App';
+import {ActionsType, App} from './App';
 
 import {Store} from "redux";
 import {store, StoreType} from "./Redux/redux-store";
 
 
-export const rerenderEntireTree = (store: Store<StoreType, any>) => {
+export const rerenderEntireTree = (store: Store<StoreType, ActionsType>) => {
     ReactDOM.render(
         <React.StrictMode>
             <App store={store}/>

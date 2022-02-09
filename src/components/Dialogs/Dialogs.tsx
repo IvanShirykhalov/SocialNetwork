@@ -4,7 +4,8 @@ import {DialogItem, propsDialogItemType} from "./DialogItem/DialogItem";
 import {Message, propsMessageType} from "./Message/Message";
 import {Button, TextField} from "@mui/material";
 import {newMessageTextAC, sendMessageAC} from "../../Redux/dialogsReducer";
-import {ActionsType} from "../../Redux/store";
+import {ActionsType} from "../../App";
+
 
 
 export type DialogsPropsType = {

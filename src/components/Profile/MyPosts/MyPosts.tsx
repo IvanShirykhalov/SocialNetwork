@@ -31,6 +31,7 @@ export function MyPost(props: postsPropsType) {
         props.dispatch(onPostChangeAC(e.currentTarget.value))
     }
 
+
     return (
         <div className={s.postsBlock}>
             {/*<h3>My Posts</h3>*/}

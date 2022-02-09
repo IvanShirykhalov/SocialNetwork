@@ -1,3 +1,5 @@
+export const myStore = {}
+/*
 import {MyPostPostType} from "../components/Profile/MyPosts/MyPosts";
 import {propsDialogItemType} from "../components/Dialogs/DialogItem/DialogItem";
 import {propsMessageType} from "../components/Dialogs/Message/Message";
@@ -52,7 +54,7 @@ export let store: RootStateType = {
             newTextPost: '',
             posts: [
                 {id: 1, message: 'Hi', likeCount: 12},
-                /*{id: 1, message: 'Hello', likeCount: 6},*/
+                /!*{id: 1, message: 'Hello', likeCount: 6},*!/
             ],
         },
         dialogsPage: {
@@ -87,8 +89,8 @@ export let store: RootStateType = {
 
 
     dispatch(action) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        //this._state.profilePage = profileReducer(this._state.profilePage, action)
+        //this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
 
 
         this._callSubscriber()
@@ -96,6 +98,7 @@ export let store: RootStateType = {
     }
 
 }
+*/
 
 
 

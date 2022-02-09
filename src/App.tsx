@@ -5,15 +5,17 @@ import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import {ActionsType, RootStateType} from "./Redux/store";
 import {Store} from "redux";
 import {StoreType} from "./Redux/redux-store";
+import {AddPostActionType, ChangeNewTextActionType} from "./Redux/profileReducer";
+import {sendMessage, UpdateNewMessageText} from "./Redux/dialogsReducer";
 
+export type ActionsType = ChangeNewTextActionType | AddPostActionType | UpdateNewMessageText | sendMessage
 type AppPropsType = {
     store: Store<StoreType, ActionsType>
 }
 
-export function App(props: AppPropsType) {
+export const App = (props: AppPropsType) => {
 
     const state = props.store.getState()
 
