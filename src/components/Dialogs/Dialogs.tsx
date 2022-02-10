@@ -1,6 +1,8 @@
 import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import {Button, TextField} from "@mui/material";
+import {Message} from "./Message/Message";
+import {DialogItem} from "./DialogItem/DialogItem";
 import {dialogsPageType} from "../../Redux/dialogsReducer";
 
 
@@ -11,19 +13,21 @@ export type DialogsPropsType = {
     sendMessage: ()=> void
     newMessageText: (e: ChangeEvent<HTMLTextAreaElement>)=> void
     newMessageValue: string
-    dialogsElement: any
-    messagesElement: any
-    /*dialogsPage: ?*/
+    dialogsPage: dialogsPageType
+    /*    dialogsElement: any
+    messagesElement: any*/
 
 
 }
 
 export function Dialogs(props: DialogsPropsType) {
 
-/*    const dialogsElement = props.dialogsState.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
-    const messagesElement = props.dialogsState.messages.map(m => <Message message={m.message} id={m.id}/>)
+    /*const dialogsElement = props.dialogsState.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)*/
+    const dialogsElement = props.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
+    const messagesElement = props.dialogsPage.messages.map(m => <Message message={m.message} id={m.id}/>)
 
-    const newMessageValue = props.dialogsState.newMessageText
+
+/*    const newMessageValue = props.dialogsState.newMessageText
 
 
     const sendMessage = () => {
@@ -34,16 +38,16 @@ export function Dialogs(props: DialogsPropsType) {
         props.dispatch(newMessageTextAC(e.currentTarget.value))
     }*/
 
-    /*const state = props.dialogsPage*/
+    const state = props.dialogsPage
 
     return (
         <div>
             <div className={s.dialogs}>
                 <div className={s.dialogsItems}>
-                    {props.dialogsElement}
+                    {dialogsElement}
                 </div>
                 <div className={s.messages}>
-                    <div> {props.messagesElement}</div>
+                    <div> {messagesElement}</div>
                     {/*<div> {state.messages}</div>*/}
                 </div>
             </div>

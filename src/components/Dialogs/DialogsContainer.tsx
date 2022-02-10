@@ -1,6 +1,4 @@
 import React, {ChangeEvent} from "react";
-import {DialogItem} from "./DialogItem/DialogItem";
-import {Message} from "./Message/Message";
 import {newMessageTextAC, sendMessageAC} from "../../Redux/dialogsReducer";
 import {ActionsType} from "../../App";
 import {Store} from "redux";
@@ -20,8 +18,8 @@ export function DialogsContainer(props: DialogsContainerPropsType) {
 
     /*const dialogsElement = props.dialogsState.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)*/
     /*const messagesElement = props.dialogsState.messages.map(m => <Message message={m.message} id={m.id}/>)*/
-    const dialogsElement = state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
-    const messagesElement = state.messages.map(m => <Message id={m.id} message={m.message}/>)
+   /* const dialogsElement = state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
+    const messagesElement = state.messages.map(m => <Message id={m.id} message={m.message}/>)*/
 
 
     /*const newMessageValue = props.dialogsState.newMessageText*/
@@ -59,9 +57,9 @@ export function DialogsContainer(props: DialogsContainerPropsType) {
         <Dialogs newMessageValue={newMessageValue}
                  sendMessage={sendMessage}
                  newMessageText={newMessageText}
-                 /*dialogsPage={state}*/
-            dialogsElement={dialogsElement}
-            messagesElement={messagesElement}
+                 dialogsPage={state}
+            /*dialogsElement={dialogsElement}
+            messagesElement={messagesElement}*/
 
         />
     )
