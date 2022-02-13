@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
-import {Dialogs} from './components/Dialogs/Dialogs';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {Store} from "redux";
-import {StoreType} from "./Redux/redux-store";
+import {store, StoreType} from "./Redux/redux-store";
 import {AddPostActionType, ChangeNewTextActionType} from "./Redux/profileReducer";
 import {sendMessage, UpdateNewMessageText} from "./Redux/dialogsReducer";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
@@ -16,9 +15,9 @@ type AppPropsType = {
     store: Store<StoreType, ActionsType>
 }
 
-export const App = (props: AppPropsType) => {
+export const App = () => {
 
-    const state = props.store.getState()
+    const state = store.getState()
 
     return (
         <BrowserRouter>
@@ -28,17 +27,8 @@ export const App = (props: AppPropsType) => {
                 <div className={'appWrapperContent'}>
                     <Routes>
                         <Route path="/messages"
-                               element={<DialogsContainer messageText={state.dialogsPage.newMessageText}
-                                                          store={props.store}
-                                   /*dialogsState={state.dialogsPage}
-                                   dispatch={props.store.dispatch.bind(props.store)}*/
-                               />}/>
-                        <Route path="/profile" element={<Profile newTextPost={state.profilePage.newTextPost}
-                                                                 store={props.store}
-                            /*dispatch={props.store.dispatch.bind(props.store)}*/
-                            /*profileState={state.profilePage}*/
-
-                        />}/>
+                               element={<DialogsContainer/>}/>
+                        <Route path="/profile" element={<Profile/>}/>
                     </Routes>
                 </div>
             </div>
