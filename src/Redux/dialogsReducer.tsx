@@ -1,6 +1,13 @@
-import {propsMessageType} from "../components/Dialogs/Message/Message";
-import {propsDialogItemType} from "../components/Dialogs/DialogItem/DialogItem";
 
+export type propsMessageType = {
+    id: number
+    message: string
+}
+
+export type propsDialogItemType = {
+    name: string
+    id: number
+}
 
 
 export type UpdateNewMessageText = {
@@ -9,7 +16,6 @@ export type UpdateNewMessageText = {
 }
 export type sendMessage = {
     type: 'SEND-MESSAGE'
-    newMessageText: string
 }
 export type dialogsPageType = {
     dialogs: Array<propsDialogItemType>
@@ -17,7 +23,15 @@ export type dialogsPageType = {
     newMessageText: string
 }
 
-const initialStore: dialogsPageType =  {
+const InitialState:initialStateType = {
+    dialogs: [],
+    messages: [],
+    newMessageText: ''
+}
+
+export type initialStateType = typeof initialStore
+
+const initialStore =  {
     dialogs: [
         {id: 1, name: 'Stephen'},
         {id: 2, name: 'Sam'},
@@ -25,30 +39,39 @@ const initialStore: dialogsPageType =  {
         {id: 4, name: 'Johnny'},
         {id: 5, name: 'Dilan'},
         {id: 6, name: 'Erik'},
-    ],
+    ] as Array<propsDialogItemType>,
     messages: [
         {id: 1, message: 'Hi'},
         {id: 2, message: 'Hello'},
         {id: 3, message: 'How are you?'},
         {id: 4, message: 'How are you doing?'},
-    ],
+    ] as Array<propsMessageType>,
     newMessageText: ''
 
 }
 
-const dialogsReducer = (state = initialStore, action: sendMessage | UpdateNewMessageText) => {
+const dialogsReducer = (state: initialStateType = initialStore, action: sendMessage | UpdateNewMessageText): initialStateType => {
     switch (action.type) {
         case 'NEW-MESSAGE-TEXT':
-            state.newMessageText = action.newMessageText
-            return state;
-        case 'SEND-MESSAGE':
-            const newMessage: propsMessageType = {
-                id: new Date().getTime(),
-                message: action.newMessageText
+            return {...state, newMessageText: action.newMessageText}
+            // state.newMessageText = action.newMessageText
+            // return state;
+        case 'SEND-MESSAGE': {
+            let message = state.newMessageText
+            return {
+                ...state,
+                newMessageText:'',
+                messages: [...state.messages, {id: new Date().getTime(), message}]
             }
-            state.messages.push(newMessage)
-            state.newMessageText = ''
-            return state;
+        }
+/*                    const newMessage: propsMessageType = {
+                        id: new Date().getTime(),
+                        message: action.newMessageText
+                    }
+                    state.messages.push(newMessage)
+                    state.newMessageText = ''
+                    return state;*/
+
         default:
             return state
     }
@@ -62,10 +85,9 @@ export const newMessageTextAC = (newMessageText: string): UpdateNewMessageText =
         newMessageText: newMessageText
     }
 }
-export const sendMessageAC = (newMessageText: string): sendMessage => {
+export const sendMessageAC = (): sendMessage => {
     return {
         type: "SEND-MESSAGE",
-        newMessageText: newMessageText
     }
 }
 

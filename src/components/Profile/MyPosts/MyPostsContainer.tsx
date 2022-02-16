@@ -1,12 +1,10 @@
 import React, {ChangeEvent} from "react";
-import {postsPropsType} from "../Profile";
 import {addPostAC, onPostChangeAC} from "../../../Redux/profileReducer";
 import {MyPost} from "./MyPosts";
-import StateContext from "../../../StateContext";
 import {store} from "../../../Redux/redux-store";
 
 
-export function MyPostContainer() {
+/*export function MyPostContainer() {
 
 
     return (
@@ -33,4 +31,4 @@ export function MyPostContainer() {
             }
         </StateContext.Consumer>
     )
-};
+};*/

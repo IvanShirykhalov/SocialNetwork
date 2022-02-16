@@ -5,14 +5,14 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {Store} from "redux";
-import {store, StoreType} from "./Redux/redux-store";
+import {store, StateType} from "./Redux/redux-store";
 import {AddPostActionType, ChangeNewTextActionType} from "./Redux/profileReducer";
 import {sendMessage, UpdateNewMessageText} from "./Redux/dialogsReducer";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 export type ActionsType = ChangeNewTextActionType | AddPostActionType | UpdateNewMessageText | sendMessage
 type AppPropsType = {
-    store: Store<StoreType, ActionsType>
+    store: Store<StateType, ActionsType>
 }
 
 export const App = () => {

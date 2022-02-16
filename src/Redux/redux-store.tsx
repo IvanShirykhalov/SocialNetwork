@@ -9,8 +9,8 @@ const reducers = combineReducers({
     profilePage:profileReducer
 })
 
-export type StoreType = ReturnType<typeof reducers>
+export type StateType = ReturnType<typeof reducers>
 
 
 
-export const store: Store<StoreType, ActionsType> = createStore(reducers)
+export const store: Store<StateType, ActionsType> = createStore(reducers)

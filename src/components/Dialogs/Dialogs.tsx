@@ -4,6 +4,7 @@ import {Button, TextField} from "@mui/material";
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {dialogsPageType} from "../../Redux/dialogsReducer";
+import {DialogsContainerPropsType} from "./DialogsContainer";
 
 
 
@@ -11,34 +12,23 @@ import {dialogsPageType} from "../../Redux/dialogsReducer";
 
 export type DialogsPropsType = {
     sendMessage: ()=> void
-    newMessageText: (e: ChangeEvent<HTMLTextAreaElement>)=> void
-    newMessageValue: string
+    newMessageText: ()=> void
     dialogsPage: dialogsPageType
-    /*    dialogsElement: any
-    messagesElement: any*/
-
-
 }
 
-export function Dialogs(props: DialogsPropsType) {
+export function Dialogs(props: DialogsContainerPropsType) {
 
-    /*const dialogsElement = props.dialogsState.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)*/
-    const dialogsElement = props.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
-    const messagesElement = props.dialogsPage.messages.map(m => <Message message={m.message} id={m.id}/>)
-
-
-/*    const newMessageValue = props.dialogsState.newMessageText
+    const dialogsElement = props.dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
+    const messagesElement = props.dialogsPage.messages.map(m => <Message key={m.id} message={m.message} id={m.id}/>)
 
 
-    const sendMessage = () => {
-        props.dispatch(sendMessageAC(props.newTextMessage))
+    const onClickHandler = () => props.sendMessage()
+
+    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) =>{
+        console.log('1')
+        props.newMessageText(e.currentTarget.value)
     }
 
-    const newMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(newMessageTextAC(e.currentTarget.value))
-    }*/
-
-    const state = props.dialogsPage
 
     return (
         <div>
@@ -48,14 +38,13 @@ export function Dialogs(props: DialogsPropsType) {
                 </div>
                 <div className={s.messages}>
                     <div> {messagesElement}</div>
-                    {/*<div> {state.messages}</div>*/}
                 </div>
             </div>
-            <div><TextField value={props.newMessageValue}
-                            onChange={props.newMessageText}
+            <div><TextField value={props.dialogsPage.newMessageText}
+                            onChange={onChangeHandler}
                             placeholder={'Enter your message...'}/></div>
             <div>
-                <Button onClick={props.sendMessage}>Send</Button>
+                <Button onClick={onClickHandler}>Send</Button>
             </div>
         </div>
     )
