@@ -3,18 +3,10 @@ import s from './Dialogs.module.css'
 import {Button, TextField} from "@mui/material";
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
-import {dialogsPageType} from "../../Redux/dialogsReducer";
 import {DialogsContainerPropsType} from "./DialogsContainer";
 
 
 
-
-
-export type DialogsPropsType = {
-    sendMessage: ()=> void
-    newMessageText: ()=> void
-    dialogsPage: dialogsPageType
-}
 
 export function Dialogs(props: DialogsContainerPropsType) {
 

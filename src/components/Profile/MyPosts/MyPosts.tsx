@@ -5,18 +5,6 @@ import {Button, TextField} from "@mui/material";
 import {MyPostContainerPropsType} from "./MyPostsContainer";
 
 
-/*
-type MyPostPropsType = {
-    addPost: () => void
-    onPostChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
-    newTextPost: string
-    profileState: {
-        posts: Array<MyPostType>
-    }
-}
-*/
-
-
 export function MyPost(props: MyPostContainerPropsType) {
 
     const onClickHandler = () => props.addPost()

@@ -1,4 +1,3 @@
-
 export type propsMessageType = {
     id: number
     message: string
@@ -26,7 +25,7 @@ export type dialogsPageType = {
 
 export type initialStateType = typeof initialStore
 
-const initialStore =  {
+const initialStore = {
     dialogs: [
         {id: 1, name: 'Stephen'},
         {id: 2, name: 'Sam'},
@@ -49,24 +48,14 @@ const dialogsReducer = (state: initialStateType = initialStore, action: sendMess
     switch (action.type) {
         case 'NEW-MESSAGE-TEXT':
             return {...state, newMessageText: action.newMessageText}
-            // state.newMessageText = action.newMessageText
-            // return state;
         case 'SEND-MESSAGE': {
             const message = state.newMessageText
             return {
                 ...state,
-                newMessageText:'',
+                newMessageText: '',
                 messages: [...state.messages, {id: new Date().getTime(), message}]
             }
         }
-/*                    const newMessage: propsMessageType = {
-                        id: new Date().getTime(),
-                        message: action.newMessageText
-                    }
-                    state.messages.push(newMessage)
-                    state.newMessageText = ''
-                    return state;*/
-
         default:
             return state
     }
@@ -81,7 +70,7 @@ export const newMessageTextAC = (newMessageText: string): UpdateNewMessageText =
 }
 export const sendMessageAC = (): sendMessage => {
     return {
-        type: "SEND-MESSAGE",
+        type: "SEND-MESSAGE"
     }
 }
 
