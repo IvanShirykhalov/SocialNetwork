@@ -1,7 +1,6 @@
 import React from "react";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionsType} from "../../App";
-import {StateType} from "../../Redux/redux-store";
+import {ActionsType, StateType} from "../../Redux/redux-store";
 import {Store} from "redux";
 import {MyPostContainer} from "./MyPosts/MyPostsContainer";
 
@@ -13,7 +12,6 @@ export type postsPropsType = {
 }
 
 export function Profile() {
-
 
     return (
         <div>

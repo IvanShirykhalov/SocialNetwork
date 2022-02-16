@@ -1,7 +1,8 @@
 import {combineReducers, createStore, Store} from "redux";
-import dialogsReducer from "./dialogsReducer";
-import profileReducer from "./profileReducer";
-import {ActionsType} from "../App";
+import dialogsReducer, {sendMessage, UpdateNewMessageText} from "./dialogsReducer";
+import profileReducer, {AddPostActionType, ChangeNewTextActionType} from "./profileReducer";
+
+export type ActionsType = ChangeNewTextActionType | AddPostActionType | UpdateNewMessageText | sendMessage
 
 
 const reducers = combineReducers({
