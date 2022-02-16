@@ -16,6 +16,7 @@ export type UsersType = {
 
 export type user = {
     id: number,
+    photoURL: string
     followed: boolean,
     fullName: string,
     status: string,
@@ -23,12 +24,7 @@ export type user = {
 }
 
 const initialState: UsersType = {
-    users: [
-        {id: 1, followed: true, fullName: 'Sam', status: 'Hello', location: {country: 'Russia', city: 'Moscow'}},
-        {id: 2, followed: true, fullName: 'Nancy', status: 'What\'s up', location: {country: 'Russia', city: 'SPb'}},
-        {id: 3, followed: false, fullName: 'Vanessa', status: 'I don\'t get acquainted', location: {country: 'Belarus', city: 'Minsk'}
-        }
-    ]
+    users: []
 }
 const usersReducer = (state: initialStateType = initialState, action: toggleFollow | setUsers) => {
     switch (action.type) {

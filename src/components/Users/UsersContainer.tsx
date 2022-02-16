@@ -9,7 +9,8 @@ export type usersMapStateToProps = {
     usersPage: UsersType
 }
 export type usersMapDispatchToPropsType = {
-
+    setUsers: (u: Array<user>) => void
+    toggleFollow: (id: number) => void
 }
 
 export type UsersContainerPropsType = usersMapStateToProps & usersMapDispatchToPropsType
@@ -27,7 +28,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
         },
 
         toggleFollow: (uID: number) => {
-                dispatch(toggleFollowAC(uID))
+            dispatch(toggleFollowAC(uID))
         }
     }
 }
