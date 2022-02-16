@@ -6,7 +6,7 @@ export type MyPostType = {
 }
 export type AddPostActionType = {
     type: 'ADD-POST'
-    newTextPost: string
+
 }
 export type ChangeNewTextActionType = {
     type: 'CHANGE-NEW-TEXT'
@@ -28,28 +28,33 @@ const initialStore: profilePageType = {
 const profileReducer = (state = initialStore, action: AddPostActionType | ChangeNewTextActionType) => {
     switch (action.type) {
         case 'ADD-POST':
-            const newPost: MyPostType = {
+            const message = state.newTextPost
+            return {
+                ...state,
+                newTextPost:'',
+                posts: [...state.posts, {id: new Date().getTime(), message, likeCount: 0}]
+            }
+/*            const newPost: MyPostType = {
                 id: new Date().getTime(),
                 message: action.newTextPost,
                 likeCount: 0
             }
             state.posts.push(newPost)
             state.newTextPost = ''
-            return state;
+            return state;*/
         case 'CHANGE-NEW-TEXT':
-            state.newTextPost = action.newText
-            return state;
+            return {...state, newTextPost: action.newText}
+/*            state.newTextPost = action.newText
+            return state;*/
         default:
             return state
     }
 
-    return state
 }
 
-export const addPostAC = (newTextPost: string): AddPostActionType => {
+export const addPostAC = (): AddPostActionType => {
     return {
         type: "ADD-POST",
-        newTextPost: newTextPost
 
     }
 }

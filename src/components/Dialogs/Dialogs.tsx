@@ -25,7 +25,6 @@ export function Dialogs(props: DialogsContainerPropsType) {
     const onClickHandler = () => props.sendMessage()
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) =>{
-        console.log('1')
         props.newMessageText(e.currentTarget.value)
     }
 

@@ -23,11 +23,6 @@ export type dialogsPageType = {
     newMessageText: string
 }
 
-const InitialState:initialStateType = {
-    dialogs: [],
-    messages: [],
-    newMessageText: ''
-}
 
 export type initialStateType = typeof initialStore
 
@@ -57,7 +52,7 @@ const dialogsReducer = (state: initialStateType = initialStore, action: sendMess
             // state.newMessageText = action.newMessageText
             // return state;
         case 'SEND-MESSAGE': {
-            let message = state.newMessageText
+            const message = state.newMessageText
             return {
                 ...state,
                 newMessageText:'',
@@ -76,7 +71,6 @@ const dialogsReducer = (state: initialStateType = initialStore, action: sendMess
             return state
     }
 
-    return state
 }
 
 export const newMessageTextAC = (newMessageText: string): UpdateNewMessageText => {
