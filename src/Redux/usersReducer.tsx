@@ -16,11 +16,11 @@ export type UsersType = {
 
 export type user = {
     id: number,
-    photoURL: string
+    photos: {small: any, large: any}
     followed: boolean,
-    fullName: string,
+    name: string,
     status: string,
-    location: { country: string, city: string }
+    /*location: { country: string, city: string }*/
 }
 
 const initialState: UsersType = {
