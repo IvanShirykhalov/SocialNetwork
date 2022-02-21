@@ -53,11 +53,11 @@ export const Users = (props: UsersContainerPropsType) => {
 
 export class Users extends React.Component<UsersContainerPropsType> {
 
-    constructor(props: UsersContainerPropsType) {
-        super(props);
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => this.props.setUsers(response.data.items))
-    }
+    componentDidMount() {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response =>
+            this.props.setUsers(response.data.items))
 
+    }
 
     render() {
         return (
@@ -70,7 +70,8 @@ export class Users extends React.Component<UsersContainerPropsType> {
                                 <img src={u.photos.small != null ? u.photos.small : userPhoto} className={s.userPhoto}/>
                             </div>
                             <div>
-                                <Button onClick={(id) => this.props.toggleFollow(u.id)}>
+                                <Button onClick={(id) =>
+                                    this.props.toggleFollow(u.id)}>
                                     {u.followed ? 'Follow' : 'Unfollowed'}
                                 </Button>
                             </div>
