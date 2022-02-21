@@ -4,7 +4,10 @@ import s from './Users.module.css';
 import {Button} from "@mui/material";
 import axios from 'axios';
 import userPhoto from '../../img/1.png';
+import {StateType} from "../../Redux/redux-store";
+import {render} from "react-dom";
 
+/*
 export const Users = (props: UsersContainerPropsType) => {
 
     const getUsers = () => {
@@ -36,14 +39,51 @@ export const Users = (props: UsersContainerPropsType) => {
                                 <div>{u.name}</div>
                                 <div>{u.status}</div>
                             </span>
-                            {/*                            <span>
+                            {/!*                            <span>
                                 <div>{u.location.country}</div>
                                 <div>{u.location.city}</div>
-                            </span>*/}
+                            </span>*!/}
                         </span>
                     </div>
                 )
             })}
         </div>
     )
+}*/
+
+export class Users extends React.Component<UsersContainerPropsType> {
+
+    constructor(props: UsersContainerPropsType) {
+        super(props);
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => this.props.setUsers(response.data.items))
+    }
+
+
+    render() {
+        return (
+            <div>
+                {this.props.usersPage.users.map(u => {
+                    return (
+                        <div key={u.id}>
+                        <span>
+                            <div>
+                                <img src={u.photos.small != null ? u.photos.small : userPhoto} className={s.userPhoto}/>
+                            </div>
+                            <div>
+                                <Button onClick={(id) => this.props.toggleFollow(u.id)}>
+                                    {u.followed ? 'Follow' : 'Unfollowed'}
+                                </Button>
+                            </div>
+                        </span>
+                            <span>
+                                <div>{u.name}</div>
+                                <div>{u.status}</div>
+                            </span>
+
+                        </div>
+                    )
+                })}
+            </div>
+        )
+    }
 }
