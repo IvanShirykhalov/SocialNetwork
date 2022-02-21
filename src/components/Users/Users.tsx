@@ -2,18 +2,21 @@ import React from "react";
 import {UsersContainerPropsType} from "./UsersContainer";
 import s from './Users.module.css';
 import {Button} from "@mui/material";
-import * as axios from 'axios';
+import axios from 'axios';
 import userPhoto from '../../img/1.png';
 
 export const Users = (props: UsersContainerPropsType) => {
 
-    if (props.usersPage.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => props.setUsers(response.data.items))
+    const getUsers = () => {
+        if (props.usersPage.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => props.setUsers(response.data.items))
+        }
     }
 
 
     return (
         <div>
+            <Button onClick={getUsers}>Get Users</Button>
             {props.usersPage.users.map(u => {
 
                 return (
@@ -33,7 +36,7 @@ export const Users = (props: UsersContainerPropsType) => {
                                 <div>{u.name}</div>
                                 <div>{u.status}</div>
                             </span>
-{/*                            <span>
+                            {/*                            <span>
                                 <div>{u.location.country}</div>
                                 <div>{u.location.city}</div>
                             </span>*/}
