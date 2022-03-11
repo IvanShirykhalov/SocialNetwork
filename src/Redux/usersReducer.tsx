@@ -7,16 +7,31 @@ type toggleFollow = {
 
 type setUsers = {
     type: 'SET-USER'
-    users: Array<user>
+    users: Array<User>
 }
+
+type currentPage = {
+    type: 'CURRENT-PAGE'
+    currentPage: number
+}
+
+type totalUsersCount = {
+    type: 'TOTAL-USERS-COUNT'
+    totalCount: number
+}
+
+type ActionType = toggleFollow | setUsers | currentPage | totalUsersCount
 
 export type UsersType = {
-    users: Array<user>
+    users: Array<User>
+    pageSize: number,
+    totalUsersCount: number
+    currentPage: number
 }
 
-export type user = {
+export type User = {
     id: number,
-    photos: {small: any, large: any}
+    photos: { small: any, large: any }
     followed: boolean,
     name: string,
     status: string,
@@ -24,9 +39,12 @@ export type user = {
 }
 
 const initialState: UsersType = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
 }
-const usersReducer = (state: initialStateType = initialState, action: toggleFollow | setUsers) => {
+const usersReducer = (state: initialStateType = initialState, action: ActionType) => {
     switch (action.type) {
         case 'TOGGLE-FOLLOW':
             return {
@@ -41,8 +59,14 @@ const usersReducer = (state: initialStateType = initialState, action: toggleFoll
         case 'SET-USER': {
             return {
                 ...state,
-                users: [...state.users, ...action.users]
+                users: action.users
             }
+        }
+        case 'CURRENT-PAGE': {
+            return {...state, currentPage: action.currentPage}
+        }
+        case "TOTAL-USERS-COUNT": {
+            return {...state, totalUsersCount: action.totalCount}
         }
         default:
             return state
@@ -57,11 +81,23 @@ export const toggleFollowAC = (userID: number): toggleFollow => {
     }
 }
 
-export const setUsersAC = (users: Array<user>): setUsers => {
+export const setUsersAC = (users: Array<User>): setUsers => {
     return {
         type: 'SET-USER',
         users
     }
 }
+export const currentPageAC = (currentPage: number): currentPage => {
+    return {
+        type: 'CURRENT-PAGE',
+        currentPage
 
+    }
+}
+export const totalUserCountAC = (totalCount: number): totalUsersCount => {
+    return {
+        type: 'TOTAL-USERS-COUNT',
+        totalCount
+    }
+}
 export default usersReducer
