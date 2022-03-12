@@ -1,11 +1,13 @@
 import {StateType} from "../../Redux/redux-store";
 import {connect} from "react-redux";
 import {
-    currentPage,
+    setCurrentPage,
+    setTotalUsersCount,
+
     setUsers,
     toggleFollow,
     toggleIsFetching,
-    totalUsersCount,
+
     User
 } from "../../Redux/usersReducer";
 import React from "react";
@@ -88,6 +90,6 @@ const mapStateToProps = (state: StateType): usersMapStateToProps => {
 }
 
 export const UsersContainer = connect(mapStateToProps, {
-    setUsers, toggleFollow, currentPage,
-    totalUsersCount, toggleIsFetching
+    setUsers, toggleFollow, setCurrentPage,
+    setTotalUsersCount, toggleIsFetching
 })(UsersContainerComponent);

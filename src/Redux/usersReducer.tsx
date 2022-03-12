@@ -97,14 +97,14 @@ export const setUsers = (users: Array<User>): setUsers => {
         users
     }
 }
-export const currentPage = (currentPage: number): currentPage => {
+export const setCurrentPage = (currentPage: number): currentPage => {
     return {
         type: 'CURRENT-PAGE',
         currentPage
 
     }
 }
-export const totalUsersCount = (totalCount: number): totalUsersCount => {
+export const setTotalUsersCount = (totalCount: number): totalUsersCount => {
     return {
         type: 'TOTAL-USERS-COUNT',
         totalCount
