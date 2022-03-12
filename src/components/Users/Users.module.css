@@ -6,3 +6,8 @@
 .selectPage {
     font-weight: bold;
 }
+
+.loading {
+    width: 640px;
+    height: 597px;
+}

@@ -19,7 +19,7 @@ export const Users = (props: userPropsType) => {
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = [];
     for (let i = 1; i < pageCount; i++) {
-        if (pages.length < 20) {
+        if (pages.length < 10) {
             pages.push(i);
         }
     }
@@ -28,10 +28,10 @@ export const Users = (props: userPropsType) => {
         <div>
             <div>
                 {pages.map(p => {
-                    return <span className={props.currentPage === p ? s.selectPage : ''}
-                                 onClick={() => {
-                                     props.onPageChanged(p)
-                                 }}>{p}</span>
+                    return <Button className={props.currentPage === p ? s.selectPage : ''}
+                                   onClick={() => {
+                                       props.onPageChanged(p)
+                                   }}>{p}</Button>
                 })}
             </div>
             {props.usersPage.map(u => {
