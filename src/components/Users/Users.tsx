@@ -8,8 +8,12 @@ import userPhoto from '../../img/1.png';
 export class Users extends React.Component<UsersContainerPropsType> {
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response =>
-            this.props.setUsers(response.data.items))
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+                this.props.setUsers(response.data.items)
+                this.props.setTotalUsersCount(response.data.totalCount)
+            }
+        )
+
 
     }
 
@@ -17,7 +21,8 @@ export class Users extends React.Component<UsersContainerPropsType> {
         this.props.setCurrentPage(p)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items)
-            this.props.setTotalUsersCount(response.data.totalUsersCount)
+            console.log(response.data.totalCount)
+            this.props.setTotalUsersCount(response.data.totalCount)
         })
 
     }
@@ -25,10 +30,12 @@ export class Users extends React.Component<UsersContainerPropsType> {
     render() {
 
         let pageCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-
+        console.log(this.props)
         let pages = [];
         for (let i = 1; i < pageCount; i++) {
-            pages.push(i);
+            if (pages.length < 20) {
+                pages.push(i);
+            }
         }
 
         return (

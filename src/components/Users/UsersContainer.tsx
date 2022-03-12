@@ -15,7 +15,7 @@ export type usersMapDispatchToPropsType = {
     setUsers: (u: Array<User>) => void
     toggleFollow: (id: number) => void
     setCurrentPage: (pageNumber: number) => void
-    setTotalUsersCount: (totalCount: number)=> void
+    setTotalUsersCount: (totalCount: number) => void
 }
 
 export type UsersContainerPropsType = usersMapStateToProps & usersMapDispatchToPropsType
@@ -41,7 +41,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
         setCurrentPage: (pageNumber: number) => {
             dispatch(currentPageAC(pageNumber))
         },
-        setTotalUsersCount: (totalCount: number)=>{
+        setTotalUsersCount: (totalCount: number) => {
             dispatch(totalUserCountAC(totalCount))
         }
     }
