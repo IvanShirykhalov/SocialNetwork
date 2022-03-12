@@ -3,6 +3,7 @@ import s from "./Users.module.css";
 import userPhoto from "../../img/1.png";
 import {Button} from "@mui/material";
 import {User} from "../../Redux/usersReducer";
+import {NavLink} from "react-router-dom";
 
 
 type userPropsType = {
@@ -39,7 +40,10 @@ export const Users = (props: userPropsType) => {
                     <div key={u.id}>
                         <span>
                             <div>
-                                <img src={u.photos.small != null ? u.photos.small : userPhoto} className={s.userPhoto}/>
+                                <NavLink to={'/profile/*' + u.id}>
+                                    <img src={u.photos.small != null ? u.photos.small : userPhoto}
+                                         className={s.userPhoto}/>
+                                </NavLink>
                             </div>
                             <div>
                                 <Button onClick={(id) =>

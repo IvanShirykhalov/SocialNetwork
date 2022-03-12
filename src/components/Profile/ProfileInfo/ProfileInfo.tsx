@@ -1,8 +1,9 @@
 import React from "react";
 import s from './../Profile.module.css'
+import {postsPropsType} from "../Profile";
 
 
-export function ProfileInfo() {
+export function ProfileInfo(props: postsPropsType) {
     return (
         <div>
             <div>

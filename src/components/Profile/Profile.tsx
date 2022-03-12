@@ -6,16 +6,18 @@ import {MyPostContainer} from "./MyPosts/MyPostsContainer";
 
 
 export type postsPropsType = {
-    store: Store<StateType, ActionsType>
-    newTextPost: string
+/*    store: Store<StateType, ActionsType>
+    newTextPost: string*/
+    profile: any
 
 }
 
-export function Profile() {
+
+export function Profile(props: postsPropsType) {
 
     return (
         <div>
-            <ProfileInfo/>
+            <ProfileInfo profile={props.profile}/>
             <MyPostContainer/>
         </div>
 

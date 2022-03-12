@@ -11,9 +11,17 @@ export type ChangeNewTextActionType = {
     type: 'CHANGE-NEW-TEXT'
     newText: string
 }
+export type setUserProfile = {
+    type: 'SET-USER-PROFILE'
+    profile: null
+}
+type actionType = AddPostActionType | ChangeNewTextActionType | setUserProfile
+
+
 export type profilePageType = {
     posts: Array<MyPostType>
     newTextPost: string
+    profile: null
 }
 
 const initialStore: profilePageType = {
@@ -21,9 +29,10 @@ const initialStore: profilePageType = {
     posts: [
         {id: 1, message: 'Hi', likeCount: 12},
     ],
+    profile: null
 }
 
-const profileReducer = (state = initialStore, action: AddPostActionType | ChangeNewTextActionType) => {
+const profileReducer = (state = initialStore, action: actionType) => {
     switch (action.type) {
         case 'ADD-POST':
             const post = state.newTextPost
@@ -34,6 +43,9 @@ const profileReducer = (state = initialStore, action: AddPostActionType | Change
             }
         case 'CHANGE-NEW-TEXT':
             return {...state, newTextPost: action.newText}
+        case "SET-USER-PROFILE": {
+            return {...state, profile: action.profile}
+        }
         default:
             return state
     }
@@ -50,6 +62,10 @@ export const onPostChangeAC = (newText: string): ChangeNewTextActionType => {
         type: "CHANGE-NEW-TEXT",
         newText: newText
     }
+}
+
+export const setUserProfile = (profile: null): setUserProfile => {
+    return {type: "SET-USER-PROFILE", profile}
 }
 
 
