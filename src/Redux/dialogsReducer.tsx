@@ -62,13 +62,13 @@ const dialogsReducer = (state: initialStateType = initialStore, action: sendMess
 
 }
 
-export const newMessageTextAC = (newMessageText: string): UpdateNewMessageText => {
+export const newMessageText = (newMessageText: string): UpdateNewMessageText => {
     return {
         type: "NEW-MESSAGE-TEXT",
         newMessageText: newMessageText
     }
 }
-export const sendMessageAC = (): sendMessage => {
+export const sendMessage = (): sendMessage => {
     return {
         type: "SEND-MESSAGE"
     }

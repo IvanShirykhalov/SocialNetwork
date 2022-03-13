@@ -20,7 +20,7 @@ export const Users = (props: userPropsType) => {
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = [];
     for (let i = 1; i < pageCount; i++) {
-        if (pages.length < 10) {
+        if (pages.length < 15) {
             pages.push(i);
         }
     }
@@ -40,9 +40,9 @@ export const Users = (props: userPropsType) => {
                     <div key={u.id}>
                         <span>
                             <div>
-                                <NavLink to={'/profile/*' + u.id}>
+                                <NavLink to={`/profile/${u.id}`}>
                                     <img src={u.photos.small != null ? u.photos.small : userPhoto}
-                                         className={s.userPhoto}/>
+                                         className={s.userPhoto} alt={'user photo'}/>
                                 </NavLink>
                             </div>
                             <div>

@@ -1,6 +1,7 @@
 import React from "react";
 import s from './../Profile.module.css'
 import {postsPropsType} from "../Profile";
+import authorImg from "../../../img/1.png";
 
 
 export function ProfileInfo(props: postsPropsType) {
@@ -12,9 +13,9 @@ export function ProfileInfo(props: postsPropsType) {
                      alt={'img'}/>
             </div>
             <div className={s.descriptionBlock}>
-                <img
-                    src={'https://cdn-icons.flaticon.com/png/128/4691/premium/4691213.png?token=exp=1644418406~hmac=13c31db1927c47e71e9374b9bf85d99a'}
-                    alt={'avatar'}/>
+                <img src={props.profile?.photos.large || authorImg} alt="user photo"
+                     style={{width: '101px', height: '101px'}}/>
+
             </div>
         </div>
 
