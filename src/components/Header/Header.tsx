@@ -7,7 +7,8 @@ type HeaderPropsType = {
     login: null | boolean
 }
 
-export function Header(props: any) {
+
+export function Header(props: HeaderPropsType) {
     return (
         <header className={s.header}>
             <img src={'https://cdn.logo.com/hotlink-ok/logo-social-sq.png'} alt={''}/>
