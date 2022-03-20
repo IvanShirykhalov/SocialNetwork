@@ -5,7 +5,7 @@ type initialStateType = {
     isAuth: boolean
 }
 
-type actionType = setUserDataType
+export type AuthActionType = setUserDataType
 
 type setUserDataType = {
     type: 'SET-USER-DATA'
@@ -19,7 +19,7 @@ const initialStore: initialStateType = {
     isAuth: false
 }
 
-const authReducer = (state = initialStore, action: actionType) => {
+const authReducer = (state = initialStore, action: AuthActionType) => {
     switch (action.type) {
         case 'SET-USER-DATA':
             return {

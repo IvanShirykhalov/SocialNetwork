@@ -1,21 +1,21 @@
 import {combineReducers, createStore, Store} from "redux";
-import dialogsReducer, {sendMessage, UpdateNewMessageText} from "./dialogsReducer";
-import profileReducer, {AddPostActionType, ChangeNewTextActionType} from "./profileReducer";
+import dialogsReducer, {DialogsActionType} from "./dialogsReducer";
+import profileReducer, {ProfileActionType} from "./profileReducer";
+import authReducer, {AuthActionType} from "./authReducer";
 import usersReducer from "./usersReducer";
-import authReducer from "./authReducer";
 
-export type ActionsType = ChangeNewTextActionType | AddPostActionType | UpdateNewMessageText | sendMessage
+
+export type ActionsType = ProfileActionType | DialogsActionType | AuthActionType
 
 
 const reducers = combineReducers({
-    dialogsPage:dialogsReducer,
-    profilePage:profileReducer,
+    dialogsPage: dialogsReducer,
+    profilePage: profileReducer,
     usersPage: usersReducer,
     auth: authReducer,
 })
 
 export type StateType = ReturnType<typeof reducers>
-
 
 
 export const store: Store<StateType, ActionsType> = createStore(reducers)

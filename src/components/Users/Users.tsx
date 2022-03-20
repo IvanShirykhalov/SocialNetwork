@@ -4,6 +4,7 @@ import userPhoto from "../../img/1.png";
 import {Button} from "@mui/material";
 import {User} from "../../Redux/usersReducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 
 type userPropsType = {
@@ -46,10 +47,36 @@ export const Users = (props: userPropsType) => {
                                 </NavLink>
                             </div>
                             <div>
-                                <Button onClick={(id) =>
-                                    props.toggleFollow(u.id)}>
-                                    {u.followed ? 'Follow' : 'Unfollowed'}
-                                </Button>
+                                <div>
+                                    {u.followed ?
+                                        <Button onClick={(id) => {
+                                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                                                {}, {
+                                                    withCredentials: true, headers: {
+                                                        'API-KEY': '22dc27fc-1166-4b2b-82e9-1055b6b8b503'
+                                                    }
+                                                })
+                                                .then(response => {
+                                                    if (response.data.resultCode === 0) {
+                                                        props.toggleFollow(u.id)
+                                                    }
+                                                })
+                                        }
+                                        }>Follow</Button> :
+                                        <Button onClick={(id) => {
+                                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                                                {
+                                                    withCredentials: true, headers: {
+                                                        'API-KEY': '22dc27fc-1166-4b2b-82e9-1055b6b8b503'
+                                                    }
+                                                })
+                                                .then(response => {
+                                                    if (response.data.resultCode === 0) {
+                                                        props.toggleFollow(u.id)
+                                                    }
+                                                })
+                                        }}>Unfollowed</Button>}
+                                </div>
                             </div>
                         </span>
                         <span>

@@ -44,7 +44,9 @@ const initialStore = {
 
 }
 
-const dialogsReducer = (state: initialStateType = initialStore, action: sendMessage | UpdateNewMessageText): initialStateType => {
+export type DialogsActionType = sendMessage | UpdateNewMessageText
+
+const dialogsReducer = (state: initialStateType = initialStore, action: DialogsActionType): initialStateType => {
     switch (action.type) {
         case 'NEW-MESSAGE-TEXT':
             return {...state, newMessageText: action.newMessageText}

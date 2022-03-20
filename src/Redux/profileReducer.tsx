@@ -15,7 +15,7 @@ export type setUserProfile = {
     type: 'SET-USER-PROFILE'
     profile: null
 }
-type actionType = AddPostActionType | ChangeNewTextActionType | setUserProfile
+export type ProfileActionType = AddPostActionType | ChangeNewTextActionType | setUserProfile
 
 
 export type profilePageType = {
@@ -32,7 +32,7 @@ const initialStore: profilePageType = {
     profile: null
 }
 
-const profileReducer = (state = initialStore, action: actionType) => {
+const profileReducer = (state = initialStore, action: ProfileActionType) => {
     switch (action.type) {
         case 'ADD-POST':
             const post = state.newTextPost
