@@ -7,3 +7,11 @@
     width: 60px;
 }
 
+.loginBlock {
+    float: right;
+}
+
+.loginBlock a {
+    text-decoration: none;
+    color: rgba(63, 63, 199, 0.96);
+}
