@@ -7,10 +7,12 @@ import {setAuthUserDataAC} from "../../Redux/authReducer";
 
 
 export type AuthDataPropsType = {
-    isAuth: boolean
-    userId: null | number
-    email: null | string
-    login: null | boolean
+    data: {
+        isAuth: boolean
+        userId: null | number
+        email: null | string
+        login: null | boolean
+    }
 }
 
 
@@ -28,7 +30,7 @@ type authMapDispatchToPropsType = {
     setAuthUserData: (data: AuthDataPropsType) => void
 }
 
-class HeaderContainerComponent extends React.Component<AuthContainerPropsType> {
+class HeaderContainerComponent extends React.Component<any> {
 
     componentDidMount() {
         axios.get(`https://social-network.samuraijs.com/api/1.0//auth/me`, {withCredentials: true})
@@ -44,7 +46,10 @@ class HeaderContainerComponent extends React.Component<AuthContainerPropsType> {
     }
 
     render() {
-        return <Header {...this.props}/>;
+        return (
+            <Header {...this.props}/>
+        )
+
     }
 }
 

@@ -8,13 +8,14 @@ import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
 
 
+
 export const App = () => {
 
 
     return (
         <BrowserRouter>
             <div className={'appWrapper'}>
-                <HeaderContainer/>
+                <HeaderContainer />
                 <Navbar/>
                 <div className={'appWrapperContent'}>
                     <Routes>
