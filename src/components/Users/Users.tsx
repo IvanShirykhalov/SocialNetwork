@@ -53,7 +53,7 @@ export const Users = (props: userPropsType) => {
                                             axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
                                                 {}, {
                                                     withCredentials: true, headers: {
-                                                        'API-KEY': '22dc27fc-1166-4b2b-82e9-1055b6b8b503'
+                                                        'API-KEY': '141aa447-788e-402f-a325-e0cd7679cd7e'
                                                     }
                                                 })
                                                 .then(response => {
@@ -67,7 +67,7 @@ export const Users = (props: userPropsType) => {
                                             axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
                                                 {
                                                     withCredentials: true, headers: {
-                                                        'API-KEY': '22dc27fc-1166-4b2b-82e9-1055b6b8b503'
+                                                        'API-KEY': '141aa447-788e-402f-a325-e0cd7679cd7e'
                                                     }
                                                 })
                                                 .then(response => {

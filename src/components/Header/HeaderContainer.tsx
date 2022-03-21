@@ -38,8 +38,14 @@ type authMapDispatchToPropsType = {
 class HeaderContainerComponent extends React.Component<AuthContainerPropsType> {
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0//auth/me`, {withCredentials: true})
+        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
+            withCredentials: true,
+            headers: {
+                'API-KEY': '141aa447-788e-402f-a325-e0cd7679cd7e'
+            }
+        })
             .then(response => {
+                    debugger
                     if (response.data.resultCode === 0) {
                         this.props.setAuthUserData(response.data.data.login)
                     }
@@ -52,7 +58,8 @@ class HeaderContainerComponent extends React.Component<AuthContainerPropsType> {
 
     render() {
         return (
-            <Header login={this.props.login} isAuth={this.props.isAuth}/>
+            /*<Header login={this.props.login} isAuth={this.props.isAuth}/>*/
+            <Header {...this.props}/>
         )
 
     }
