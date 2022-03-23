@@ -8,8 +8,8 @@ const instance = axios.create({
     },
 })
 
-export const userAPI = {
-    getUsers(pageSize: number, currentPage?: number,) {
+export const userProfileAPI = {
+    getUserProfile(pageSize: number, currentPage?: number,) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
     }
 }
@@ -20,8 +20,8 @@ export const profileAPI = {
     }
 }
 
-export const headerAPI = {
-    getHeader() {
+export const authAPI = {
+    getAuth() {
         return instance.get(`auth/me`).then(response => response.data)
     }
 }

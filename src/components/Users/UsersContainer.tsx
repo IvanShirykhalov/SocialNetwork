@@ -13,7 +13,7 @@ import {
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
-import {userAPI} from "../../api/api";
+import {userProfileAPI} from "../../api/api";
 
 
 export type usersMapStateToProps = {
@@ -38,7 +38,7 @@ class UsersContainerComponent extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
         this.props.toggleIsFetching(true)
 
-        userAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+        userProfileAPI.getUserProfile(this.props.currentPage, this.props.pageSize).then(data => {
                     this.props.toggleIsFetching(false)
                     this.props.setUsers(data.items)
                     this.props.setTotalUsersCount(data.totalCount)
@@ -51,7 +51,7 @@ class UsersContainerComponent extends React.Component<UsersContainerPropsType> {
     onPageChanged = (p: number) => {
         this.props.setCurrentPage(p)
         this.props.toggleIsFetching(true)
-        userAPI.getUsers(this.props.pageSize).then(data => {
+        userProfileAPI.getUserProfile(this.props.pageSize).then(data => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(data.items)
                 this.props.setTotalUsersCount(data.totalCount)
