@@ -1,13 +1,17 @@
 import React from 'react';
 import './App.css';
-import {Technologies} from "./Technologies";
-import {Header} from "./Header";
+import {Header} from "./components/Header";
+import {NavBar} from "./components/NavBar";
+import {Profile} from "./components/Profile";
+import {Footer} from "./components/Footer";
 
 function App() {
     return (
-        <div>
+        <div className={'app-wrapper'}>
             <Header/>
-            <Technologies/>
+            <NavBar/>
+            <Profile/>
+            <Footer/>
         </div>
     );
 }
