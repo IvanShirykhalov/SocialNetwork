@@ -1,7 +1,7 @@
 import React from 'react';
-import s from './NavBar.module.css'
+import s from './Navbar.module.css'
 
-export const NavBar = () => {
+export const Navbar = () => {
     return (
         <div className={s.nav}>
             <div><a className={`${s.item} ${s.active}`}>Profile</a></div>

@@ -3,8 +3,7 @@
     width: 1200px;
     margin: 0 auto;
 
-    grid-template-areas:
-            'h h'
+    grid-template-areas:'h h'
     'n c';
 
     grid-template-rows: 60px 1fr;
