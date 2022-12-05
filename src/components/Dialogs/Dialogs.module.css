@@ -9,9 +9,7 @@
     grid-area: d;
 }
 
-.dialog {
 
-}
 
 .active {
     color: red;
@@ -21,6 +19,3 @@
     grid-area: m;
 }
 
-.message {
-
-}
