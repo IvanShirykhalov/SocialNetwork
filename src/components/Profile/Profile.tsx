@@ -5,14 +5,16 @@ import {ProfileInfo} from "./Profileinfo/ProfileInfo";
 import {PostPropsType} from "./MyPosts/Post/Post";
 
 export type ProfilePropsType = {
-    posts: PostPropsType[]
+    profilePage: {
+        posts: PostPropsType[]
+    }
 }
 
 export const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.posts}/>
+            <MyPosts posts={props.profilePage.posts}/>
         </div>
     );
 };

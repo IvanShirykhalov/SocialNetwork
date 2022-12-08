@@ -14,9 +14,15 @@ import {PostPropsType} from "./components/Profile/MyPosts/Post/Post";
 
 
 type AppPropsType = {
-    dialogs: DialogPropsType[]
-    message: MessagePropsType[]
-    postData: PostPropsType[]
+    state: {
+        dialogsPage: {
+            dialogs: DialogPropsType[]
+            messages: MessagePropsType[]
+        },
+        profilePage: {
+            posts: PostPropsType[]
+        }
+    }
 }
 
 function App(props: AppPropsType) {
@@ -26,8 +32,9 @@ function App(props: AppPropsType) {
                 <Header/>
                 <Navbar/>
                 <div className={'app-wrapper-content'}>
-                    <Route render={() => <Profile posts={props.postData}/>} path={'/profile'}/>
-                    <Route render={() => <Dialogs messages={props.message} dialogs={props.dialogs}/>}
+                    <Route render={() => <Profile profilePage={props.state.profilePage}/>}
+                           path={'/profile'}/>
+                    <Route render={() => <Dialogs dialogsPage={props.state.dialogsPage}/>}
                            path={'/dialogs'}/>
                     <Route render={() => <Music/>} path={'/music'}/>
                     <Route render={() => <News/>} path={'/news'}/>
