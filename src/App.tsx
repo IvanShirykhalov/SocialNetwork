@@ -4,10 +4,9 @@ import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
-import {MyPostPropsType} from "./components/Profile/MyPosts/MyPosts";
 import {DialogPropsType} from "./components/Dialogs/DialogItem/DialogItem";
 import {MessagePropsType} from "./components/Dialogs/Message/Message";
 import {PostPropsType} from "./components/Profile/MyPosts/Post/Post";
@@ -27,22 +26,22 @@ type AppPropsType = {
 
 function App(props: AppPropsType) {
     return (
-        <BrowserRouter>
-            <div className={'app-wrapper'}>
-                <Header/>
-                <Navbar/>
-                <div className={'app-wrapper-content'}>
-                    <Route render={() => <Profile profilePage={props.state.profilePage}/>}
-                           path={'/profile'}/>
-                    <Route render={() => <Dialogs dialogsPage={props.state.dialogsPage}/>}
-                           path={'/dialogs'}/>
-                    <Route render={() => <Music/>} path={'/music'}/>
-                    <Route render={() => <News/>} path={'/news'}/>
-                </div>
 
-                {/*<Footer/>*/}
+        <div className={'app-wrapper'}>
+            <Header/>
+            <Navbar/>
+            <div className={'app-wrapper-content'}>
+                <Route render={() => <Profile profilePage={props.state.profilePage}/>}
+                       path={'/profile'}/>
+                <Route render={() => <Dialogs dialogsPage={props.state.dialogsPage}/>}
+                       path={'/dialogs'}/>
+                <Route render={() => <Music/>} path={'/music'}/>
+                <Route render={() => <News/>} path={'/news'}/>
             </div>
-        </BrowserRouter>
+
+            {/*<Footer/>*/}
+        </div>
+
     );
 }
 
