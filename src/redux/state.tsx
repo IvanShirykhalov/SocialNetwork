@@ -7,7 +7,7 @@ type StateType = {
         dialogs: DialogPropsType[]
         messages: MessagePropsType[]
     },
-    profilePage : {
+    profilePage: {
         posts: PostPropsType[]
     }
 
@@ -38,4 +38,8 @@ export const state: StateType = {
         ],
     },
 
+}
+
+export const addPost = (message: string) => {
+    state.profilePage.posts.push({id: '5', message, likeCount: 0})
 }

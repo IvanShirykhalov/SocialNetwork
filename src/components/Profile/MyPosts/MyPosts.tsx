@@ -4,6 +4,7 @@ import s from './MyPosts.module.css'
 
 export type MyPostPropsType = {
     posts: PostPropsType[]
+    addPost: (message: string) => void
 }
 
 export const MyPosts = (props: MyPostPropsType) => {
@@ -12,7 +13,7 @@ export const MyPosts = (props: MyPostPropsType) => {
     const newPostElement = useRef<HTMLTextAreaElement>(null)
     const addPost = () => {
         if (newPostElement.current !== null) {
-            alert(newPostElement.current.value)
+            props.addPost(newPostElement.current.value)
         }
     }
 
@@ -28,7 +29,7 @@ export const MyPosts = (props: MyPostPropsType) => {
                     <button onClick={addPost}>Add post</button>
                 </div>
             </div>
-            {props.posts.map(p => <Post id={p.id} message={p.message} likeCount={p.likeCount}/>)}
+            {props.posts.map(p => <Post key={p.id} id={p.id} message={p.message} likeCount={p.likeCount}/>)}
 
         </div>
     );

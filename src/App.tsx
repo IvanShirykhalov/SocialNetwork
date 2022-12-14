@@ -10,6 +10,7 @@ import {News} from "./components/News/News";
 import {DialogPropsType} from "./components/Dialogs/DialogItem/DialogItem";
 import {MessagePropsType} from "./components/Dialogs/Message/Message";
 import {PostPropsType} from "./components/Profile/MyPosts/Post/Post";
+import {addPost} from "./redux/state";
 
 
 type AppPropsType = {
@@ -22,6 +23,7 @@ type AppPropsType = {
             posts: PostPropsType[]
         }
     }
+    addPost: (message: string)=> void
 }
 
 function App(props: AppPropsType) {
@@ -31,7 +33,7 @@ function App(props: AppPropsType) {
             <Header/>
             <Navbar/>
             <div className={'app-wrapper-content'}>
-                <Route render={() => <Profile profilePage={props.state.profilePage}/>}
+                <Route render={() => <Profile profilePage={props.state.profilePage} addPost={props.addPost}/>}
                        path={'/profile'}/>
                 <Route render={() => <Dialogs dialogsPage={props.state.dialogsPage}/>}
                        path={'/dialogs'}/>
