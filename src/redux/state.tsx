@@ -1,8 +1,9 @@
 import {DialogPropsType} from "../components/Dialogs/DialogItem/DialogItem";
 import {MessagePropsType} from "../components/Dialogs/Message/Message";
 import {PostPropsType} from "../components/Profile/MyPosts/Post/Post";
+import {rerenderEntireTree} from "../render";
 
-type StateType = {
+export type StateType = {
     dialogsPage: {
         dialogs: DialogPropsType[]
         messages: MessagePropsType[]
@@ -42,4 +43,5 @@ export const state: StateType = {
 
 export const addPost = (message: string) => {
     state.profilePage.posts.push({id: '5', message, likeCount: 0})
+    rerenderEntireTree(state)
 }

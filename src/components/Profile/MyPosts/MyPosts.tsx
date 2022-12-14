@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useRef} from 'react';
+import React, {useRef} from 'react';
 import {Post, PostPropsType} from "./Post/Post";
 import s from './MyPosts.module.css'
 
@@ -14,8 +14,10 @@ export const MyPosts = (props: MyPostPropsType) => {
     const addPost = () => {
         if (newPostElement.current !== null) {
             props.addPost(newPostElement.current.value)
+            newPostElement.current.value = ''
         }
     }
+
 
     return (
         <div className={s.postsBlock}>
