@@ -1,7 +1,10 @@
 import {DialogPropsType} from "../components/Dialogs/DialogItem/DialogItem";
 import {MessagePropsType} from "../components/Dialogs/Message/Message";
 import {PostPropsType} from "../components/Profile/MyPosts/Post/Post";
-import {rerenderEntireTree} from "../render";
+
+
+let rerenderEntireTree = (state: StateType) => {
+}
 
 export type StateType = {
     dialogsPage: {
@@ -52,4 +55,8 @@ export const addPost = (message: string) => {
 export const changeNewPostText = (newPostText: string) => {
     state.profilePage.newPostText = newPostText
     rerenderEntireTree(state)
+}
+
+export const observer = (observer: any) => {
+    rerenderEntireTree = observer
 }
