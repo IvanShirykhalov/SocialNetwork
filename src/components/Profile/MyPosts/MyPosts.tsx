@@ -5,6 +5,8 @@ import s from './MyPosts.module.css'
 export type MyPostPropsType = {
     posts: PostPropsType[]
     addPost: (message: string) => void
+    changeNewPostText: (newPostText: string) => void
+    newPostText: string
 }
 
 export const MyPosts = (props: MyPostPropsType) => {
@@ -14,7 +16,12 @@ export const MyPosts = (props: MyPostPropsType) => {
     const addPost = () => {
         if (newPostElement.current !== null) {
             props.addPost(newPostElement.current.value)
-            newPostElement.current.value = ''
+        }
+    }
+
+    const onChange = () => {
+        if (newPostElement.current !== null) {
+            props.changeNewPostText(newPostElement.current.value)
         }
     }
 
@@ -25,7 +32,7 @@ export const MyPosts = (props: MyPostPropsType) => {
             <div>New post</div>
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea ref={newPostElement} value={props.newPostText} onChange={onChange}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>

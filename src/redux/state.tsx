@@ -10,6 +10,7 @@ export type StateType = {
     },
     profilePage: {
         posts: PostPropsType[]
+        newPostText: string
     }
 
 }
@@ -37,11 +38,18 @@ export const state: StateType = {
             {id: '2', message: 'Hi', likeCount: 10},
             {id: '3', message: 'How are you?', likeCount: 4},
         ],
+        newPostText: ''
     },
 
 }
 
 export const addPost = (message: string) => {
-    state.profilePage.posts.push({id: '5', message, likeCount: 0})
+    state.profilePage.posts.push({id: '5', message: state.profilePage.newPostText, likeCount: 0})
+    state.profilePage.newPostText = ''
+    rerenderEntireTree(state)
+}
+
+export const changeNewPostText = (newPostText: string) => {
+    state.profilePage.newPostText = newPostText
     rerenderEntireTree(state)
 }

@@ -7,15 +7,19 @@ import {PostPropsType} from "./MyPosts/Post/Post";
 export type ProfilePropsType = {
     profilePage: {
         posts: PostPropsType[]
+        newPostText: string
     }
-    addPost: (message: string)=> void
+    addPost: (message: string) => void
+    changeNewPostText: (newPostText: string) => void
 }
 
 export const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.profilePage.posts} addPost={props.addPost}/>
+            <MyPosts posts={props.profilePage.posts} addPost={props.addPost}
+                     newPostText={props.profilePage.newPostText} changeNewPostText={props.changeNewPostText}
+            />
         </div>
     );
 };
