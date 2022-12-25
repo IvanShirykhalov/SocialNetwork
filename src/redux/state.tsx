@@ -5,11 +5,13 @@ import {PostPropsType} from "../components/Profile/MyPosts/Post/Post";
 
 export type StoreType = {
     _state: StateType
-    rerenderEntireTree: ()=> void
+    _callSubscriber: () => void
     getState: () => StateType
-    addPost: (message: string) => void
-    changeNewPostText: (newPostText: string) => void
     subscribe: (observer: () => void) => void
+    /*    addPost: (message: string) => void
+        changeNewPostText: (newPostText: string) => void*/
+
+    dispatch: (action: ActionType) => void
 
 }
 export type StateType = {
@@ -23,6 +25,15 @@ export type StateType = {
     }
 
 }
+type AddPostActionType = {
+    type: 'ADD-POST'
+}
+type ChangeNewPostText = {
+    type: 'CHANGE-NEW-POST-TEXT'
+    newPostText: string
+}
+export type ActionType = AddPostActionType | ChangeNewPostText
+
 
 export const store: StoreType = {
     _state: {
@@ -52,22 +63,40 @@ export const store: StoreType = {
         },
 
     },
-    rerenderEntireTree() {
+    _callSubscriber() {
     },
+
     getState() {
         return this._state
     },
-    addPost(message: string) {
-        this._state.profilePage.posts.push({id: '5', message: this._state.profilePage.newPostText, likeCount: 0})
-        this._state.profilePage.newPostText = ''
-        this.rerenderEntireTree()
-    },
-    changeNewPostText(newPostText: string) {
-        this._state.profilePage.newPostText = newPostText
-        this.rerenderEntireTree()
-    },
     subscribe(observer) {
-        this.rerenderEntireTree = observer
+        this._callSubscriber = observer
     },
+    /*    addPost(message: string) {
+            this._state.profilePage.posts.push({id: '5', message: this._state.profilePage.newPostText, likeCount: 0})
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber()
+        },
+        changeNewPostText(newPostText: string) {
+            this._state.profilePage.newPostText = newPostText
+            this._callSubscriber()
+        },*/
+    dispatch(action: ActionType) {
+        switch (action.type) {
+            case 'ADD-POST':
+                this._state.profilePage.posts.push({
+                    id: '5',
+                    message: this._state.profilePage.newPostText,
+                    likeCount: 0
+                })
+                this._state.profilePage.newPostText = ''
+                this._callSubscriber()
+                break;
+            case 'CHANGE-NEW-POST-TEXT':
+                this._state.profilePage.newPostText = action.newPostText
+                this._callSubscriber()
+                break;
+        }
+    }
 
 }
