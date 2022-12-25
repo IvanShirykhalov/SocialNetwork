@@ -3,12 +3,9 @@ import {MessagePropsType} from "../components/Dialogs/Message/Message";
 import {PostPropsType} from "../components/Profile/MyPosts/Post/Post";
 
 
-let rerenderEntireTree = () => {
-}
-
-
 export type StoreType = {
     _state: StateType
+    rerenderEntireTree: ()=> void
     getState: () => StateType
     addPost: (message: string) => void
     changeNewPostText: (newPostText: string) => void
@@ -55,20 +52,22 @@ export const store: StoreType = {
         },
 
     },
+    rerenderEntireTree() {
+    },
     getState() {
         return this._state
     },
     addPost(message: string) {
         this._state.profilePage.posts.push({id: '5', message: this._state.profilePage.newPostText, likeCount: 0})
         this._state.profilePage.newPostText = ''
-        rerenderEntireTree()
+        this.rerenderEntireTree()
     },
     changeNewPostText(newPostText: string) {
         this._state.profilePage.newPostText = newPostText
-        rerenderEntireTree()
+        this.rerenderEntireTree()
     },
     subscribe(observer) {
-        rerenderEntireTree = observer
+        this.rerenderEntireTree = observer
     },
 
 }
