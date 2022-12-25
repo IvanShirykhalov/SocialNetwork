@@ -1,15 +1,13 @@
-import React, {useRef} from 'react';
+import React, {useRef, KeyboardEvent} from 'react';
 import {Post, PostPropsType} from "./Post/Post";
 import s from './MyPosts.module.css'
-import {ActionType} from "../../../redux/state";
+import {ActionType, AddPostAC, changeNewPostTextAC} from "../../../redux/state";
 
 export type MyPostPropsType = {
     posts: PostPropsType[]
 
     newPostText: string
     dispatch: (action: ActionType) => void
-    /*    addPost: (message: string) => void
-        changeNewPostText: (newPostText: string) => void*/
 }
 
 export const MyPosts = (props: MyPostPropsType) => {
@@ -18,15 +16,19 @@ export const MyPosts = (props: MyPostPropsType) => {
     const newPostElement = useRef<HTMLTextAreaElement>(null)
     const addPost = () => {
         if (newPostElement.current !== null) {
-            //props.dispatch.addPost(newPostElement.current.value)
-            props.dispatch({type: 'ADD-POST'})
+            props.dispatch(AddPostAC())
         }
     }
 
     const onChange = () => {
         if (newPostElement.current !== null) {
-            //props.changeNewPostText(newPostElement.current.value)
-            props.dispatch({type: 'CHANGE-NEW-POST-TEXT', newPostText: newPostElement.current.value})
+            props.dispatch(changeNewPostTextAC(newPostElement.current.value))
+        }
+    }
+
+    const onKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === 'Enter') {
+            addPost()
         }
     }
 
@@ -37,7 +39,8 @@ export const MyPosts = (props: MyPostPropsType) => {
             <div>New post</div>
             <div>
                 <div>
-                    <textarea ref={newPostElement} value={props.newPostText} onChange={onChange}/>
+                    <textarea ref={newPostElement} value={props.newPostText} onChange={onChange}
+                              onKeyPress={onKeyPress}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
