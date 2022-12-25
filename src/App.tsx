@@ -10,7 +10,6 @@ import {News} from "./components/News/News";
 import {DialogPropsType} from "./components/Dialogs/DialogItem/DialogItem";
 import {MessagePropsType} from "./components/Dialogs/Message/Message";
 import {PostPropsType} from "./components/Profile/MyPosts/Post/Post";
-import {changeNewPostText} from "./redux/state";
 
 
 type AppPropsType = {
