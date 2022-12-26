@@ -1,6 +1,8 @@
 import {DialogPropsType} from "../components/Dialogs/DialogItem/DialogItem";
 import {MessagePropsType} from "../components/Dialogs/Message/Message";
 import {PostPropsType} from "../components/Profile/MyPosts/Post/Post";
+import {AddMessageAC, changeNewMessageTextAC, dialogsPageReducer} from "./dialogsPageReducer";
+import {AddPostAC, changeNewPostTextAC, profilePageReducer} from "./profilePageReducer";
 
 
 export type StoreType = {
@@ -11,24 +13,25 @@ export type StoreType = {
     dispatch: (action: ActionType) => void
 
 }
+export type DialogsPageType = {
+    dialogs: DialogPropsType[]
+    messages: MessagePropsType[]
+    newMessageText: string
+}
+export type ProfilePageType = {
+    posts: PostPropsType[]
+    newPostText: string
+}
 export type StateType = {
-    dialogsPage: {
-        dialogs: DialogPropsType[]
-        messages: MessagePropsType[]
-        newMessageText: string
-    },
-    profilePage: {
-        posts: PostPropsType[]
-        newPostText: string
-    }
+    dialogsPage: DialogsPageType,
+    profilePage: ProfilePageType
 
 }
 export type ActionType =
-    ReturnType<typeof AddPostAC>
-    | ReturnType<typeof changeNewPostTextAC>
-    | ReturnType<typeof AddMessageAC>
+    ReturnType<typeof AddMessageAC>
     | ReturnType<typeof changeNewMessageTextAC>
-
+    | ReturnType<typeof AddPostAC>
+    | ReturnType<typeof changeNewPostTextAC>
 
 export const store: StoreType = {
     _state: {
@@ -67,7 +70,10 @@ export const store: StoreType = {
         this._callSubscriber = observer
     },
     dispatch(action: ActionType) {
-        switch (action.type) {
+        dialogsPageReducer(this._state, action)
+        profilePageReducer(this._state, action)
+        this._callSubscriber()
+        /*switch (action.type) {
             case 'ADD-POST':
                 this._state.profilePage.posts.push({
                     id: '5',
@@ -92,15 +98,9 @@ export const store: StoreType = {
             case "CHANGE-NEW-MESSAGE-TEXT":
                 this._state.dialogsPage.newMessageText = action.newMessageText
                 this._callSubscriber()
-        }
+        }*/
     }
 }
 
-export const AddPostAC = () => ({type: 'ADD-POST'} as const)
-export const changeNewPostTextAC = (newPostText: string) => ({type: 'CHANGE-NEW-POST-TEXT', newPostText} as const)
 
-export const AddMessageAC = () => ({type: 'ADD-MESSAGE'} as const)
-export const changeNewMessageTextAC = (newMessageText: string) => ({
-    type: 'CHANGE-NEW-MESSAGE-TEXT',
-    newMessageText
-} as const)
+
