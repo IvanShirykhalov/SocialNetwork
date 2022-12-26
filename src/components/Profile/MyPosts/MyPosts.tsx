@@ -1,4 +1,4 @@
-import React, {useRef, KeyboardEvent} from 'react';
+import React, {KeyboardEvent, ChangeEvent} from 'react';
 import {Post, PostPropsType} from "./Post/Post";
 import s from './MyPosts.module.css'
 import {ActionType, AddPostAC, changeNewPostTextAC} from "../../../redux/state";
@@ -12,19 +12,10 @@ export type MyPostPropsType = {
 
 export const MyPosts = (props: MyPostPropsType) => {
 
+    const addPost = () => props.dispatch(AddPostAC())
 
-    const newPostElement = useRef<HTMLTextAreaElement>(null)
-    const addPost = () => {
-        if (newPostElement.current !== null) {
-            props.dispatch(AddPostAC())
-        }
-    }
+    const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => props.dispatch(changeNewPostTextAC(e.currentTarget.value))
 
-    const onChange = () => {
-        if (newPostElement.current !== null) {
-            props.dispatch(changeNewPostTextAC(newPostElement.current.value))
-        }
-    }
 
     const onKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
@@ -39,9 +30,10 @@ export const MyPosts = (props: MyPostPropsType) => {
             <div>New post</div>
             <div>
                 <div>
-                    <textarea ref={newPostElement} value={props.newPostText}
-                              onChange={onChange}
-                              onKeyPress={onKeyPress}/>
+                    <textarea
+                        value={props.newPostText}
+                        onChange={onChange}
+                        onKeyPress={onKeyPress}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>

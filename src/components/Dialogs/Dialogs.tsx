@@ -1,4 +1,4 @@
-import React, {useRef, KeyboardEvent} from 'react';
+import React, {KeyboardEvent, ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem, DialogPropsType} from "./DialogItem/DialogItem";
 import {Message, MessagePropsType} from "./Message/Message";
@@ -18,17 +18,12 @@ export type DialogsPropsType = {
 
 export const Dialogs = (props: DialogsPropsType) => {
 
-    const newMessageElement = useRef<HTMLTextAreaElement>(null)
-
     const addMessage = () => {
-        if (newMessageElement.current !== null) {
-            props.dispatch(AddMessageAC())
-        }
+        props.dispatch(AddMessageAC())
     }
-    const onChange = () => {
-        if (newMessageElement.current !== null) {
-            props.dispatch(changeNewMessageTextAC(newMessageElement.current.value))
-        }
+    const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch(changeNewMessageTextAC(e.currentTarget.value))
+
     }
 
     const onKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -44,13 +39,18 @@ export const Dialogs = (props: DialogsPropsType) => {
             </div>
             <div className={s.messages}>
                 {props.dialogsPage.messages.map(m => <Message id={m.id} message={m.message}/>)}
-                <textarea ref={newMessageElement}
-                          onKeyPress={onKeyPress}
-                          onChange={onChange}
-                          value={props.dialogsPage.newMessageText}
+                <div>
+                    <div><textarea
+                        placeholder={`Enter your Message...`}
+                        onKeyPress={onKeyPress}
+                        onChange={onChange}
+                        value={props.dialogsPage.newMessageText}
 
-                />
-                <button onClick={addMessage}>Send message</button>
+                    /></div>
+                    <div>
+                        <button onClick={addMessage}>Send</button>
+                    </div>
+                </div>
             </div>
         </div>
     );
