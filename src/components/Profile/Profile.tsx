@@ -11,8 +11,6 @@ export type ProfilePropsType = {
         newPostText: string
     }
     dispatch: (action: ActionType) => void
-    /*addPost: (message: string) => void
-    changeNewPostText: (newPostText: string) => void*/
 }
 
 export const Profile = (props: ProfilePropsType) => {
@@ -22,8 +20,6 @@ export const Profile = (props: ProfilePropsType) => {
             <MyPosts posts={props.profilePage.posts}
                      newPostText={props.profilePage.newPostText}
                      dispatch={props.dispatch}
-                /*addPost={props.addPost}
-                changeNewPostText={props.changeNewPostText}*/
             />
         </div>
     );

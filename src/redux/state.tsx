@@ -15,6 +15,7 @@ export type StateType = {
     dialogsPage: {
         dialogs: DialogPropsType[]
         messages: MessagePropsType[]
+        newMessageText: string
     },
     profilePage: {
         posts: PostPropsType[]
@@ -22,7 +23,11 @@ export type StateType = {
     }
 
 }
-export type ActionType = ReturnType<typeof AddPostAC> | ReturnType<typeof changeNewPostTextAC>
+export type ActionType =
+    ReturnType<typeof AddPostAC>
+    | ReturnType<typeof changeNewPostTextAC>
+    | ReturnType<typeof AddMessageAC>
+    | ReturnType<typeof changeNewMessageTextAC>
 
 
 export const store: StoreType = {
@@ -38,10 +43,9 @@ export const store: StoreType = {
             messages: [
                 {id: '1', message: 'Hi'},
                 {id: '2', message: 'Hello'},
-                {id: '3', message: 'Whats up'},
-                {id: '4', message: 'Guten tag'},
-                {id: '5', message: 'Aloha'},
+
             ],
+            newMessageText: ''
         },
         profilePage: {
             posts: [
@@ -77,9 +81,26 @@ export const store: StoreType = {
                 this._state.profilePage.newPostText = action.newPostText
                 this._callSubscriber()
                 break;
+            case "ADD-MESSAGE":
+                this._state.dialogsPage.messages.push({
+                    id: '6',
+                    message: this._state.dialogsPage.newMessageText
+                })
+                this._state.dialogsPage.newMessageText = ''
+                this._callSubscriber()
+                break;
+            case "CHANGE-NEW-MESSAGE-TEXT":
+                this._state.dialogsPage.newMessageText = action.newMessageText
+                this._callSubscriber()
         }
     }
 }
 
 export const AddPostAC = () => ({type: 'ADD-POST'} as const)
 export const changeNewPostTextAC = (newPostText: string) => ({type: 'CHANGE-NEW-POST-TEXT', newPostText} as const)
+
+export const AddMessageAC = () => ({type: 'ADD-MESSAGE'} as const)
+export const changeNewMessageTextAC = (newMessageText: string) => ({
+    type: 'CHANGE-NEW-MESSAGE-TEXT',
+    newMessageText
+} as const)

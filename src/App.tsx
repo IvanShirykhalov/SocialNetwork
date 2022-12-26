@@ -18,6 +18,7 @@ type AppPropsType = {
         dialogsPage: {
             dialogs: DialogPropsType[]
             messages: MessagePropsType[]
+            newMessageText: string
         },
         profilePage: {
             posts: PostPropsType[]
@@ -38,11 +39,11 @@ function App(props: AppPropsType) {
             <div className={'app-wrapper-content'}>
                 <Route render={() => <Profile profilePage={props.state.profilePage}
                                               dispatch={props.dispatch}
-                                              /*addPost={props.addPost}
-                                              changeNewPostText={props.changeNewPostText}*/
                 />}
                        path={'/profile'}/>
-                <Route render={() => <Dialogs dialogsPage={props.state.dialogsPage}/>}
+                <Route render={() => <Dialogs dialogsPage={props.state.dialogsPage}
+                                              dispatch={props.dispatch}
+                />}
                        path={'/dialogs'}/>
                 <Route render={() => <Music/>} path={'/music'}/>
                 <Route render={() => <News/>} path={'/news'}/>

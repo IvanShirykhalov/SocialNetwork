@@ -39,7 +39,8 @@ export const MyPosts = (props: MyPostPropsType) => {
             <div>New post</div>
             <div>
                 <div>
-                    <textarea ref={newPostElement} value={props.newPostText} onChange={onChange}
+                    <textarea ref={newPostElement} value={props.newPostText}
+                              onChange={onChange}
                               onKeyPress={onKeyPress}/>
                 </div>
                 <div>
