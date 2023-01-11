@@ -28,7 +28,7 @@ type AppPropsType = {
             }
         }
         dispatch: (action: ActionType) => void*/
-    store: StoreType
+    //store: StoreType
 }
 
 function App(props: AppPropsType) {
@@ -38,13 +38,16 @@ function App(props: AppPropsType) {
             <Header/>
             <Navbar/>
             <div className={'app-wrapper-content'}>
-                <Route render={() => <Profile store={props.store}
+                <Route render={() => <Profile
+                    //store={props.store}
+
                     //profilePage={props.store.getState().profilePage}
                     //dispatch={props.store.dispatch.bind(props.store)}
                 />}
                        path={'/profile'}/>
                 <Route render={() => <DialogsContainer
-                    store={props.store}
+                    //store={props.store}
+
                     //dialogsPage={props.store.getState().dialogsPage}
                     //dispatch={props.store.dispatch.bind(props.store)}
                 />}

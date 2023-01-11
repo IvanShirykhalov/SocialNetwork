@@ -7,7 +7,7 @@ import {ActionType, StoreType} from "../../redux/store";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 export type ProfilePropsType = {
-    store: StoreType
+    //store: StoreType
    /* profilePage: {
         posts: PostPropsType[]
         newPostText: string
@@ -20,7 +20,7 @@ export const Profile = (props: ProfilePropsType) => {
         <div>
             <ProfileInfo/>
             <MyPostsContainer
-                store={props.store}
+                //store={props.store}
                 //profilePage={props.store.getState().profilePage}
                               //dispatch={props.store.dispatch}
             />

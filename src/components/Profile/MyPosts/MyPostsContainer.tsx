@@ -3,26 +3,38 @@ import {MyPosts} from "./MyPosts";
 import {PostPropsType} from "./Post/Post";
 import {ActionType, StoreType} from "../../../redux/store";
 import {AddPostAC, changeNewPostTextAC} from "../../../redux/profilePageReducer";
+import {store} from "../../../redux/redux-store";
+import {StoreContext} from "../../../redux/StoreContext";
 
 
-export type MyPostContainerPropsType = {
-    /*    profilePage: {
+/*export type MyPostContainerPropsType = {
+    /!*    profilePage: {
             posts: PostPropsType[]
             newPostText: string
         }
-        dispatch: (action: ActionType) => void*/
+        dispatch: (action: ActionType) => void*!/
     store: StoreType
-}
+}*/
 
-export const MyPostsContainer = (props: MyPostContainerPropsType) => {
-
-    const addPost = () => props.store.dispatch(AddPostAC())
-
-    const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => props.store.dispatch(changeNewPostTextAC(e.currentTarget.value))
+export const MyPostsContainer = () => {
 
     return (
-        <MyPosts posts={props.store.getState().profilePage.posts}
-                 newPostText={props.store.getState().profilePage.newPostText} addPost={addPost}
-                 onChange={onChange}/>
+        <StoreContext.Consumer>
+            {
+                (store) => {
+                    const addPost = () => store.dispatch(AddPostAC())
+
+                    const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => store.dispatch(changeNewPostTextAC(e.currentTarget.value))
+
+                    return (
+                        <MyPosts posts={store.getState().profilePage.posts}
+                                 newPostText={store.getState().profilePage.newPostText}
+                                 addPost={addPost}
+                                 onChange={onChange}/>
+                    )
+                }
+
+            }
+        </StoreContext.Consumer>
     );
 };
