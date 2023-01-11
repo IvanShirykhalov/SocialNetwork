@@ -10,7 +10,7 @@ import {News} from "./components/News/News";
 import {DialogPropsType} from "./components/Dialogs/DialogItem/DialogItem";
 import {MessagePropsType} from "./components/Dialogs/Message/Message";
 import {PostPropsType} from "./components/Profile/MyPosts/Post/Post";
-import {ActionType} from "./redux/state";
+import {ActionType} from "./redux/store";
 
 
 type AppPropsType = {
@@ -25,8 +25,6 @@ type AppPropsType = {
             newPostText: string
         }
     }
-    /*    addPost: (message: string) => void
-        changeNewPostText: (newPostText: string)=> void*/
     dispatch: (action: ActionType) => void
 }
 

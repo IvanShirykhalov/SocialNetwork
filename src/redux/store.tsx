@@ -70,35 +70,9 @@ export const store: StoreType = {
         this._callSubscriber = observer
     },
     dispatch(action: ActionType) {
-        dialogsPageReducer(this._state, action)
-        profilePageReducer(this._state, action)
-        this._callSubscriber()
-        /*switch (action.type) {
-            case 'ADD-POST':
-                this._state.profilePage.posts.push({
-                    id: '5',
-                    message: this._state.profilePage.newPostText,
-                    likeCount: 0
-                })
-                this._state.profilePage.newPostText = ''
-                this._callSubscriber()
-                break;
-            case 'CHANGE-NEW-POST-TEXT':
-                this._state.profilePage.newPostText = action.newPostText
-                this._callSubscriber()
-                break;
-            case "ADD-MESSAGE":
-                this._state.dialogsPage.messages.push({
-                    id: '6',
-                    message: this._state.dialogsPage.newMessageText
-                })
-                this._state.dialogsPage.newMessageText = ''
-                this._callSubscriber()
-                break;
-            case "CHANGE-NEW-MESSAGE-TEXT":
-                this._state.dialogsPage.newMessageText = action.newMessageText
-                this._callSubscriber()
-        }*/
+        //dialogsPageReducer(this._state, action)
+        //profilePageReducer(this._state, action)
+        //this._callSubscriber()
     }
 }
 

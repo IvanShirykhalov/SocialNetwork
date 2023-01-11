@@ -1,18 +1,32 @@
-import {ActionType, StateType} from "./state";
+import {ActionType} from "./store";
+import {PostPropsType} from "../components/Profile/MyPosts/Post/Post";
 
+export type ProfilePageType = {
+    posts: PostPropsType[]
+    newPostText: string
+}
 
-export const profilePageReducer = (state: StateType, action: ActionType) => {
+const initialState: ProfilePageType = {
+    posts: [
+        {id: '1', message: 'Hi, how are you?', likeCount: 2},
+        {id: '2', message: 'Hi', likeCount: 10},
+        {id: '3', message: 'How are you?', likeCount: 4},
+    ],
+    newPostText: ''
+}
+
+export const profilePageReducer = (state = initialState, action: ActionType) => {
     switch (action.type) {
         case 'ADD-POST':
-            state.profilePage.posts.push({
+            state.posts.push({
                 id: '5',
-                message: state.profilePage.newPostText,
+                message: state.newPostText,
                 likeCount: 0
             })
-            state.profilePage.newPostText = ''
+            state.newPostText = ''
             break;
         case 'CHANGE-NEW-POST-TEXT':
-            state.profilePage.newPostText = action.newPostText
+            state.newPostText = action.newPostText
             break;
         default:
             return state
