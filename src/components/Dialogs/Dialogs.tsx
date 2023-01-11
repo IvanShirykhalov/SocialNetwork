@@ -13,23 +13,18 @@ export type DialogsPropsType = {
         newMessageText: string
 
     }
+    addMessage: () => void
 
-    dispatch: (action: ActionType) => void
+    onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
 
-    const addMessage = () => {
-        props.dispatch(AddMessageAC())
-    }
-    const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(changeNewMessageTextAC(e.currentTarget.value))
 
-    }
 
     const onKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
-            addMessage()
+            props.addMessage()
         }
     }
 
@@ -44,12 +39,12 @@ export const Dialogs = (props: DialogsPropsType) => {
                     <div><textarea
                         placeholder={`Enter your Message...`}
                         onKeyPress={onKeyPress}
-                        onChange={onChange}
+                        onChange={props.onChange}
                         value={props.dialogsPage.newMessageText}
 
                     /></div>
                     <div>
-                        <button onClick={addMessage}>Send</button>
+                        <button onClick={props.addMessage}>Send</button>
                     </div>
                 </div>
             </div>

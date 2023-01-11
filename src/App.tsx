@@ -12,6 +12,7 @@ import {MessagePropsType} from "./components/Dialogs/Message/Message";
 import {PostPropsType} from "./components/Profile/MyPosts/Post/Post";
 import {ActionType, StoreType} from "./redux/store";
 import {store} from "./redux/redux-store";
+import {DialogsContainer} from "./components/Dialogs/Message/DialogsContainer";
 
 
 type AppPropsType = {
@@ -41,8 +42,8 @@ function App(props: AppPropsType) {
                                               dispatch={props.store.dispatch.bind(props.store)}
                 />}
                        path={'/profile'}/>
-                <Route render={() => <Dialogs dialogsPage={props.store.getState().dialogsPage}
-                                              dispatch={props.store.dispatch.bind(props.store)}
+                <Route render={() => <DialogsContainer dialogsPage={props.store.getState().dialogsPage}
+                                                       dispatch={props.store.dispatch.bind(props.store)}
                 />}
                        path={'/dialogs'}/>
                 <Route render={() => <Music/>} path={'/music'}/>
