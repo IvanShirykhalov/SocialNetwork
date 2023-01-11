@@ -10,22 +10,24 @@ import {News} from "./components/News/News";
 import {DialogPropsType} from "./components/Dialogs/DialogItem/DialogItem";
 import {MessagePropsType} from "./components/Dialogs/Message/Message";
 import {PostPropsType} from "./components/Profile/MyPosts/Post/Post";
-import {ActionType} from "./redux/store";
+import {ActionType, StoreType} from "./redux/store";
+import {store} from "./redux/redux-store";
 
 
 type AppPropsType = {
-    state: {
-        dialogsPage: {
-            dialogs: DialogPropsType[]
-            messages: MessagePropsType[]
-            newMessageText: string
-        },
-        profilePage: {
-            posts: PostPropsType[]
-            newPostText: string
+    /*    state: {
+            dialogsPage: {
+                dialogs: DialogPropsType[]
+                messages: MessagePropsType[]
+                newMessageText: string
+            },
+            profilePage: {
+                posts: PostPropsType[]
+                newPostText: string
+            }
         }
-    }
-    dispatch: (action: ActionType) => void
+        dispatch: (action: ActionType) => void*/
+    store: StoreType
 }
 
 function App(props: AppPropsType) {
@@ -35,12 +37,12 @@ function App(props: AppPropsType) {
             <Header/>
             <Navbar/>
             <div className={'app-wrapper-content'}>
-                <Route render={() => <Profile profilePage={props.state.profilePage}
-                                              dispatch={props.dispatch}
+                <Route render={() => <Profile profilePage={props.store.getState().profilePage}
+                                              dispatch={props.store.dispatch.bind(props.store)}
                 />}
                        path={'/profile'}/>
-                <Route render={() => <Dialogs dialogsPage={props.state.dialogsPage}
-                                              dispatch={props.dispatch}
+                <Route render={() => <Dialogs dialogsPage={props.store.getState().dialogsPage}
+                                              dispatch={props.store.dispatch.bind(props.store)}
                 />}
                        path={'/dialogs'}/>
                 <Route render={() => <Music/>} path={'/music'}/>

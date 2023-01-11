@@ -9,8 +9,9 @@ const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <App
-                state={store.getState()}
-                dispatch={store.dispatch.bind(store)}
+                store={store}
+                /*                state={store.getState()}
+                                dispatch={store.dispatch.bind(store)}*/
             />
         </BrowserRouter>,
         document.getElementById('root')
@@ -18,7 +19,9 @@ const rerenderEntireTree = () => {
 }
 
 rerenderEntireTree()
-store.subscribe(() => {
-
+/*store.subscribe(() => {
+    let state = store.getState()
     rerenderEntireTree()
-})
+})*/
+store.subscribe(rerenderEntireTree)
+
