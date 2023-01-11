@@ -38,12 +38,15 @@ function App(props: AppPropsType) {
             <Header/>
             <Navbar/>
             <div className={'app-wrapper-content'}>
-                <Route render={() => <Profile profilePage={props.store.getState().profilePage}
-                                              dispatch={props.store.dispatch.bind(props.store)}
+                <Route render={() => <Profile store={props.store}
+                    //profilePage={props.store.getState().profilePage}
+                    //dispatch={props.store.dispatch.bind(props.store)}
                 />}
                        path={'/profile'}/>
-                <Route render={() => <DialogsContainer dialogsPage={props.store.getState().dialogsPage}
-                                                       dispatch={props.store.dispatch.bind(props.store)}
+                <Route render={() => <DialogsContainer
+                    store={props.store}
+                    //dialogsPage={props.store.getState().dialogsPage}
+                    //dispatch={props.store.dispatch.bind(props.store)}
                 />}
                        path={'/dialogs'}/>
                 <Route render={() => <Music/>} path={'/music'}/>

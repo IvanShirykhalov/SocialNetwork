@@ -14,7 +14,6 @@ export type DialogsPropsType = {
 
     }
     addMessage: () => void
-
     onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
 }
 

@@ -6,10 +6,8 @@ import {AddPostAC, changeNewPostTextAC} from "../../../redux/profilePageReducer"
 
 export type MyPostPropsType = {
     posts: PostPropsType[]
-
     newPostText: string
     addPost: () => void
-
     onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
 }
 
