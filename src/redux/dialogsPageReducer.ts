@@ -1,6 +1,7 @@
 import {ActionType} from "./store";
 import {DialogPropsType} from "../components/Dialogs/DialogItem/DialogItem";
 import {MessagePropsType} from "../components/Dialogs/Message/Message";
+import {v1} from "uuid";
 
 type DialogsPageType = {
     dialogs: DialogPropsType[]
@@ -10,15 +11,15 @@ type DialogsPageType = {
 
 const initialState: DialogsPageType = {
     dialogs: [
-        {id: '1', name: 'Oleg'},
-        {id: '2', name: 'Vladimir'},
-        {id: '3', name: 'Petr'},
-        {id: '4', name: 'Fedor'},
-        {id: '5', name: 'Alexander'},
+        {id: v1(), name: 'Oleg'},
+        {id: v1(), name: 'Vladimir'},
+        {id: v1(), name: 'Petr'},
+        {id: v1(), name: 'Fedor'},
+        {id: v1(), name: 'Alexander'},
     ],
     messages: [
-        {id: '1', message: 'Hi'},
-        {id: '2', message: 'Hello'},
+        {id: v1(), message: 'Hi'},
+        {id: v1(), message: 'Hello'},
 
     ],
     newMessageText: ''
@@ -28,15 +29,16 @@ export const dialogsPageReducer = (state = initialState, action: ActionType) => 
     switch (action.type) {
         case "ADD-MESSAGE":
             state.messages.push({
-                id: '6',
+                id: v1(),
                 message: state.newMessageText
             })
             state.newMessageText = ''
+            return state
 
-            break;
         case "CHANGE-NEW-MESSAGE-TEXT":
             state.newMessageText = action.newMessageText
-            break;
+            return state
+
         default:
             return state
     }

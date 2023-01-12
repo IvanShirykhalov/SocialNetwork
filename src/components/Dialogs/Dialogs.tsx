@@ -14,12 +14,15 @@ export type DialogsPropsType = {
 
     }
     addMessage: () => void
-    onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
+    onChange: (text: string) => void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
 
 
+    const addMessage = () => props.addMessage()
+
+    const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => props.onChange(e.currentTarget.value)
 
     const onKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
@@ -30,20 +33,20 @@ export const Dialogs = (props: DialogsPropsType) => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {props.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)}
+                {props.dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)}
             </div>
             <div className={s.messages}>
-                {props.dialogsPage.messages.map(m => <Message id={m.id} message={m.message}/>)}
+                {props.dialogsPage.messages.map(m => <Message key={m.id} id={m.id} message={m.message}/>)}
                 <div>
                     <div><textarea
                         placeholder={`Enter your Message...`}
                         onKeyPress={onKeyPress}
-                        onChange={props.onChange}
+                        onChange={onChange}
                         value={props.dialogsPage.newMessageText}
 
                     /></div>
                     <div>
-                        <button onClick={props.addMessage}>Send</button>
+                        <button onClick={addMessage}>Send</button>
                     </div>
                 </div>
             </div>

@@ -1,11 +1,11 @@
 import React, {ChangeEvent} from 'react';
-import {AddMessageAC, changeNewMessageTextAC} from "../../../redux/dialogsPageReducer";
-import {DialogPropsType} from "../DialogItem/DialogItem";
-import {MessagePropsType} from "./Message";
-import {ActionType, StoreType} from "../../../redux/store";
-import {Dialogs} from "../Dialogs";
-import {store} from "../../../redux/redux-store";
-import {StoreContext} from "../../../redux/StoreContext";
+import {AddMessageAC, changeNewMessageTextAC} from "../../redux/dialogsPageReducer";
+import {DialogPropsType} from "./DialogItem/DialogItem";
+import {MessagePropsType} from "./Message/Message";
+import {ActionType, StoreType} from "../../redux/store";
+import {Dialogs} from "./Dialogs";
+import {store} from "../../redux/redux-store";
+import {StoreContext} from "../../redux/StoreContext";
 
 export type DialogsContainerPropsType = {
     /*    dialogsPage: {
@@ -27,8 +27,8 @@ export const DialogsContainer = (props: DialogsContainerPropsType) => {
                 const addMessage = () => {
                     store.dispatch(AddMessageAC())
                 }
-                const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-                    store.dispatch(changeNewMessageTextAC(e.currentTarget.value))
+                const onChange = (text: string) => {
+                    store.dispatch(changeNewMessageTextAC(text))
 
                 }
 

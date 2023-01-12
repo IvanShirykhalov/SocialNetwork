@@ -1,5 +1,6 @@
 import {ActionType} from "./store";
 import {PostPropsType} from "../components/Profile/MyPosts/Post/Post";
+import {v1} from "uuid";
 
 export type ProfilePageType = {
     posts: PostPropsType[]
@@ -8,9 +9,9 @@ export type ProfilePageType = {
 
 const initialState: ProfilePageType = {
     posts: [
-        {id: '1', message: 'Hi, how are you?', likeCount: 2},
-        {id: '2', message: 'Hi', likeCount: 10},
-        {id: '3', message: 'How are you?', likeCount: 4},
+        {id: v1(), message: 'Hi, how are you?', likeCount: 2},
+        {id: v1(), message: 'Hi', likeCount: 10},
+        {id: v1(), message: 'How are you?', likeCount: 4},
     ],
     newPostText: ''
 }
@@ -19,15 +20,15 @@ export const profilePageReducer = (state = initialState, action: ActionType) => 
     switch (action.type) {
         case 'ADD-POST':
             state.posts.push({
-                id: '5',
+                id: v1(),
                 message: state.newPostText,
                 likeCount: 0
             })
             state.newPostText = ''
-            break;
+            return state
         case 'CHANGE-NEW-POST-TEXT':
             state.newPostText = action.newPostText
-            break;
+            return state
         default:
             return state
     }

@@ -8,18 +8,15 @@ export type MyPostPropsType = {
     posts: PostPropsType[]
     newPostText: string
     addPost: () => void
-    onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
+    onChange: (text: string) => void
 }
 
 export const MyPosts = (props: MyPostPropsType) => {
 
-/*
-    const addPost = () => props.addPost
+
+    const addPost = () => props.addPost()
 
     const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => props.onChange(e.currentTarget.value)
-*/
-
-
     const onKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
             props.addPost()
@@ -35,11 +32,11 @@ export const MyPosts = (props: MyPostPropsType) => {
                 <div>
                     <textarea
                         value={props.newPostText}
-                        onChange={props.onChange}
+                        onChange={onChange}
                         onKeyPress={onKeyPress}/>
                 </div>
                 <div>
-                    <button onClick={props.addPost}>Add post</button>
+                    <button onClick={addPost}>Add post</button>
                 </div>
             </div>
             {props.posts.map(p => <Post key={p.id} id={p.id} message={p.message} likeCount={p.likeCount}/>)}

@@ -24,7 +24,10 @@ export const MyPostsContainer = () => {
                 (store) => {
                     const addPost = () => store.dispatch(AddPostAC())
 
-                    const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => store.dispatch(changeNewPostTextAC(e.currentTarget.value))
+
+                    const onChange = (text: string) => {
+                        store.dispatch(changeNewPostTextAC(text))
+                    }
 
                     return (
                         <MyPosts posts={store.getState().profilePage.posts}

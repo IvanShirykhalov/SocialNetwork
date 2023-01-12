@@ -15,6 +15,8 @@ import {ActionType, StateType, StoreType} from "./store";
     dialogsPage: dialogsPageReducer,
     profilePage: profilePageReducer,
 })*/
+
+
 export const store: StoreType = createStore(
     combineReducers({
             dialogsPage: dialogsPageReducer,

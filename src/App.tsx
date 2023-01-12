@@ -12,7 +12,7 @@ import {MessagePropsType} from "./components/Dialogs/Message/Message";
 import {PostPropsType} from "./components/Profile/MyPosts/Post/Post";
 import {ActionType, StoreType} from "./redux/store";
 import {store} from "./redux/redux-store";
-import {DialogsContainer} from "./components/Dialogs/Message/DialogsContainer";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
 type AppPropsType = {
