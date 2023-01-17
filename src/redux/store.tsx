@@ -1,11 +1,9 @@
-import {DialogPropsType} from "../components/Dialogs/DialogItem/DialogItem";
-import {MessagePropsType} from "../components/Dialogs/Message/Message";
 import {PostPropsType} from "../components/Profile/MyPosts/Post/Post";
-import {AddMessageAC, changeNewMessageTextAC, dialogsPageReducer} from "./dialogsPageReducer";
-import {AddPostAC, changeNewPostTextAC, profilePageReducer} from "./profilePageReducer";
+import {AddMessageAC, changeNewMessageTextAC} from "./dialogsPageReducer";
+import {AddPostAC, changeNewPostTextAC} from "./profilePageReducer";
+import {DialogsPageType} from "../components/Dialogs/DialogsContainer";
 
-
-export type StoreType = {
+type StoreType = {
     _state: StateType
     _callSubscriber: () => void
     getState: () => StateType
@@ -13,27 +11,23 @@ export type StoreType = {
     dispatch: (action: ActionType) => void
 
 }
-export type DialogsPageType = {
-    dialogs: DialogPropsType[]
-    messages: MessagePropsType[]
-    newMessageText: string
-}
-export type ProfilePageType = {
+
+type ProfilePageType = {
     posts: PostPropsType[]
     newPostText: string
 }
-export type StateType = {
+type StateType = {
     dialogsPage: DialogsPageType,
     profilePage: ProfilePageType
 
 }
-export type ActionType =
+type ActionType =
     ReturnType<typeof AddMessageAC>
     | ReturnType<typeof changeNewMessageTextAC>
     | ReturnType<typeof AddPostAC>
     | ReturnType<typeof changeNewPostTextAC>
 
-export const store: StoreType = {
+const store: StoreType = {
     _state: {
         dialogsPage: {
             dialogs: [

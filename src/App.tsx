@@ -3,35 +3,13 @@ import './App.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
-import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
-import {DialogPropsType} from "./components/Dialogs/DialogItem/DialogItem";
-import {MessagePropsType} from "./components/Dialogs/Message/Message";
-import {PostPropsType} from "./components/Profile/MyPosts/Post/Post";
-import {ActionType, StoreType} from "./redux/store";
-import {store} from "./redux/redux-store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
-type AppPropsType = {
-    /*    state: {
-            dialogsPage: {
-                dialogs: DialogPropsType[]
-                messages: MessagePropsType[]
-                newMessageText: string
-            },
-            profilePage: {
-                posts: PostPropsType[]
-                newPostText: string
-            }
-        }
-        dispatch: (action: ActionType) => void*/
-    //store: StoreType
-}
-
-function App(props: AppPropsType) {
+function App() {
     return (
 
         <div className={'app-wrapper'}>

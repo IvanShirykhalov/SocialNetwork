@@ -1,4 +1,3 @@
-import {ActionType} from "./store";
 import {DialogPropsType} from "../components/Dialogs/DialogItem/DialogItem";
 import {MessagePropsType} from "../components/Dialogs/Message/Message";
 import {v1} from "uuid";
@@ -8,6 +7,10 @@ type DialogsPageType = {
     messages: MessagePropsType[]
     newMessageText: string
 }
+
+type ActionType =
+    ReturnType<typeof AddMessageAC>
+    | ReturnType<typeof changeNewMessageTextAC>
 
 const initialState: DialogsPageType = {
     dialogs: [
@@ -25,7 +28,7 @@ const initialState: DialogsPageType = {
     newMessageText: ''
 }
 
-export const dialogsPageReducer = (state = initialState, action: ActionType) => {
+export const dialogsPageReducer = (state = initialState, action: ActionType): DialogsPageType => {
     switch (action.type) {
         case "ADD-MESSAGE":
             return {
