@@ -1,13 +1,9 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import {Post, PostPropsType} from "./Post/Post";
 import s from './MyPosts.module.css'
+import {MyPostPropsType} from "./MyPostsContainer";
 
-export type MyPostPropsType = {
-    posts: PostPropsType[]
-    newPostText: string
-    addPost: () => void
-    onChange: (text: string) => void
-}
+
 
 export const MyPosts = (props: MyPostPropsType) => {
 

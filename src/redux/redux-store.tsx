@@ -3,7 +3,6 @@ import {dialogsPageReducer} from "./dialogsPageReducer";
 import {profilePageReducer} from "./profilePageReducer";
 
 
-
 export type StoreType = ReturnType<typeof rootReducer>
 
 const rootReducer = (
@@ -14,4 +13,4 @@ const rootReducer = (
     )
 )
 
-export const store: StoreType = createStore(rootReducer)
+export const store = createStore(rootReducer)

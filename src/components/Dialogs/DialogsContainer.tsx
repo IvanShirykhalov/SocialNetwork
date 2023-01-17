@@ -17,13 +17,20 @@ type mapStateToProps = {
     dialogsPage: DialogsPageType
 }
 
-const mapStateToProps = (state: StoreType) => {
+type mapDispatchToPropsType = {
+    onChange: (text: string) => void
+    addMessage: () => void
+}
+
+const mapStateToProps = (state: StoreType): mapStateToProps => {
     return {
         dialogsPage: state.dialogsPage
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+export type DialogsPropsType = mapStateToProps & mapDispatchToPropsType
+
+const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
         onChange: (text: string) => {
             dispatch(changeNewMessageTextAC(text))

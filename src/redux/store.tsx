@@ -1,6 +1,6 @@
 import {PostPropsType} from "../components/Profile/MyPosts/Post/Post";
 import {AddMessageAC, changeNewMessageTextAC} from "./dialogsPageReducer";
-import {AddPostAC, changeNewPostTextAC} from "./profilePageReducer";
+import {AddPostAC, changeNewPostTextAC, ProfilePageType} from "./profilePageReducer";
 import {DialogsPageType} from "../components/Dialogs/DialogsContainer";
 
 type StoreType = {
@@ -12,10 +12,7 @@ type StoreType = {
 
 }
 
-type ProfilePageType = {
-    posts: PostPropsType[]
-    newPostText: string
-}
+
 type StateType = {
     dialogsPage: DialogsPageType,
     profilePage: ProfilePageType
@@ -27,7 +24,7 @@ type ActionType =
     | ReturnType<typeof AddPostAC>
     | ReturnType<typeof changeNewPostTextAC>
 
-const store: StoreType = {
+export const store: StoreType = {
     _state: {
         dialogsPage: {
             dialogs: [

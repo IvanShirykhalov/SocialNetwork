@@ -38,8 +38,7 @@ export const dialogsPageReducer = (state = initialState, action: ActionType): Di
             }
 
         case "CHANGE-NEW-MESSAGE-TEXT":
-            state.newMessageText = action.newMessageText
-            return state
+            return {...state, newMessageText: action.newMessageText}
         default:
             return state
     }

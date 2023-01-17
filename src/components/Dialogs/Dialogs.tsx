@@ -1,19 +1,9 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './Dialogs.module.css'
-import {DialogItem, DialogPropsType} from "./DialogItem/DialogItem";
-import {Message, MessagePropsType} from "./Message/Message";
+import {DialogItem} from "./DialogItem/DialogItem";
+import {Message} from "./Message/Message";
+import {DialogsPropsType} from "./DialogsContainer";
 
-
-export type DialogsPropsType = {
-    dialogsPage: {
-        dialogs: DialogPropsType[]
-        messages: MessagePropsType[]
-        newMessageText: string
-
-    }
-    addMessage: () => void
-    onChange: (text: string) => void
-}
 
 export const Dialogs = (props: DialogsPropsType) => {
 
