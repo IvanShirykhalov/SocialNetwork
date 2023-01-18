@@ -19,7 +19,7 @@ type ActionType =
     | ReturnType<typeof AddPostAC>
     | ReturnType<typeof changeNewPostTextAC>
 
-export const profilePageReducer = (state = initialState, action: ActionType): ProfilePageType => {
+export const profileReducer = (state = initialState, action: ActionType): ProfilePageType => {
     switch (action.type) {
         case 'ADD-POST':
             return {

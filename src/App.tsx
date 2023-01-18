@@ -7,6 +7,7 @@ import {Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {UsersContainer} from "./components/Users/UsersContainer";
 
 
 function App() {
@@ -16,20 +17,9 @@ function App() {
             <Header/>
             <Navbar/>
             <div className={'app-wrapper-content'}>
-                <Route render={() => <Profile
-                    //store={props.store}
-
-                    //profilePage={props.store.getState().profilePage}
-                    //dispatch={props.store.dispatch.bind(props.store)}
-                />}
-                       path={'/profile'}/>
-                <Route render={() => <DialogsContainer
-                    //store={props.store}
-
-                    //dialogsPage={props.store.getState().dialogsPage}
-                    //dispatch={props.store.dispatch.bind(props.store)}
-                />}
-                       path={'/dialogs'}/>
+                <Route render={() => <Profile/>} path={'/profile'}/>
+                <Route render={() => <DialogsContainer/>} path={'/dialogs'}/>
+                <Route render={() => <UsersContainer/>} path={'/users'}/>
                 <Route render={() => <Music/>} path={'/music'}/>
                 <Route render={() => <News/>} path={'/news'}/>
             </div>

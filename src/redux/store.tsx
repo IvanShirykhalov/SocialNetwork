@@ -1,6 +1,5 @@
-import {PostPropsType} from "../components/Profile/MyPosts/Post/Post";
-import {AddMessageAC, changeNewMessageTextAC} from "./dialogsPageReducer";
-import {AddPostAC, changeNewPostTextAC, ProfilePageType} from "./profilePageReducer";
+import {AddMessageAC, changeNewMessageTextAC} from "./dialogs-reducer";
+import {AddPostAC, changeNewPostTextAC, ProfilePageType} from "./profile-reducer";
 import {DialogsPageType} from "../components/Dialogs/DialogsContainer";
 
 type StoreType = {
@@ -24,7 +23,7 @@ type ActionType =
     | ReturnType<typeof AddPostAC>
     | ReturnType<typeof changeNewPostTextAC>
 
-export const store: StoreType = {
+const store: StoreType = {
     _state: {
         dialogsPage: {
             dialogs: [
@@ -61,8 +60,8 @@ export const store: StoreType = {
         this._callSubscriber = observer
     },
     dispatch(action: ActionType) {
-        //dialogsPageReducer(this._state, action)
-        //profilePageReducer(this._state, action)
+        //dialogsReducer(this._state, action)
+        //profileReducer(this._state, action)
         //this._callSubscriber()
     }
 }
