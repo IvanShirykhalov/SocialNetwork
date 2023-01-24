@@ -1,27 +1,21 @@
-import {v1} from 'uuid'
-
 export type UserType = {
     id: string
+    photos: {
+        large: string | null
+        small: string | null
+    }
     followed: boolean
     name: string
     status: string
-    location: {
-        country: string
-        city: string
-    }
 }
 
 export type UsersPageType = {
     users: UserType[]
 }
 
-const initialState: UsersPageType = {
-    users: [
-        //{id: v1(), followed: false, name: 'Igor', status: 'I\'m Igor', location: {country: 'UK', city: 'Liverpool'}},
-        //{id: v1(), followed: false, name: 'Masha', status: 'I\'m Masha', location: {country: 'USA', city: 'Detroit'}},
-        //{id: v1(), followed: true, name: 'Same', status: 'I\'m Same', location: {country: 'Australia', city: 'Sidney'}},
 
-    ]
+const initialState: UsersPageType = {
+    users: []
 }
 
 type ActionType =
@@ -37,7 +31,7 @@ export const UserReducer = (state = initialState, action: ActionType): UsersPage
         case "CHANGE-SUBSCRIPTION":
             return {
                 ...state,
-                users: state.users.map(u => u.id === action.id ? {...u, followed: action.follow} : u)
+                users: state.users.map(u => u.id === action.id ? {...u, followed: !u.followed} : u)
             }
         default:
             return state
@@ -46,6 +40,6 @@ export const UserReducer = (state = initialState, action: ActionType): UsersPage
 
 
 export const setUsersAC = (users: UserType[]) => ({type: 'SET-USERS', users} as const)
-export const subscriptionChangeAC = (id: string, follow: boolean) => ({
-    type: 'CHANGE-SUBSCRIPTION', id, follow
+export const subscriptionChangeAC = (id: string) => ({
+    type: 'CHANGE-SUBSCRIPTION', id
 } as const)

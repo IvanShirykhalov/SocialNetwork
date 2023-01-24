@@ -34,12 +34,8 @@ const mapStateToProps = (state: StoreType): mapStateToPropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
-        addPost: () => {
-            dispatch(AddPostAC())
-        },
-        onChange: (text: string) => {
-            dispatch(changeNewPostTextAC(text))
-        },
+        addPost: () => dispatch(AddPostAC()),
+        onChange: (text: string) => dispatch(changeNewPostTextAC(text)),
     }
 }
 export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
