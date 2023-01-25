@@ -3,25 +3,26 @@ import {UsersPropsType} from "./UsersContainer";
 import s from './Users.module.css'
 import axios from "axios";
 import userPhoto from '../../img/1.png'
+import {StoreType} from "../../redux/redux-store";
 
-export const Users = (props: UsersPropsType) => {
 
-    const urlPhoto = "https://us.123rf.com/450wm/yupiramos/yupiramos1709/yupiramos170900442/85024718-engineer-avatar-.jpg?ver=6"
+export class Users extends React.Component<UsersPropsType, StoreType> {
 
-    if (props.users.length === 0) {
+    constructor(props: UsersPropsType) {
+        super(props);
         axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then((res) => props.setUsers(res.data.items))
-
+            .then((res) => this.props.setUsers(res.data.items))
     }
 
-    return (
-        <div>
-            {props.users.map(u => {
+    render() {
+        return (
+            <div>
+                {this.props.users.map(u => {
 
-                const onClick = () => props.subscriptionChange(u.id)
+                    const onClick = () => this.props.subscriptionChange(u.id)
 
-                return (
-                    <div key={u.id}>
+                    return (
+                        <div key={u.id}>
                         <span>
                             <div>
                                 <img className={s.usersPhoto}
@@ -36,7 +37,7 @@ export const Users = (props: UsersPropsType) => {
                                         </button>
                                     </div>
                                     </span>
-                        <span>
+                            <span>
                              <span>
                                  <div>{u.name}</div>
                                  <div>{u.status}</div>
@@ -46,9 +47,10 @@ export const Users = (props: UsersPropsType) => {
                                 <div>{'u.location.city'}</div>
                             </span>
                         </span>
-                    </div>
-                )
-            })}
-        </div>
-    );
-};
+                        </div>
+                    )
+                })}
+            </div>
+        )
+    }
+}
