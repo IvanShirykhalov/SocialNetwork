@@ -1,54 +1,37 @@
 import React from 'react';
-import {UsersPropsType} from "./UsersContainer";
-import s from './Users.module.css'
-import axios from "axios";
-import userPhoto from '../../img/1.png'
-import {StoreType} from "../../redux/redux-store";
+import s from "./Users.module.css";
+import userPhoto from "../../img/1.png";
+import {UserType} from "../../redux/users-reducer";
 
 
-export class Users extends React.Component<UsersPropsType, StoreType> {
+type UsersPropsType = {
+    slicedPages: number[]
+    onPageChanged: (p: number) => void
+    currentPage: number
+    users: UserType[]
+    subscriptionChange: (id: string) => void
+}
 
+export const Users = (props: UsersPropsType) => {
+    return (
+        <div>
+            <div>{props.slicedPages.map(p => {
+                return <button
+                    onClick={() => {
+                        props.onPageChanged(p)
+                    }}
+                    //className={props.currentPage === p ? s.selectedPage : ''}
+                >
+                    {p}
+                </button>
+            })}
+            </div>
+            {props.users.map(u => {
 
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then((res) => {
-                this.props.setUsers(res.data.items)
-                this.props.setTotalUsersCount(res.data.totalCount)
-            })
-    }
+                const onClick = () => props.subscriptionChange(u.id)
 
-    onPageChanged = (page: number) => {
-        this.props.setCurrentPage(page)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
-            .then((res) => this.props.setUsers(res.data.items))
-    }
-
-    render() {
-
-        const pageCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-        const pages = []
-        for (let i = 1; i <= pageCount; i++) {
-            pages.push(i)
-        }
-
-        const curP = this.props.currentPage;
-        const curPF = ((curP - 5) < 0) ? 0 : curP - 5;
-        const curPL = curP + 5;
-        const slicedPages = pages.slice(curPF, curPL);
-
-        return (
-            <div>
-                <div>{slicedPages.map(p => <button onClick={() => {
-                    this.onPageChanged(p)
-                }}
-                                                   className={this.props.currentPage === p ? s.selectedPage : ''}>{p}</button>)}
-                </div>
-                {this.props.users.map(u => {
-
-                    const onClick = () => this.props.subscriptionChange(u.id)
-
-                    return (
-                        <div key={u.id}>
+                return (
+                    <div key={u.id}>
                         <span>
                             <div>
                                 <img className={s.usersPhoto}
@@ -63,20 +46,21 @@ export class Users extends React.Component<UsersPropsType, StoreType> {
                                         </button>
                                     </div>
                                     </span>
-                            <span>
+                        <span>
                              <span>
                                  <div>{u.name}</div>
                                  <div>{u.status}</div>
                             </span>
-                                {/*                                <span>
+                            {/*<span>
                                 <div>{'u.location.country'}</div>
                                 <div>{'u.location.city'}</div>
                             </span>*/}
                         </span>
-                        </div>
-                    )
-                })}
-            </div>
-        )
-    }
+                    </div>
+                )
+            })}
+        </div>
+    );
 }
+    ;
+
