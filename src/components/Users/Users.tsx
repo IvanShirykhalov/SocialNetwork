@@ -13,7 +13,7 @@ export class Users extends React.Component<UsersPropsType, StoreType> {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then((res) => {
                 this.props.setUsers(res.data.items)
-                //this.props.setTotalUsersCount(res.data.totalUsersCount)
+                this.props.setTotalUsersCount(res.data.totalCount)
             })
     }
 
@@ -38,10 +38,10 @@ export class Users extends React.Component<UsersPropsType, StoreType> {
 
         return (
             <div>
-                <div>{slicedPages.map(p => <span onClick={() => {
+                <div>{slicedPages.map(p => <button onClick={() => {
                     this.onPageChanged(p)
                 }}
-                                                 className={this.props.currentPage === p ? s.selectedPage : ''}>{p}</span>)}
+                                                   className={this.props.currentPage === p ? s.selectedPage : ''}>{p}</button>)}
                 </div>
                 {this.props.users.map(u => {
 
