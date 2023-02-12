@@ -4,13 +4,15 @@ import {
     setCurrentPageAC,
     setUsersAC,
     setUsersTotalCountAC,
-    subscriptionChangeAC,
+    subscriptionChangeAC, toggleIsFetchingAC,
     UserType
 } from "../../redux/users-reducer";
 import {Dispatch} from "redux";
 import React from "react";
 import axios from "axios";
 import {Users} from "./Users";
+import preloader from '../../img/preloader.svg'
+import {Preloader} from "../common/Preloader";
 
 
 type mapStateToProps = {
@@ -18,6 +20,7 @@ type mapStateToProps = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 type mapDispatchToPropsType = {
@@ -25,6 +28,7 @@ type mapDispatchToPropsType = {
     subscriptionChange: (id: string) => void
     setCurrentPage: (page: number) => void
     setTotalUsersCount: (count: number) => void
+    toggleIsFetching: (isFetching: boolean) => void
 }
 
 
@@ -34,17 +38,23 @@ class UsersContainer extends React.Component<UsersPropsType, StoreType> {
 
 
     componentDidMount() {
+        this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then((res) => {
+                this.props.toggleIsFetching(false)
                 this.props.setUsers(res.data.items)
                 this.props.setTotalUsersCount(res.data.totalCount)
             })
     }
 
     onPageChanged = (page: number) => {
+        this.props.toggleIsFetching(true)
         this.props.setCurrentPage(page)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
-            .then((res) => this.props.setUsers(res.data.items))
+            .then((res) => {
+                this.props.setUsers(res.data.items)
+                this.props.toggleIsFetching(false)
+            })
     }
 
     render() {
@@ -61,56 +71,21 @@ class UsersContainer extends React.Component<UsersPropsType, StoreType> {
         let slicedPages = pages.slice(curPF, curPL);
 
 
-        return (
-            <Users slicedPages={slicedPages}
-                   onPageChanged={this.onPageChanged}
-                   currentPage={this.props.currentPage}
-                   users={this.props.users}
-                   subscriptionChange={this.props.subscriptionChange}/>
-            /*<div>
-                <div>{slicedPages.map(p => <button onClick={() => {
-                    this.onPageChanged(p)
-                }}
-                                                   className={this.props.currentPage === p ? s.selectedPage : ''}>{p}</button>)}
-                </div>
-                {this.props.users.map(u => {
+        return (<>
+                {this.props.isFetching
+                    ? <Preloader/>
+                    : <Users slicedPages={slicedPages}
+                             onPageChanged={this.onPageChanged}
+                             currentPage={this.props.currentPage}
+                             users={this.props.users}
+                             subscriptionChange={this.props.subscriptionChange}
 
-                    const onClick = () => this.props.subscriptionChange(u.id)
+                    />}
 
-                    return (
-                        <div key={u.id}>
-                        <span>
-                            <div>
-                                <img className={s.usersPhoto}
-                                     src={u.photos.small ? u.photos.small : userPhoto}
-                                     alt="user avatar"
-                                />
-                                    </div>
-                                    <div>
-                                        <button
-                                            onClick={onClick}>
-                                            {u.followed ? 'subscribed' : 'unsubscribed'}
-                                        </button>
-                                    </div>
-                                    </span>
-                            <span>
-                             <span>
-                                 <div>{u.name}</div>
-                                 <div>{u.status}</div>
-                            </span>
-                                {/!*                                <span>
-                                <div>{'u.location.country'}</div>
-                                <div>{'u.location.city'}</div>
-                            </span>*!/}
-                        </span>
-                        </div>
-                    )
-                })}
-            </div>*/
+            </>
         )
     }
 }
-
 
 
 const mapStateToProps = (state: StoreType): mapStateToProps => {
@@ -119,6 +94,8 @@ const mapStateToProps = (state: StoreType): mapStateToProps => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching,
+
     }
 }
 
@@ -128,6 +105,7 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
         subscriptionChange: (id: string) => dispatch(subscriptionChangeAC(id)),
         setCurrentPage: (page: number) => dispatch(setCurrentPageAC(page)),
         setTotalUsersCount: (totalUsersCount: number) => dispatch(setUsersTotalCountAC(totalUsersCount)),
+        toggleIsFetching: (isFetching: boolean) => dispatch(toggleIsFetchingAC(isFetching))
 
     }
 }
