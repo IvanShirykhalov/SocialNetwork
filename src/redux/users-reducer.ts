@@ -28,11 +28,11 @@ const initialState: UsersPageType = {
 }
 
 type ActionType =
-    | ReturnType<typeof subscriptionChangeAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setUsersTotalCountAC>
-    | ReturnType<typeof toggleIsFetchingAC>
+    | ReturnType<typeof subscriptionChange>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUsersCount>
+    | ReturnType<typeof toggleIsFetching>
 
 export const UserReducer = (state = initialState, action: ActionType): UsersPageType => {
     switch (action.type) {
@@ -66,11 +66,11 @@ export const UserReducer = (state = initialState, action: ActionType): UsersPage
 }
 
 
-export const setUsersAC = (users: UserType[]) => ({type: 'SET-USERS', users} as const)
-export const subscriptionChangeAC = (id: string) => ({type: 'CHANGE-SUBSCRIPTION', id} as const)
-export const setCurrentPageAC = (currentPage: number) => ({type: 'SET-CURRENT-PAGE', currentPage} as const)
-export const setUsersTotalCountAC = (totalUsersCount: number) => ({
+export const setUsers = (users: UserType[]) => ({type: 'SET-USERS', users} as const)
+export const subscriptionChange = (id: string) => ({type: 'CHANGE-SUBSCRIPTION', id} as const)
+export const setCurrentPage = (currentPage: number) => ({type: 'SET-CURRENT-PAGE', currentPage} as const)
+export const setTotalUsersCount = (totalUsersCount: number) => ({
     type: 'SET-USERS-TOTAL-COUNT',
     totalUsersCount
 } as const)
-export const toggleIsFetchingAC = (isFetching: boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching} as const)
+export const toggleIsFetching = (isFetching: boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching} as const)

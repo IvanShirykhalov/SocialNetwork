@@ -13,25 +13,25 @@ type UsersPropsType = {
 }
 
 export const Users = (props: UsersPropsType) => {
-    return (
-        <div>
-            <div>{props.slicedPages.map(p => {
-                return <button
-                    onClick={() => {
-                        props.onPageChanged(p)
-                    }}
-                    //className={props.currentPage === p ? s.selectedPage : ''}
-                >
-                    {p}
-                </button>
-            })}
-            </div>
-            {props.users.map(u => {
+        return (
+            <div>
+                <div>{props.slicedPages.map(p => {
+                    return <button
+                        onClick={() => {
+                            props.onPageChanged(p)
+                        }}
+                        className={props.currentPage === p ? s.selectedPage : ''}
+                    >
+                        {p}
+                    </button>
+                })}
+                </div>
+                {props.users.map(u => {
 
-                const onClick = () => props.subscriptionChange(u.id)
+                    const onClick = () => props.subscriptionChange(u.id)
 
-                return (
-                    <div key={u.id}>
+                    return (
+                        <div key={u.id}>
                         <span>
                             <div>
                                 <img className={s.usersPhoto}
@@ -46,21 +46,17 @@ export const Users = (props: UsersPropsType) => {
                                         </button>
                                     </div>
                                     </span>
-                        <span>
-                             <span>
-                                 <div>{u.name}</div>
-                                 <div>{u.status}</div>
-                            </span>
-                            {/*<span>
-                                <div>{'u.location.country'}</div>
-                                <div>{'u.location.city'}</div>
-                            </span>*/}
+                            <span>
+                                <span>
+                                    <div>{u.name}</div>
+                                    <div>{u.status}</div>
+                                </span>
                         </span>
-                    </div>
-                )
-            })}
-        </div>
-    );
-}
-    ;
+                        </div>
+                    )
+                })}
+            </div>
+        );
+    }
+;
 

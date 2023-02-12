@@ -1,17 +1,16 @@
 import {connect} from "react-redux";
 import {StoreType} from "../../redux/redux-store";
 import {
-    setCurrentPageAC,
-    setUsersAC,
-    setUsersTotalCountAC,
-    subscriptionChangeAC, toggleIsFetchingAC,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    subscriptionChange,
+    toggleIsFetching,
     UserType
 } from "../../redux/users-reducer";
-import {Dispatch} from "redux";
 import React from "react";
 import axios from "axios";
 import {Users} from "./Users";
-import preloader from '../../img/preloader.svg'
 import {Preloader} from "../common/Preloader";
 
 
@@ -99,6 +98,7 @@ const mapStateToProps = (state: StoreType): mapStateToProps => {
     }
 }
 
+/*
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
         setUsers: (users: UserType[]) => dispatch(setUsersAC(users)),
@@ -109,5 +109,9 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
 
     }
 }
+*/
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default connect(mapStateToProps, {
+    setUsers, subscriptionChange, setCurrentPage,
+    setTotalUsersCount, toggleIsFetching,
+})(UsersContainer)
