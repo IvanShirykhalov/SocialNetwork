@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./Users.module.css";
 import userPhoto from "../../img/1.png";
 import {UserType} from "../../redux/users-reducer";
+import {NavLink} from "react-router-dom";
 
 
 type UsersPropsType = {
@@ -34,18 +35,20 @@ export const Users = (props: UsersPropsType) => {
                         <div key={u.id}>
                         <span>
                             <div>
-                                <img className={s.usersPhoto}
-                                     src={u.photos.small ? u.photos.small : userPhoto}
-                                     alt="user avatar"
-                                />
-                                    </div>
+                                <NavLink to={`/profile/${u.id}`}>
+                                    <img className={s.usersPhoto}
+                                         src={u.photos.small ? u.photos.small : userPhoto}
+                                         alt="user avatar"
+                                    />
+                                </NavLink>
+                                </div>
                                     <div>
                                         <button
                                             onClick={onClick}>
                                             {u.followed ? 'subscribed' : 'unsubscribed'}
                                         </button>
                                     </div>
-                                    </span>
+                        </span>
                             <span>
                                 <span>
                                     <div>{u.name}</div>

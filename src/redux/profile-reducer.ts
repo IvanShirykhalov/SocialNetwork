@@ -1,9 +1,33 @@
 import {PostPropsType} from "../components/Profile/MyPosts/Post/Post";
 import {v1} from "uuid";
 
+
+export type UserProfileType = null | {
+    aboutMe: string
+    contacts: {
+        facebook: string
+        website: string
+        vk: string
+        twitter: string
+        instagram: string
+        youtube: string
+        github: string
+        mainLink: string
+    },
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: {
+        small: string
+        large: string
+    }
+}
+
 export type ProfilePageType = {
     posts: PostPropsType[]
     newPostText: string
+    profile: UserProfileType
 }
 
 const initialState: ProfilePageType = {
@@ -12,12 +36,15 @@ const initialState: ProfilePageType = {
         {id: v1(), message: 'Hi', likeCount: 10},
         {id: v1(), message: 'How are you?', likeCount: 4},
     ],
-    newPostText: ''
+    newPostText: '',
+    profile: null,
 }
 
 type ActionType =
     | ReturnType<typeof AddPostAC>
     | ReturnType<typeof changeNewPostTextAC>
+    | ReturnType<typeof setUserProfile>
+
 
 export const profileReducer = (state = initialState, action: ActionType): ProfilePageType => {
     switch (action.type) {
@@ -29,6 +56,10 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
             }
         case 'CHANGE-NEW-POST-TEXT':
             return {...state, newPostText: action.newPostText}
+        case "SET-USER-PROFILE":
+            return {
+                ...state, profile: action.profile
+            }
         default:
             return state
     }
@@ -36,3 +67,4 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
 
 export const AddPostAC = () => ({type: 'ADD-POST'} as const)
 export const changeNewPostTextAC = (newPostText: string) => ({type: 'CHANGE-NEW-POST-TEXT', newPostText} as const)
+export const setUserProfile = (profile: UserProfileType) => ({type: 'SET-USER-PROFILE', profile} as const)

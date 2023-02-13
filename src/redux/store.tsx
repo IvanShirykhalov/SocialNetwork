@@ -46,7 +46,8 @@ const store: StoreType = {
                 {id: '2', message: 'Hi', likeCount: 10},
                 {id: '3', message: 'How are you?', likeCount: 4},
             ],
-            newPostText: ''
+            newPostText: '',
+            profile: null,
         },
 
     },

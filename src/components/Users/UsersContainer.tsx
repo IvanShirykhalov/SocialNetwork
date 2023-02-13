@@ -112,6 +112,9 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
 */
 
 export default connect(mapStateToProps, {
-    setUsers, subscriptionChange, setCurrentPage,
-    setTotalUsersCount, toggleIsFetching,
+    setUsers,
+    subscriptionChange,
+    setCurrentPage,
+    setTotalUsersCount,
+    toggleIsFetching,
 })(UsersContainer)
