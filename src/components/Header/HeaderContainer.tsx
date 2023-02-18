@@ -10,10 +10,11 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 type PathParamsType = {}
 
 type MapStateToProps = {
-    id: number | null
-    email: string | null
-    login: string | null
-    isAuth: boolean
+    // id: number | null
+    // email: string | null
+    // login: string | null
+    // isAuth: boolean
+    auth: AuthDataType
 }
 
 type mapDispatchToPropsType = {
@@ -44,11 +45,9 @@ class HeaderContainer extends React.Component<PropsType, StoreType> {
     }
 }
 
+
 const MapStateToProps = (state: StoreType): MapStateToProps => ({
-    id: state.auth.id,
-    isAuth: state.auth.isAuth,
-    email: state.auth.email,
-    login: state.auth.login,
+    auth: state.auth
 })
 
 export default connect(MapStateToProps, {setUserData})(withRouter(HeaderContainer))

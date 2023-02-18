@@ -1,5 +1,5 @@
 import {AddMessageAC, changeNewMessageTextAC} from "./dialogs-reducer";
-import {AddPostAC, changeNewPostTextAC, ProfilePageType} from "./profile-reducer";
+import {addPost, changeNewPostText, ProfilePageType} from "./profile-reducer";
 import {DialogsPageType} from "../components/Dialogs/DialogsContainer";
 
 type StoreType = {
@@ -20,8 +20,8 @@ type StateType = {
 type ActionType =
     ReturnType<typeof AddMessageAC>
     | ReturnType<typeof changeNewMessageTextAC>
-    | ReturnType<typeof AddPostAC>
-    | ReturnType<typeof changeNewPostTextAC>
+    | ReturnType<typeof addPost>
+    | ReturnType<typeof changeNewPostText>
 
 const store: StoreType = {
     _state: {

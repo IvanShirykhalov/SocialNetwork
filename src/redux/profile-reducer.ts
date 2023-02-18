@@ -41,8 +41,8 @@ const initialState: ProfilePageType = {
 }
 
 type ActionType =
-    | ReturnType<typeof AddPostAC>
-    | ReturnType<typeof changeNewPostTextAC>
+    | ReturnType<typeof addPost>
+    | ReturnType<typeof changeNewPostText>
     | ReturnType<typeof setUserProfile>
 
 
@@ -65,6 +65,6 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
     }
 }
 
-export const AddPostAC = () => ({type: 'ADD-POST'} as const)
-export const changeNewPostTextAC = (newPostText: string) => ({type: 'CHANGE-NEW-POST-TEXT', newPostText} as const)
+export const addPost = () => ({type: 'ADD-POST'} as const)
+export const changeNewPostText = (newPostText: string) => ({type: 'CHANGE-NEW-POST-TEXT', newPostText} as const)
 export const setUserProfile = (profile: UserProfileType) => ({type: 'SET-USER-PROFILE', profile} as const)

@@ -4,13 +4,12 @@ import s from './MyPosts.module.css'
 import {MyPostPropsType} from "./MyPostsContainer";
 
 
-
 export const MyPosts = (props: MyPostPropsType) => {
 
 
     const addPost = () => props.addPost()
 
-    const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => props.onChange(e.currentTarget.value)
+    const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => props.changeNewPostText(e.currentTarget.value)
     const onKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
             props.addPost()
