@@ -7,3 +7,8 @@
     width: 200px;
     height: 40px;
 }
+
+.loginBlock {
+    float: right;
+    font-size: 30px;
+}
