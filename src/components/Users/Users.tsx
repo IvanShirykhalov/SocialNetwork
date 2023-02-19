@@ -3,6 +3,7 @@ import s from "./Users.module.css";
 import userPhoto from "../../img/1.png";
 import {UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 
 type UsersPropsType = {
@@ -31,6 +32,32 @@ export const Users = (props: UsersPropsType) => {
 
                     const onClick = () => props.subscriptionChange(u.id)
 
+                    const follow = () => {
+                        axios.post(`https://social-network.samuraijs.com/api/1.0/${u.id}`, {}, {
+                            withCredentials: true,
+                            headers: {
+                                'API-KEY': 'ba6089c3-d607-4289-9bff-c23a30735991'
+                            },
+                        }).then((res) => {
+                            if (res.data.data.resultCode === 0) {
+                                u.followed = true
+                            }
+                        })
+                    }
+
+                    const unfollow = () => {
+                        axios.delete(`https://social-network.samuraijs.com/api/1.0/${u.id}`, {
+                            withCredentials: true,
+                            headers: {
+                                'API-KEY': 'ba6089c3-d607-4289-9bff-c23a30735991'
+                            },
+                        }).then((res) => {
+                            if (res.data.data.resultCode === 0) {
+                                u.followed = false
+                            }
+                        })
+                    }
+
                     return (
                         <div key={u.id}>
                         <span>
@@ -43,10 +70,21 @@ export const Users = (props: UsersPropsType) => {
                                 </NavLink>
                                 </div>
                                     <div>
-                                        <button
-                                            onClick={onClick}>
-                                            {u.followed ? 'subscribed' : 'unsubscribed'}
-                                        </button>
+                                        {u.followed
+                                            ? <button
+                                                onClick={follow}>
+                                                {u.followed && 'subscribed'}
+                                            </button>
+                                            : <button
+                                                onClick={unfollow}>
+                                                {!u.followed && 'unsubscribed'}
+                                            </button>
+
+                                        }
+                                        {/*<button*/}
+                                        {/*    onClick={onClick}>*/}
+                                        {/*    {u.followed ? 'subscribed' : 'unsubscribed'}*/}
+                                        {/*</button>                                        */}
                                     </div>
                         </span>
                             <span>
