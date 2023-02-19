@@ -11,52 +11,26 @@ type UsersPropsType = {
     onPageChanged: (p: number) => void
     currentPage: number
     users: UserType[]
-    subscriptionChange: (id: string) => void
+    follow: (id: string) => void
+    unfollow: (id: string) => void
+    //subscriptionChange: (id: string) => void
 }
 
 export const Users = (props: UsersPropsType) => {
         return (
             <div>
                 <div>{props.slicedPages.map(p => {
-                    return <button
-                        onClick={() => {
-                            props.onPageChanged(p)
-                        }}
-                        className={props.currentPage === p ? s.selectedPage : ''}
+                    return <button key={p}
+                                   onClick={() => {
+                                       props.onPageChanged(p)
+                                   }}
+                                   className={props.currentPage === p ? s.selectedPage : ''}
                     >
                         {p}
                     </button>
                 })}
                 </div>
                 {props.users.map(u => {
-
-                    const onClick = () => props.subscriptionChange(u.id)
-
-                    const follow = () => {
-                        axios.post(`https://social-network.samuraijs.com/api/1.0/${u.id}`, {}, {
-                            withCredentials: true,
-                            headers: {
-                                'API-KEY': 'ba6089c3-d607-4289-9bff-c23a30735991'
-                            },
-                        }).then((res) => {
-                            if (res.data.data.resultCode === 0) {
-                                u.followed = true
-                            }
-                        })
-                    }
-
-                    const unfollow = () => {
-                        axios.delete(`https://social-network.samuraijs.com/api/1.0/${u.id}`, {
-                            withCredentials: true,
-                            headers: {
-                                'API-KEY': 'ba6089c3-d607-4289-9bff-c23a30735991'
-                            },
-                        }).then((res) => {
-                            if (res.data.data.resultCode === 0) {
-                                u.followed = false
-                            }
-                        })
-                    }
 
                     return (
                         <div key={u.id}>
@@ -71,20 +45,62 @@ export const Users = (props: UsersPropsType) => {
                                 </div>
                                     <div>
                                         {u.followed
-                                            ? <button
-                                                onClick={follow}>
-                                                {u.followed && 'subscribed'}
-                                            </button>
-                                            : <button
-                                                onClick={unfollow}>
-                                                {!u.followed && 'unsubscribed'}
-                                            </button>
+                                            ?
+                                            <button onClick={() => {
+                                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                                    withCredentials: true,
+                                                    headers: {
+                                                        'API-KEY': '4e5ca4d6-33f5-42ea-8844-4766f0c08361'
+                                                    },
+                                                }).then((res) => {
+                                                    if (res.data.data.resultCode == 0) {
+                                                        props.unfollow(u.id)
+                                                    }
+                                                })
+                                            }
+                                            }>unfollow</button>
+                                            :
+                                            <button onClick={() => {
+                                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                                                    withCredentials: true,
+                                                    headers: {
+                                                        'API-KEY': '4e5ca4d6-33f5-42ea-8844-4766f0c08361'
+                                                    },
+                                                }).then((res) => {
+                                                    if (res.data.data.resultCode == 0) {
+                                                        props.follow(u.id)
+                                                    }
+                                                })
+                                            }
+                                            }>follow</button>
 
                                         }
-                                        {/*<button*/}
-                                        {/*    onClick={onClick}>*/}
-                                        {/*    {u.followed ? 'subscribed' : 'unsubscribed'}*/}
-                                        {/*</button>                                        */}
+                                        {/*                                        <button onClick={() => {
+                                            u.followed
+                                                ? axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                                    withCredentials: true,
+                                                    headers: {
+                                                        'API-KEY': 'ba6089c3-d607-4289-9bff-c23a30735991'
+                                                    },
+                                                }).then((res) => {
+                                                    if (res.data.data.resultCode === 0) {
+                                                        props.subscriptionChange(u.id)
+                                                    }
+                                                })
+                                                : axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                                                    withCredentials: true,
+                                                    headers: {
+                                                        'API-KEY': 'ba6089c3-d607-4289-9bff-c23a30735991'
+                                                    },
+                                                }).then((res) => {
+                                                    if (res.data.data.resultCode === 0) {
+                                                        props.subscriptionChange(u.id)
+                                                    }
+                                                })
+                                        }
+                                        }>
+                                            {!u.followed ? 'subscribed' : 'unsubscribed'}
+                                        </button>*/}
                                     </div>
                         </span>
                             <span>

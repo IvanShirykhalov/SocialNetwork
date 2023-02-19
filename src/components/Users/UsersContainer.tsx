@@ -1,10 +1,12 @@
 import {connect} from "react-redux";
 import {StoreType} from "../../redux/redux-store";
 import {
+    follow,
+    unfollow,
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
-    subscriptionChange,
+    //subscriptionChange,
     toggleIsFetching,
     UserType
 } from "../../redux/users-reducer";
@@ -24,7 +26,9 @@ type mapStateToProps = {
 
 type mapDispatchToPropsType = {
     setUsers: (users: UserType[]) => void
-    subscriptionChange: (id: string) => void
+    //subscriptionChange: (id: string) => void
+    follow: (id: string) => void
+    unfollow: (id: string) => void
     setCurrentPage: (page: number) => void
     setTotalUsersCount: (count: number) => void
     toggleIsFetching: (isFetching: boolean) => void
@@ -81,7 +85,9 @@ class UsersContainer extends React.Component<UsersPropsType, StoreType> {
                              onPageChanged={this.onPageChanged}
                              currentPage={this.props.currentPage}
                              users={this.props.users}
-                             subscriptionChange={this.props.subscriptionChange}
+                             follow={this.props.follow}
+                             unfollow={this.props.unfollow}
+                        //subscriptionChange={this.props.subscriptionChange}
 
                     />}
 
@@ -102,22 +108,12 @@ const mapStateToProps = (state: StoreType): mapStateToProps => {
     }
 }
 
-/*
-const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
-    return {
-        setUsers: (users: UserType[]) => dispatch(setUsersAC(users)),
-        subscriptionChange: (id: string) => dispatch(subscriptionChangeAC(id)),
-        setCurrentPage: (page: number) => dispatch(setCurrentPageAC(page)),
-        setTotalUsersCount: (totalUsersCount: number) => dispatch(setUsersTotalCountAC(totalUsersCount)),
-        toggleIsFetching: (isFetching: boolean) => dispatch(toggleIsFetchingAC(isFetching))
-
-    }
-}
-*/
 
 export default connect(mapStateToProps, {
     setUsers,
-    subscriptionChange,
+    follow,
+    unfollow,
+    //subscriptionChange,
     setCurrentPage,
     setTotalUsersCount,
     toggleIsFetching,
