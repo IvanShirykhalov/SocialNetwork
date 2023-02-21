@@ -3,7 +3,7 @@ import s from "./Users.module.css";
 import userPhoto from "../../img/1.png";
 import {UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {followAPI} from "../../api/api";
 
 
 type UsersPropsType = {
@@ -11,14 +11,14 @@ type UsersPropsType = {
     onPageChanged: (p: number) => void
     currentPage: number
     users: UserType[]
-    follow: (id: string) => void
-    unfollow: (id: string) => void
-    //subscriptionChange: (id: string) => void
+    //follow: (id: string) => void
+    //unfollow: (id: string) => void
+    subscriptionChange: (id: string) => void
 }
 
 export const Users = (props: UsersPropsType) => {
 
-    console.log(props)
+        console.log(props)
         return (
             <div>
                 <div>{props.slicedPages.map(p => {
@@ -46,7 +46,7 @@ export const Users = (props: UsersPropsType) => {
                                 </NavLink>
                                 </div>
                                     <div>
-                                        {u.followed
+{/*                                        {u.followed
                                             ?
                                             <button onClick={() => {
                                                 axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
@@ -76,33 +76,25 @@ export const Users = (props: UsersPropsType) => {
                                                 })
                                             }}>follow</button>
 
-                                        }
-                                        {/*                                        <button onClick={() => {
-                                            u.followed
-                                                ? axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                                    withCredentials: true,
-                                                    headers: {
-                                                        'API-KEY': 'ba6089c3-d607-4289-9bff-c23a30735991'
-                                                    },
-                                                }).then((res) => {
-                                                    if (res.data.data.resultCode === 0) {
+                                        }*/}
+                                        <button onClick={() => {
+                                            !u.followed
+                                                ?
+                                                followAPI.follow(u.id).then((res) => {
+                                                    if (res.resultCode === 0) {
                                                         props.subscriptionChange(u.id)
                                                     }
                                                 })
-                                                : axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                                    withCredentials: true,
-                                                    headers: {
-                                                        'API-KEY': 'ba6089c3-d607-4289-9bff-c23a30735991'
-                                                    },
-                                                }).then((res) => {
-                                                    if (res.data.data.resultCode === 0) {
+                                                :
+                                                followAPI.unfollow(u.id).then((res) => {
+                                                    if (res.resultCode === 0) {
                                                         props.subscriptionChange(u.id)
                                                     }
                                                 })
                                         }
                                         }>
                                             {!u.followed ? 'subscribed' : 'unsubscribed'}
-                                        </button>*/}
+                                        </button>
                                     </div>
                         </span>
                             <span>
