@@ -17,6 +17,8 @@ type UsersPropsType = {
 }
 
 export const Users = (props: UsersPropsType) => {
+
+    console.log(props)
         return (
             <div>
                 <div>{props.slicedPages.map(p => {
@@ -53,12 +55,11 @@ export const Users = (props: UsersPropsType) => {
                                                         'API-KEY': '4e5ca4d6-33f5-42ea-8844-4766f0c08361'
                                                     },
                                                 }).then((res) => {
-                                                    if (res.data.data.resultCode == 0) {
+                                                    if (res.data.resultCode == 0) {
                                                         props.unfollow(u.id)
                                                     }
                                                 })
-                                            }
-                                            }>unfollow</button>
+                                            }}>unfollow</button>
                                             :
                                             <button onClick={() => {
                                                 axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
@@ -67,12 +68,13 @@ export const Users = (props: UsersPropsType) => {
                                                         'API-KEY': '4e5ca4d6-33f5-42ea-8844-4766f0c08361'
                                                     },
                                                 }).then((res) => {
-                                                    if (res.data.data.resultCode == 0) {
+                                                  console.log(res)
+                                                    if (res.data.resultCode == 0) {
+                                                        console.log(0)
                                                         props.follow(u.id)
                                                     }
                                                 })
-                                            }
-                                            }>follow</button>
+                                            }}>follow</button>
 
                                         }
                                         {/*                                        <button onClick={() => {

@@ -43,6 +43,7 @@ export const UserReducer = (state = initialState, action: ActionType): UsersPage
                 ...state, users: [...action.users],
             }
         case "FOLLOW":
+            console.log(action)
             return {
                 ...state,
                 users: state.users.map(u => u.id === action.id ? {...u, followed: true} : u)
