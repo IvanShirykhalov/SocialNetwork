@@ -14,11 +14,13 @@ type UsersPropsType = {
     //follow: (id: string) => void
     //unfollow: (id: string) => void
     subscriptionChange: (id: string) => void
+    toggleFollowingProgress: (followingInProgress: boolean, id: string) => void
+    followingInProgress: string[]
 }
 
 export const Users = (props: UsersPropsType) => {
 
-        console.log(props)
+
         return (
             <div>
                 <div>{props.slicedPages.map(p => {
@@ -77,19 +79,22 @@ export const Users = (props: UsersPropsType) => {
                                             }}>follow</button>
 
                                         }*/}
-                                        <button onClick={() => {
+                                        <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                            props.toggleFollowingProgress(true, u.id )
                                             !u.followed
                                                 ?
                                                 followAPI.follow(u.id).then((res) => {
                                                     if (res.resultCode === 0) {
                                                         props.subscriptionChange(u.id)
                                                     }
+                                                    props.toggleFollowingProgress(false, u.id)
                                                 })
                                                 :
                                                 followAPI.unfollow(u.id).then((res) => {
                                                     if (res.resultCode === 0) {
                                                         props.subscriptionChange(u.id)
                                                     }
+                                                    props.toggleFollowingProgress(false, u.id)
                                                 })
                                         }
                                         }>
