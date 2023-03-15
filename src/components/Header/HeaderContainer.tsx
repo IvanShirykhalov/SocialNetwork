@@ -1,11 +1,9 @@
 import React from "react";
 import {StoreType} from "../../redux/redux-store";
 import {Header} from "./Header";
-import axios from "axios";
 import {connect} from "react-redux";
-import {AuthDataType, authMe, setUserData} from "../../redux/auth-reducer";
+import {AuthDataType, getAuthUserData} from "../../redux/auth-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {headerAPI} from "../../api/api";
 
 
 type PathParamsType = {}
@@ -20,7 +18,7 @@ type MapStateToProps = {
 
 type mapDispatchToPropsType = {
     //setUserData: (data: AuthDataType) => void
-    authMe: () => void
+    getAuthUserData: () => void
 }
 
 type HeaderPropsType = MapStateToProps & mapDispatchToPropsType
@@ -31,7 +29,7 @@ class HeaderContainer extends React.Component<PropsType, StoreType> {
 
     componentDidMount() {
 
-        this.props.authMe()
+        this.props.getAuthUserData()
         // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true})
         // headerAPI.authMe()
         //     .then((res) => {
@@ -53,4 +51,4 @@ const MapStateToProps = (state: StoreType): MapStateToProps => ({
     auth: state.auth
 })
 
-export default connect(MapStateToProps, {authMe})(withRouter(HeaderContainer))
+export default connect(MapStateToProps, {getAuthUserData})(withRouter(HeaderContainer))

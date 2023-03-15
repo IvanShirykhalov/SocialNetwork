@@ -3,7 +3,6 @@ import s from "./Users.module.css";
 import userPhoto from "../../img/1.png";
 import {UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import {followAPI} from "../../api/api";
 
 
 type UsersPropsType = {

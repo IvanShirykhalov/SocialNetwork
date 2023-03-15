@@ -4,16 +4,14 @@ import {
     follow,
     getUsers,
     setCurrentPage,
-    setTotalUsersCount,
-    setUsers,
-    subscriptionChange, toggleFollowingProgress,
-    toggleIsFetching, unfollow,
+    subscriptionChange,
+    toggleFollowingProgress,
+    unfollow,
     UserType
 } from "../../redux/users-reducer";
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader";
-import {usersAPI} from "../../api/api";
 
 
 type mapStateToProps = {

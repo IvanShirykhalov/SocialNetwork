@@ -1,7 +1,7 @@
 import {PostPropsType} from "../components/Profile/MyPosts/Post/Post";
 import {v1} from "uuid";
 import {Dispatch} from "redux";
-import {profileAPI} from "../api/api";
+import {usersAPI} from "../api/api";
 
 
 export type UserProfileType = null | {
@@ -73,7 +73,7 @@ export const setUserProfile = (profile: UserProfileType) => ({type: 'SET-USER-PR
 
 
 export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
-    profileAPI.getUserProfile(userId).then((res) => {
+    usersAPI.getProfile(userId).then((res) => {
         dispatch(setUserProfile(res.data))
     })
 

@@ -1,11 +1,9 @@
 import React from "react";
 import {Profile} from "./Profile";
 import {StoreType} from "../../redux/redux-store";
-import axios from "axios";
 import {connect} from "react-redux";
-import {getUserProfile, setUserProfile, UserProfileType} from "../../redux/profile-reducer";
+import {getUserProfile, UserProfileType} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {profileAPI} from "../../api/api";
 
 
 type PathParamsType = {

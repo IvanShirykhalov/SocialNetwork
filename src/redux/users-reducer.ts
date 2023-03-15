@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {followAPI, usersAPI} from "../api/api";
+import {usersAPI} from "../api/api";
 
 export type UserType = {
     id: string
@@ -120,7 +120,7 @@ export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Di
 }
 
 export const follow = (userId: string) => (dispatch: Dispatch) => {
-    followAPI.follow(userId).then((res) => {
+    usersAPI.follow(userId).then((res) => {
         if (res.resultCode === 0) {
             dispatch(subscriptionChange(userId))
         }
@@ -128,7 +128,7 @@ export const follow = (userId: string) => (dispatch: Dispatch) => {
     })
 }
 export const unfollow = (userId: string) => (dispatch: Dispatch) => {
-    followAPI.unfollow(userId).then((res) => {
+    usersAPI.unfollow(userId).then((res) => {
         if (res.resultCode === 0) {
             dispatch(subscriptionChange(userId))
         }
