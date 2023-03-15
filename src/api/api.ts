@@ -17,7 +17,6 @@ export const usersAPI = {
 
 }
 
-
 export const followAPI = {
     unfollow(id: string) {
         return instance.delete(`follow/${id}`).then((res) => res.data)
@@ -27,14 +26,14 @@ export const followAPI = {
     },
 }
 
-// export const getUsers = (currentPage: number, pageSize: number) => {
-//     return instance.get(`users?page=${currentPage}&count=${pageSize}`).then((res) => res.data)
-// }
-//
-// export const unfollow = (id: string) => {
-//     return instance.delete(`follow/${id}`).then((res) => res.data)
-// }
-//
-// export const follow = (id: string) => {
-//     return instance.post(`follow/${id}`, {}).then((res) => res.data)
-// }
+export const headerAPI = {
+    authMe() {
+        return instance.get(`auth/me`, {withCredentials: true})
+    }
+}
+
+export const profileAPI = {
+    getUserProfile(userId: string){
+        return instance.get(`profile/${userId}`)
+    }
+}
