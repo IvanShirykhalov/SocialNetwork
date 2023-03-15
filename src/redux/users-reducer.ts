@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {followAPI, usersAPI} from "../api/api";
+
 export type UserType = {
     id: string
     photos: {
@@ -32,13 +35,13 @@ const initialState: UsersPageType = {
 
 type ActionType =
     | ReturnType<typeof subscriptionChange>
-    //| ReturnType<typeof follow>
-    //| ReturnType<typeof unfollow>
     | ReturnType<typeof setUsers>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof toggleFollowingProgress>
+    //| ReturnType<typeof follow>
+    //| ReturnType<typeof unfollow>
 
 export const UserReducer = (state = initialState, action: ActionType): UsersPageType => {
     switch (action.type) {
@@ -101,7 +104,34 @@ export const setTotalUsersCount = (totalUsersCount: number) => ({
 } as const)
 export const toggleIsFetching = (isFetching: boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching} as const)
 export const toggleFollowingProgress = (followingInProgress: boolean, id: string) => ({
-    type: 'TOGGLE-IS-FOLLOWING-PROGRESS',
-    followingInProgress,
-    id
+    type: 'TOGGLE-IS-FOLLOWING-PROGRESS', followingInProgress, id
 } as const)
+
+
+export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFetching(true))
+
+    usersAPI.getUsers(currentPage, pageSize)
+        .then((res) => {
+            dispatch(toggleIsFetching(false))
+            dispatch(setUsers(res.items))
+            dispatch(setTotalUsersCount(res.totalCount))
+        })
+}
+
+export const follow = (userId: string) => (dispatch: Dispatch) => {
+    followAPI.follow(userId).then((res) => {
+        if (res.resultCode === 0) {
+            dispatch(subscriptionChange(userId))
+        }
+        dispatch(toggleFollowingProgress(false, userId))
+    })
+}
+export const unfollow = (userId: string) => (dispatch: Dispatch) => {
+    followAPI.unfollow(userId).then((res) => {
+        if (res.resultCode === 0) {
+            dispatch(subscriptionChange(userId))
+        }
+        dispatch(toggleFollowingProgress(false, userId))
+    })
+}

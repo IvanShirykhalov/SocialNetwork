@@ -16,6 +16,8 @@ type UsersPropsType = {
     subscriptionChange: (id: string) => void
     toggleFollowingProgress: (followingInProgress: boolean, id: string) => void
     followingInProgress: string[]
+    follow: (userId: string) => void
+    unfollow: (userId: string) => void
 }
 
 export const Users = (props: UsersPropsType) => {
@@ -79,25 +81,28 @@ export const Users = (props: UsersPropsType) => {
                                             }}>follow</button>
 
                                         }*/}
-                                        <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                            props.toggleFollowingProgress(true, u.id )
-                                            !u.followed
-                                                ?
-                                                followAPI.follow(u.id).then((res) => {
-                                                    if (res.resultCode === 0) {
-                                                        props.subscriptionChange(u.id)
-                                                    }
-                                                    props.toggleFollowingProgress(false, u.id)
-                                                })
-                                                :
-                                                followAPI.unfollow(u.id).then((res) => {
-                                                    if (res.resultCode === 0) {
-                                                        props.subscriptionChange(u.id)
-                                                    }
-                                                    props.toggleFollowingProgress(false, u.id)
-                                                })
-                                        }
-                                        }>
+                                        <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                                onClick={() => {
+                                                    props.toggleFollowingProgress(true, u.id)
+                                                    !u.followed ? props.follow(u.id) : props.unfollow(u.id)
+                                                    // ?
+                                                    // props.follow(u.id)
+                                                    // // followAPI.follow(u.id).then((res) => {
+                                                    // //     if (res.resultCode === 0) {
+                                                    // //         props.subscriptionChange(u.id)
+                                                    // //     }
+                                                    // //     props.toggleFollowingProgress(false, u.id)
+                                                    // // })
+                                                    // :
+                                                    // props.unfollow(u.id)
+                                                    // // followAPI.unfollow(u.id).then((res) => {
+                                                    // //     if (res.resultCode === 0) {
+                                                    // //         props.subscriptionChange(u.id)
+                                                    // //     }
+                                                    // //     props.toggleFollowingProgress(false, u.id)
+                                                    // // })
+                                                }
+                                                }>
                                             {!u.followed ? 'subscribed' : 'unsubscribed'}
                                         </button>
                                     </div>
