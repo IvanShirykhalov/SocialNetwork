@@ -2,6 +2,7 @@ import React from 'react';
 import s from './Header.module.css'
 import {NavLink} from "react-router-dom";
 import {AuthDataType} from "../../redux/auth-reducer";
+import {Login} from "../Login/Login";
 
 
 type HeaderPropsType = {
@@ -17,7 +18,7 @@ export const Header = (props: HeaderPropsType) => {
             <div className={s.loginBlock}>
                 {props.auth.isAuth
                     ? props.auth.login
-                    : <NavLink to={'/login'}>Login</NavLink>
+                    : <NavLink to={'/login'}><Login/></NavLink>
                 }
             </div>
         </div>

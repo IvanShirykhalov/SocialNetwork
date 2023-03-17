@@ -12,6 +12,7 @@ import {
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader";
+import {Redirect} from "react-router-dom";
 
 
 type mapStateToProps = {
@@ -21,6 +22,7 @@ type mapStateToProps = {
     currentPage: number
     isFetching: boolean
     followingInProgress: string[]
+    isAuth: boolean
 }
 
 type mapDispatchToPropsType = {
@@ -83,22 +85,29 @@ class UsersContainer extends React.Component<UsersPropsType, StoreType> {
 
 
         return (<>
-                {this.props.isFetching
-                    ? <Preloader/>
-                    : <Users
-                        //follow={this.props.follow}
-                        //unfollow={this.props.unfollow}
-                        slicedPages={slicedPages}
-                        onPageChanged={this.onPageChanged}
-                        currentPage={this.props.currentPage}
-                        users={this.props.users}
-                        followingInProgress={this.props.followingInProgress}
-                        subscriptionChange={this.props.subscriptionChange}
-                        toggleFollowingProgress={this.props.toggleFollowingProgress}
-                        follow={this.props.follow}
-                        unfollow={this.props.unfollow}
+                {
+                    this.props.isAuth
+                        ?
+                        (this.props.isFetching
+                            ? <Preloader/>
+                            : <Users
+                                //follow={this.props.follow}
+                                //unfollow={this.props.unfollow}
+                                slicedPages={slicedPages}
+                                onPageChanged={this.onPageChanged}
+                                currentPage={this.props.currentPage}
+                                users={this.props.users}
+                                followingInProgress={this.props.followingInProgress}
+                                subscriptionChange={this.props.subscriptionChange}
+                                toggleFollowingProgress={this.props.toggleFollowingProgress}
+                                follow={this.props.follow}
+                                unfollow={this.props.unfollow}
 
-                    />}
+
+                            />)
+                        :
+                        <Redirect to="/login"/>
+                }
 
             </>
         )
@@ -114,6 +123,8 @@ const mapStateToProps = (state: StoreType): mapStateToProps => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress,
+        // @ts-ignore
+        isAuth: state.auth.isAuth
 
     }
 }
