@@ -13,6 +13,8 @@ import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader";
 import {Redirect} from "react-router-dom";
+import {withAuthRedirectComponent} from "../../hoc/WithAuthRedirectComponent";
+import {Dialogs} from "../Dialogs/Dialogs";
 
 
 type mapStateToProps = {
@@ -60,14 +62,6 @@ class UsersContainer extends React.Component<UsersPropsType, StoreType> {
     onPageChanged = (page: number) => {
         this.props.setCurrentPage(page)
         this.props.getUsers(page, this.props.pageSize)
-        //
-        // this.props.toggleIsFetching(true)
-        // this.props.setCurrentPage(page)
-        // usersAPI.getUsers(page, this.props.pageSize)
-        //     .then((res) => {
-        //         this.props.setUsers(res.items)
-        //         this.props.toggleIsFetching(false)
-        //     })
     }
 
     render() {
@@ -86,29 +80,20 @@ class UsersContainer extends React.Component<UsersPropsType, StoreType> {
 
         return (<>
                 {
-                    this.props.isAuth
-                        ?
-                        (this.props.isFetching
-                            ? <Preloader/>
-                            : <Users
-                                //follow={this.props.follow}
-                                //unfollow={this.props.unfollow}
-                                slicedPages={slicedPages}
-                                onPageChanged={this.onPageChanged}
-                                currentPage={this.props.currentPage}
-                                users={this.props.users}
-                                followingInProgress={this.props.followingInProgress}
-                                subscriptionChange={this.props.subscriptionChange}
-                                toggleFollowingProgress={this.props.toggleFollowingProgress}
-                                follow={this.props.follow}
-                                unfollow={this.props.unfollow}
-
-
-                            />)
-                        :
-                        <Redirect to="/login"/>
+                    (this.props.isFetching
+                        ? <Preloader/>
+                        : <Users
+                            slicedPages={slicedPages}
+                            onPageChanged={this.onPageChanged}
+                            currentPage={this.props.currentPage}
+                            users={this.props.users}
+                            followingInProgress={this.props.followingInProgress}
+                            subscriptionChange={this.props.subscriptionChange}
+                            toggleFollowingProgress={this.props.toggleFollowingProgress}
+                            follow={this.props.follow}
+                            unfollow={this.props.unfollow}
+                        />)
                 }
-
             </>
         )
     }
@@ -129,17 +114,14 @@ const mapStateToProps = (state: StoreType): mapStateToProps => {
     }
 }
 
+//const AuthRedirectComponent = withAuthRedirectComponent(UsersContainer)
 
-export default connect(mapStateToProps, {
+
+export default withAuthRedirectComponent(connect(mapStateToProps, {
     subscriptionChange,
     setCurrentPage,
     toggleFollowingProgress,
     getUsers,
     follow,
     unfollow,
-    //setUsers,
-    //follow,
-    //unfollow,
-    //setTotalUsersCount,
-    //toggleIsFetching,
-})(UsersContainer)
+})(UsersContainer))

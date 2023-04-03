@@ -4,7 +4,6 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
 import {StoreType} from "../../redux/redux-store";
-import {Redirect} from "react-router-dom";
 
 
 // export const Dialogs = (props: DialogsPropsType) => {
@@ -70,30 +69,26 @@ export class Dialogs extends React.Component<DialogsPropsType, StoreType> {
 
     render() {
         return (
-            this.props.isAuth
-                ?
-                <div className={s.dialogs}>
-                    <div className={s.dialogsItems}>
-                        {this.props.dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)}
-                    </div>
-                    <div className={s.messages}>
-                        {this.props.dialogsPage.messages.map(m => <Message key={m.id} id={m.id} message={m.message}/>)}
-                        <div>
-                            <div><textarea
-                                placeholder={`Enter your Message...`}
-                                onKeyPress={this.onKeyPress}
-                                onChange={this.onChange}
-                                value={this.props.dialogsPage.newMessageText}
+            <div className={s.dialogs}>
+                <div className={s.dialogsItems}>
+                    {this.props.dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)}
+                </div>
+                <div className={s.messages}>
+                    {this.props.dialogsPage.messages.map(m => <Message key={m.id} id={m.id} message={m.message}/>)}
+                    <div>
+                        <div><textarea
+                            placeholder={`Enter your Message...`}
+                            onKeyPress={this.onKeyPress}
+                            onChange={this.onChange}
+                            value={this.props.dialogsPage.newMessageText}
 
-                            /></div>
-                            <div>
-                                <button onClick={this.addMessage}>Send</button>
-                            </div>
+                        /></div>
+                        <div>
+                            <button onClick={this.addMessage}>Send</button>
                         </div>
                     </div>
                 </div>
-                :
-                <Redirect to="/login"/>
+            </div>
         )
     }
 }

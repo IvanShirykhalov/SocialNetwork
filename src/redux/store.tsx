@@ -1,4 +1,4 @@
-import {AddMessageAC, changeNewMessageTextAC} from "./dialogs-reducer";
+import {AddMessage, changeNewMessageText} from "./dialogs-reducer";
 import {addPost, changeNewPostText, ProfilePageType} from "./profile-reducer";
 import {DialogsPageType} from "../components/Dialogs/DialogsContainer";
 
@@ -18,8 +18,8 @@ type StateType = {
 
 }
 type ActionType =
-    ReturnType<typeof AddMessageAC>
-    | ReturnType<typeof changeNewMessageTextAC>
+    ReturnType<typeof AddMessage>
+    | ReturnType<typeof changeNewMessageText>
     | ReturnType<typeof addPost>
     | ReturnType<typeof changeNewPostText>
 
