@@ -1,14 +1,16 @@
 import React from 'react';
-import {StoreType} from "../../../redux/redux-store";
 
 type ProfileStatusType = {
-    state: {
-        editMode: boolean
-    }
     status: string
 }
 
-export class ProfileStatus extends React.Component <any, any> {
+
+//but it is not exactly
+type stateType = {
+    editMode: boolean
+}
+
+export class ProfileStatus extends React.Component <ProfileStatusType, stateType> {
 
 
     state = {
@@ -16,7 +18,7 @@ export class ProfileStatus extends React.Component <any, any> {
     }
 
 
-    toggleEditMode() {
+    toggleEditMode = () => {
         this.setState({
             editMode: !this.state.editMode
         })
