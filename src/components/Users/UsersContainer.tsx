@@ -127,11 +127,23 @@ const mapStateToProps = (state: StoreType): mapStateToProps => {
 //     unfollow,
 // }))
 
-export default withAuthRedirectComponent(compose((connect(mapStateToProps, {
-    subscriptionChange,
-    setCurrentPage,
-    toggleFollowingProgress,
-    getUsers,
-    follow,
-    unfollow,
-})))(UsersContainer))
+// export default withAuthRedirectComponent(compose((connect(mapStateToProps, {
+//     subscriptionChange,
+//     setCurrentPage,
+//     toggleFollowingProgress,
+//     getUsers,
+//     follow,
+//     unfollow,
+// })))(UsersContainer))
+
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        subscriptionChange,
+        setCurrentPage,
+        toggleFollowingProgress,
+        getUsers,
+        follow,
+        unfollow,
+    }),
+    withAuthRedirectComponent
+)(UsersContainer)

@@ -33,14 +33,16 @@ const mapStateToProps = (state: StoreType): mapStateToProps => {
 
 export type DialogsPropsType = mapStateToProps & mapDispatchToPropsType
 
-// const AuthRedirectComponent = withAuthRedirectComponent(Dialogs)
-// export const DialogsContainer = withAuthRedirectComponent(connect(mapStateToProps, {
+
+// export default withAuthRedirectComponent(compose(connect(mapStateToProps, {
 //     changeNewMessageText,
 //     AddMessage
-// })(Dialogs))
+// }))(Dialogs))
 
-
-export default withAuthRedirectComponent(compose(connect(mapStateToProps, {
-    changeNewMessageText,
-    AddMessage
-}))(Dialogs))
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        changeNewMessageText,
+        AddMessage
+    }),
+    withAuthRedirectComponent
+)(Dialogs)

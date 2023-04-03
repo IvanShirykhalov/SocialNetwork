@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React from "react";
 import {Profile} from "./Profile";
 import {StoreType} from "../../redux/redux-store";
 import {connect} from "react-redux";
@@ -44,21 +44,17 @@ class ProfileContainer extends React.Component<PropsType, StoreType> {
 }
 
 
-
-
 const MapStateToProps = (state: StoreType): mapStateToProps => ({
     profile: state.profilePage.profile
 
 })
 
-// compose(
-//     withAuthRedirectComponent,
-//     connect(MapStateToProps, {getUserProfile})
-// )(ProfileContainer)
 
-// export default compose(
-//     withAuthRedirectComponent,
-//     connect(MapStateToProps, {getUserProfile})
-// )(ProfileContainer)
+// export default withAuthRedirectComponent( compose<FC>(connect(MapStateToProps, {getUserProfile}), withRouter)(ProfileContainer))
 
-export default withAuthRedirectComponent( compose<FC>(connect(MapStateToProps, {getUserProfile}), withRouter)(ProfileContainer) )
+
+export default compose<React.ComponentType>(
+    connect(MapStateToProps, {getUserProfile}),
+    withRouter,
+    withAuthRedirectComponent
+)(ProfileContainer)
