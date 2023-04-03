@@ -13,7 +13,7 @@ import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader";
 import {Redirect} from "react-router-dom";
-import {withAuthRedirectComponent} from "../../hoc/WithAuthRedirectComponent";
+import {withAuthRedirectComponent} from "../../hoc/withAuthRedirectComponent";
 import {Dialogs} from "../Dialogs/Dialogs";
 
 

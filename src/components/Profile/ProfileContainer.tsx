@@ -4,7 +4,7 @@ import {StoreType} from "../../redux/redux-store";
 import {connect} from "react-redux";
 import {getUserProfile, UserProfileType} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {withAuthRedirectComponent} from "../../hoc/WithAuthRedirectComponent";
+import {withAuthRedirectComponent} from "../../hoc/withAuthRedirectComponent";
 
 
 type PathParamsType = {

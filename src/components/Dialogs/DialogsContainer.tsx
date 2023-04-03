@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {StoreType} from "../../redux/redux-store";
 import {DialogPropsType} from "./DialogItem/DialogItem";
 import {MessagePropsType} from "./Message/Message";
-import {withAuthRedirectComponent} from "../../hoc/WithAuthRedirectComponent";
+import {withAuthRedirectComponent} from "../../hoc/withAuthRedirectComponent";
 
 export type DialogsPageType = {
     dialogs: DialogPropsType[]
