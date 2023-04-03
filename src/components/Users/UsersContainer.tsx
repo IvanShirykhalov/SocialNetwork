@@ -15,6 +15,7 @@ import {Preloader} from "../common/Preloader";
 import {Redirect} from "react-router-dom";
 import {withAuthRedirectComponent} from "../../hoc/withAuthRedirectComponent";
 import {Dialogs} from "../Dialogs/Dialogs";
+import {compose} from "redux";
 
 
 type mapStateToProps = {
@@ -117,11 +118,20 @@ const mapStateToProps = (state: StoreType): mapStateToProps => {
 //const AuthRedirectComponent = withAuthRedirectComponent(UsersContainer)
 
 
-export default withAuthRedirectComponent(connect(mapStateToProps, {
+// export default withAuthRedirectComponent(connect(mapStateToProps, {
+//     subscriptionChange,
+//     setCurrentPage,
+//     toggleFollowingProgress,
+//     getUsers,
+//     follow,
+//     unfollow,
+// }))
+
+export default withAuthRedirectComponent(compose((connect(mapStateToProps, {
     subscriptionChange,
     setCurrentPage,
     toggleFollowingProgress,
     getUsers,
     follow,
     unfollow,
-})(UsersContainer))
+})))(UsersContainer))

@@ -7,8 +7,9 @@ type MapStateToPropsForRedirectType = {
     isAuth: boolean
 }
 
+
 const MapStateToPropsForRedirect = (state: StoreType): MapStateToPropsForRedirectType => ({
-    //@ts-ignore
+// @ts-ignore
     isAuth: state.auth.isAuth
 })
 
@@ -22,5 +23,6 @@ export function withAuthRedirectComponent<T>(Component: ComponentType<T>) {
         return <Component {...restAuth as T}/>
     }
 
+    // @ts-ignore
     return connect(MapStateToPropsForRedirect)(withRouter(RedirectComponent))
 }
