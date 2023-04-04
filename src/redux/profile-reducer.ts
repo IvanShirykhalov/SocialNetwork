@@ -1,7 +1,8 @@
 import {PostPropsType} from "../components/Profile/MyPosts/Post/Post";
 import {v1} from "uuid";
-import {Dispatch} from "redux";
-import {usersAPI} from "../api/api";
+
+import {profileAPI} from "../api/api";
+import {AnyAction, Dispatch} from "redux";
 
 
 export type UserProfileType = null | {
@@ -30,6 +31,7 @@ export type ProfilePageType = {
     posts: PostPropsType[]
     newPostText: string
     profile: UserProfileType
+    status: string
 }
 
 const initialState: ProfilePageType = {
@@ -40,12 +42,14 @@ const initialState: ProfilePageType = {
     ],
     newPostText: '',
     profile: null,
+    status: ''
 }
 
 type ActionType =
     | ReturnType<typeof addPost>
     | ReturnType<typeof changeNewPostText>
     | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setStatus>
 
 
 export const profileReducer = (state = initialState, action: ActionType): ProfilePageType => {
@@ -62,6 +66,8 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
             return {
                 ...state, profile: action.profile
             }
+        case "SET-STATUS":
+            return {...state, status: action.status}
         default:
             return state
     }
@@ -70,11 +76,25 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
 export const addPost = () => ({type: 'ADD-POST'} as const)
 export const changeNewPostText = (newPostText: string) => ({type: 'CHANGE-NEW-POST-TEXT', newPostText} as const)
 export const setUserProfile = (profile: UserProfileType) => ({type: 'SET-USER-PROFILE', profile} as const)
+export const setStatus = (status: string) => ({type: 'SET-STATUS', status} as const)
 
 
 export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
-    usersAPI.getProfile(userId).then((res) => {
+    profileAPI.getUserProfile(userId).then((res) => {
         dispatch(setUserProfile(res.data))
     })
+}
 
+export const getStatus = (userId: string) => (dispatch: Dispatch) => {
+    profileAPI.getStatus(userId).then((res) => {
+        dispatch(setStatus(res.data))
+    })
+}
+
+export const updateStatus = (status: string) => (dispatch: Dispatch) => {
+    profileAPI.updateStatus(status).then((res) => {
+        if (res.data.resulCode === 0) {
+            dispatch(setStatus(status))
+        }
+    })
 }

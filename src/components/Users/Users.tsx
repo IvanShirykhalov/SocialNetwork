@@ -22,8 +22,6 @@ type UsersPropsType = {
 export const Users = (props: UsersPropsType) => {
 
 
-
-
         return (
             <div>
                 <div>{props.slicedPages.map(p => {
@@ -51,57 +49,10 @@ export const Users = (props: UsersPropsType) => {
                                 </NavLink>
                                 </div>
                                     <div>
-{/*                                        {u.followed
-                                            ?
-                                            <button onClick={() => {
-                                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                                    withCredentials: true,
-                                                    headers: {
-                                                        'API-KEY': '4e5ca4d6-33f5-42ea-8844-4766f0c08361'
-                                                    },
-                                                }).then((res) => {
-                                                    if (res.data.resultCode == 0) {
-                                                        props.unfollow(u.id)
-                                                    }
-                                                })
-                                            }}>unfollow</button>
-                                            :
-                                            <button onClick={() => {
-                                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                                    withCredentials: true,
-                                                    headers: {
-                                                        'API-KEY': '4e5ca4d6-33f5-42ea-8844-4766f0c08361'
-                                                    },
-                                                }).then((res) => {
-                                                  console.log(res)
-                                                    if (res.data.resultCode == 0) {
-                                                        console.log(0)
-                                                        props.follow(u.id)
-                                                    }
-                                                })
-                                            }}>follow</button>
-
-                                        }*/}
                                         <button disabled={props.followingInProgress.some(id => id === u.id)}
                                                 onClick={() => {
                                                     props.toggleFollowingProgress(true, u.id)
                                                     !u.followed ? props.follow(u.id) : props.unfollow(u.id)
-                                                    // ?
-                                                    // props.follow(u.id)
-                                                    // // followAPI.follow(u.id).then((res) => {
-                                                    // //     if (res.resultCode === 0) {
-                                                    // //         props.subscriptionChange(u.id)
-                                                    // //     }
-                                                    // //     props.toggleFollowingProgress(false, u.id)
-                                                    // // })
-                                                    // :
-                                                    // props.unfollow(u.id)
-                                                    // // followAPI.unfollow(u.id).then((res) => {
-                                                    // //     if (res.resultCode === 0) {
-                                                    // //         props.subscriptionChange(u.id)
-                                                    // //     }
-                                                    // //     props.toggleFollowingProgress(false, u.id)
-                                                    // // })
                                                 }
                                                 }>
                                             {!u.followed ? 'subscribed' : 'unsubscribed'}

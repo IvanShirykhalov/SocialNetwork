@@ -48,6 +48,7 @@ const store: StoreType = {
             ],
             newPostText: '',
             profile: null,
+            status: ''
         },
 
     },
