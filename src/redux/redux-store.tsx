@@ -4,6 +4,7 @@ import {profileReducer} from "./profile-reducer";
 import {UserReducer} from "./users-reducer";
 import {authReducer} from "./auth-reducer";
 import thunk from "redux-thunk";
+import {reducer as formReducer} from 'redux-form'
 
 
 export type StoreType = ReturnType<typeof rootReducer>
@@ -14,6 +15,7 @@ const rootReducer = (
             profilePage: profileReducer,
             usersPage: UserReducer,
             auth: authReducer,
+            form: formReducer,
         }
     )
 )
