@@ -18,8 +18,7 @@ type mapStateToProps = {
 }
 
 type mapDispatchToPropsType = {
-    onChange: (text: string) => void
-    AddMessage: (values: string) => void
+    addMessage: (value: string) => void
 }
 
 const mapStateToProps = (state: StoreType): mapStateToProps => {

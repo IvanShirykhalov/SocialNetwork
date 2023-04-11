@@ -1,11 +1,11 @@
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import React from "react";
 
 type AddPostFormDataType = {
-    newMessageBody: string
+    newPostBody: string
 }
 
-const AddPostForm = (props: any) => {
+const AddPostForm = (props: InjectedFormProps<AddPostFormDataType>) => {
 
 
     return (
@@ -13,7 +13,7 @@ const AddPostForm = (props: any) => {
             <div>
                 <Field
                     component={'textarea'}
-                    name={' '}
+                    name={'newPostBody'}
                     placeholder={'Enter your message'}
                 />
             </div>

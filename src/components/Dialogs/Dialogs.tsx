@@ -4,7 +4,7 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
 import {StoreType} from "../../redux/redux-store";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {AddMessagesFormRedux} from "./AddMessageForm";
 
 
 // export const Dialogs = (props: DialogsPropsType) => {
@@ -56,19 +56,8 @@ export class Dialogs extends React.Component<DialogsPropsType, StoreType> {
     }
 
     addNewMessage = (value: { newMessageBody: string }) => {
-        this.props.AddMessage(value.newMessageBody)
+        this.props.addMessage(value.newMessageBody)
     }
-
-    // addMessage = () => {
-    //     this.props.addMessage()
-    // }
-    //onChange = (e: ChangeEvent<HTMLTextAreaElement>) => this.props.onChange(e.currentTarget.value)
-    // onKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    //     if (e.key === 'Enter') {
-    //         this.props.addMessage()
-    //     }
-    // }
-
 
     render() {
         return (
@@ -88,26 +77,3 @@ export class Dialogs extends React.Component<DialogsPropsType, StoreType> {
 }
 
 
-type AddMessageFormDataType = {
-    newMessageBody: string
-}
-
-const AddMessageForm = (props: InjectedFormProps<AddMessageFormDataType>) => {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field
-                    placeholder={`Enter your Message...`}
-                    component={'textarea'}
-                    name={'newMessageBody'}
-                />
-            </div>
-            <div>
-                <button>Send</button>
-            </div>
-        </form>
-
-    )
-}
-
-export const AddMessagesFormRedux = reduxForm<AddMessageFormDataType>({form: 'dialogAddMessageForm'})(AddMessageForm)

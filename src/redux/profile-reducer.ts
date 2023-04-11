@@ -1,6 +1,5 @@
 import {PostPropsType} from "../components/Profile/MyPosts/Post/Post";
 import {v1} from "uuid";
-
 import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
 
@@ -29,7 +28,6 @@ export type UserProfileType = null | {
 
 export type ProfilePageType = {
     posts: PostPropsType[]
-    newPostText: string
     profile: UserProfileType
     status: string
 }
@@ -40,7 +38,6 @@ const initialState: ProfilePageType = {
         {id: v1(), message: 'Hi', likeCount: 10},
         {id: v1(), message: 'How are you?', likeCount: 4},
     ],
-    newPostText: '',
     profile: null,
     status: ''
 }
@@ -57,11 +54,8 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
         case 'ADD-POST':
             return {
                 ...state,
-                posts: [...state.posts, {id: v1(), message: state.newPostText, likeCount: 0}],
-                newPostText: ''
+                posts: [...state.posts, {id: v1(), message: action.newPostBody, likeCount: 0}],
             }
-        case 'CHANGE-NEW-POST-TEXT':
-            return {...state, newPostText: action.newPostText}
         case "SET-USER-PROFILE":
             return {
                 ...state, profile: action.profile
@@ -73,7 +67,7 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
     }
 }
 
-export const addPost = () => ({type: 'ADD-POST'} as const)
+export const addPost = (newPostBody: string) => ({type: 'ADD-POST', newPostBody} as const)
 export const changeNewPostText = (newPostText: string) => ({type: 'CHANGE-NEW-POST-TEXT', newPostText} as const)
 export const setUserProfile = (profile: UserProfileType) => ({type: 'SET-USER-PROFILE', profile} as const)
 export const setStatus = (status: string) => ({type: 'SET-STATUS', status} as const)
