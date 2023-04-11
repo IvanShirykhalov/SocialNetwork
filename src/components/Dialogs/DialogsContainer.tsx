@@ -1,5 +1,5 @@
 import React from 'react';
-import {AddMessage, changeNewMessageText} from "../../redux/dialogs-reducer";
+import {AddMessage} from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {StoreType} from "../../redux/redux-store";
@@ -11,7 +11,6 @@ import {compose} from "redux";
 export type DialogsPageType = {
     dialogs: DialogPropsType[]
     messages: MessagePropsType[]
-    newMessageText: string
 }
 
 type mapStateToProps = {
@@ -20,7 +19,7 @@ type mapStateToProps = {
 
 type mapDispatchToPropsType = {
     onChange: (text: string) => void
-    addMessage: () => void
+    AddMessage: (values: string) => void
 }
 
 const mapStateToProps = (state: StoreType): mapStateToProps => {
@@ -33,16 +32,6 @@ const mapStateToProps = (state: StoreType): mapStateToProps => {
 
 export type DialogsPropsType = mapStateToProps & mapDispatchToPropsType
 
-
-// export default withAuthRedirectComponent(compose(connect(mapStateToProps, {
-//     changeNewMessageText,
-//     AddMessage
-// }))(Dialogs))
-
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {
-        changeNewMessageText,
-        AddMessage
-    }),
-    withAuthRedirectComponent
+    connect(mapStateToProps, {AddMessage}), withAuthRedirectComponent
 )(Dialogs)

@@ -5,12 +5,10 @@ import {v1} from "uuid";
 type DialogsPageType = {
     dialogs: DialogPropsType[]
     messages: MessagePropsType[]
-    newMessageText: string
 }
 
 type ActionType =
     ReturnType<typeof AddMessage>
-    | ReturnType<typeof changeNewMessageText>
 
 const initialState: DialogsPageType = {
     dialogs: [
@@ -25,7 +23,6 @@ const initialState: DialogsPageType = {
         {id: v1(), message: 'Hello'},
 
     ],
-    newMessageText: ''
 }
 
 export const dialogsReducer = (state = initialState, action: ActionType): DialogsPageType => {
@@ -33,19 +30,11 @@ export const dialogsReducer = (state = initialState, action: ActionType): Dialog
         case "ADD-MESSAGE":
             return {
                 ...state,
-                messages: [...state.messages, {id: v1(), message: state.newMessageText}],
-                newMessageText: ''
+                messages: [...state.messages, {id: v1(), message: action.newMessageBody}],
             }
-
-        case "CHANGE-NEW-MESSAGE-TEXT":
-            return {...state, newMessageText: action.newMessageText}
         default:
             return state
     }
 }
 
-export const AddMessage = () => ({type: 'ADD-MESSAGE'} as const)
-export const changeNewMessageText = (newMessageText: string) => ({
-    type: 'CHANGE-NEW-MESSAGE-TEXT',
-    newMessageText
-} as const)
+export const AddMessage = (newMessageBody: string) => ({type: 'ADD-MESSAGE', newMessageBody} as const)

@@ -1,11 +1,11 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
-import {Post, PostPropsType} from "./Post/Post";
+import {Post} from "./Post/Post";
 import s from './MyPosts.module.css'
 import {MyPostPropsType} from "./MyPostsContainer";
+import {AddPostFormRedux} from "./AddPostForm";
 
 
 export const MyPosts = (props: MyPostPropsType) => {
-
 
     const addPost = () => props.addPost()
 
@@ -21,19 +21,10 @@ export const MyPosts = (props: MyPostPropsType) => {
         <div className={s.postsBlock}>
             <h3>My post</h3>
             <div>New post</div>
-            <div>
-                <div>
-                    <textarea
-                        value={props.newPostText}
-                        onChange={onChange}
-                        onKeyPress={onKeyPress}/>
-                </div>
-                <div>
-                    <button onClick={addPost}>Add post</button>
-                </div>
-            </div>
+            <AddPostFormRedux/>
             {props.posts.map(p => <Post key={p.id} id={p.id} message={p.message} likeCount={p.likeCount}/>)}
-
         </div>
     );
 };
+
+

@@ -1,7 +1,7 @@
 import React from 'react';
 import {ProfileInfo} from "./Profileinfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-import {updateStatus, UserProfileType} from "../../redux/profile-reducer";
+import {UserProfileType} from "../../redux/profile-reducer";
 
 
 type ProfilePropsType = {
@@ -18,3 +18,5 @@ export const Profile = (props: ProfilePropsType) => {
         </div>
     );
 };
+
+

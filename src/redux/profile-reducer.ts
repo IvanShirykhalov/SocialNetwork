@@ -2,7 +2,7 @@ import {PostPropsType} from "../components/Profile/MyPosts/Post/Post";
 import {v1} from "uuid";
 
 import {profileAPI} from "../api/api";
-import {AnyAction, Dispatch} from "redux";
+import {Dispatch} from "redux";
 
 
 export type UserProfileType = null | {
