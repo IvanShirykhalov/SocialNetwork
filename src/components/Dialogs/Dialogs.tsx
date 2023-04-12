@@ -3,7 +3,6 @@ import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
-import {StoreType} from "../../redux/redux-store";
 import {AddMessagesFormRedux} from "./AddMessageForm";
 
 
@@ -11,7 +10,6 @@ export const Dialogs = (props: DialogsPropsType) => {
 
 
     const addNewMessage = (value: { newMessageBody: string }) => {
-        debugger
         props.addMessage(value.newMessageBody)
     }
 
