@@ -8,7 +8,7 @@ type DialogsPageType = {
 }
 
 type ActionType =
-    ReturnType<typeof AddMessage>
+    ReturnType<typeof addMessage>
 
 const initialState: DialogsPageType = {
     dialogs: [
@@ -37,4 +37,4 @@ export const dialogsReducer = (state = initialState, action: ActionType): Dialog
     }
 }
 
-export const AddMessage = (newMessageBody: string) => ({type: 'ADD-MESSAGE', newMessageBody} as const)
+export const addMessage = (newMessageBody: string) => ({type: 'ADD-MESSAGE', newMessageBody} as const)

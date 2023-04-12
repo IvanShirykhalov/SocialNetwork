@@ -1,5 +1,5 @@
 import React from 'react';
-import {AddMessage} from "../../redux/dialogs-reducer";
+import {addMessage} from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {StoreType} from "../../redux/redux-store";
@@ -32,5 +32,5 @@ const mapStateToProps = (state: StoreType): mapStateToProps => {
 export type DialogsPropsType = mapStateToProps & mapDispatchToPropsType
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {AddMessage}), withAuthRedirectComponent
+    connect(mapStateToProps, {addMessage}), withAuthRedirectComponent
 )(Dialogs)

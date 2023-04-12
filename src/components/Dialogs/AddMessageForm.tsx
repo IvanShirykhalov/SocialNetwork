@@ -7,7 +7,7 @@ type AddMessageFormDataType = {
     newMessageBody: string
 }
 
-const maxLength = maxLengthCreator(10)
+const maxLength = maxLengthCreator(100)
 
 const AddMessageForm = (props: InjectedFormProps<AddMessageFormDataType>) => {
     return (
@@ -15,9 +15,9 @@ const AddMessageForm = (props: InjectedFormProps<AddMessageFormDataType>) => {
             <div>
                 <Field
                     placeholder={`Enter your Message...`}
-                    component={'textarea'}
+                    component={Textarea}
                     name={'newMessageBody'}
-                    validate={[requiredField, maxLength,]}
+                    validate={[requiredField, maxLength]}
                 />
             </div>
             <div>
