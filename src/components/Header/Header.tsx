@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Header.module.css'
 import {NavLink} from "react-router-dom";
 import {AuthDataType} from "../../redux/auth-reducer";
-import {Login} from "../Login/Login";
+import Login from "../Login/Login";
 
 
 type HeaderPropsType = {
