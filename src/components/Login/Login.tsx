@@ -2,15 +2,23 @@ import React from 'react';
 import {LoginFormDataType, LoginReduxForm} from "./LoginForm";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
+import {Redirect} from "react-router-dom";
+import {StoreType} from "../../redux/redux-store";
+
 
 type LoginPropsType = {
     login: (email: string, password: string, rememberMe: boolean) => void
+    isAuth: boolean
 }
 
 const Login = (props: LoginPropsType) => {
 
     const onSubmit = (formData: LoginFormDataType) => {
         props.login(formData.email, formData.password, formData.rememberMe)
+    }
+
+    if (props.isAuth) {
+        return <Redirect to={'/profile'}/>
     }
 
     return (
@@ -21,5 +29,13 @@ const Login = (props: LoginPropsType) => {
     );
 };
 
+type mapStateToProps = {
+    isAuth: boolean
+}
 
-export default connect(null, {login})(Login)
+const mapStateToProps = (state: StoreType): mapStateToProps => ({
+    //@ts-ignore
+    isAuth: state.auth.isAuth
+})
+
+export default connect(mapStateToProps, {login})(Login)

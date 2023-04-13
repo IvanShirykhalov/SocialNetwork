@@ -24,8 +24,7 @@ export const authReducer = (state = initialState, action: ActionType) => {
         case "SET-USER-DATA":
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.data
             }
         default:
             return state

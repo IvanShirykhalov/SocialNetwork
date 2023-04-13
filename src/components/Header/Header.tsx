@@ -7,6 +7,7 @@ import Login from "../Login/Login";
 
 type HeaderPropsType = {
     auth: AuthDataType
+    logout: () => void
 }
 
 export const Header = (props: HeaderPropsType) => {
@@ -17,7 +18,10 @@ export const Header = (props: HeaderPropsType) => {
                 alt="logo"/>
             <div className={s.loginBlock}>
                 {props.auth.isAuth
-                    ? props.auth.login
+                    ? <div>
+                        {props.auth.login}
+                        <button onClick={props.logout}>logOut</button>
+                    </div>
                     : <NavLink to={'/login'}><Login/></NavLink>
                 }
             </div>
