@@ -36,6 +36,7 @@ class ProfileContainer extends React.Component<PropsType, StoreType> {
         if (!userId) {
             userId = this.props.userId
         }
+
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
     }
