@@ -40,8 +40,8 @@ type ActionType =
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof toggleFollowingProgress>
-    //| ReturnType<typeof follow>
-    //| ReturnType<typeof unfollow>
+//| ReturnType<typeof follow>
+//| ReturnType<typeof unfollow>
 
 export const UserReducer = (state = initialState, action: ActionType): UsersPageType => {
     switch (action.type) {
@@ -95,10 +95,10 @@ export const toggleFollowingProgress = (followingInProgress: boolean, id: string
 } as const)
 
 
-export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+export const requestUsers = (page: number, pageSize: number) => (dispatch: Dispatch) => {
     dispatch(toggleIsFetching(true))
-
-    usersAPI.getUsers(currentPage, pageSize)
+    dispatch(setCurrentPage(page))
+    usersAPI.getUsers(page, pageSize)
         .then((res) => {
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(res.items))
