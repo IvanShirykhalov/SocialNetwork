@@ -5,6 +5,7 @@ import {UserReducer} from "./users-reducer";
 import {authReducer} from "./auth-reducer";
 import thunk, {ThunkDispatch} from "redux-thunk";
 import {reducer as formReducer} from 'redux-form'
+import {appReducer} from "./app-reducer";
 
 
 export type StoreType = ReturnType<typeof rootReducer>
@@ -17,12 +18,12 @@ const rootReducer = (
             usersPage: UserReducer,
             auth: authReducer,
             form: formReducer,
+            app: appReducer,
         }
     )
 )
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))
-
 
 
 //@ts-ignore

@@ -145,5 +145,5 @@ export default compose<React.ComponentType>(
         follow,
         unfollow,
     }),
-    withAuthRedirectComponent
+    //withAuthRedirectComponent
 )(UsersContainer)

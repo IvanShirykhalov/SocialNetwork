@@ -36,7 +36,7 @@ export const authReducer = (state = initialState, action: ActionType) => {
 export const setUserData = (data: AuthDataType) => ({type: 'SET-USER-DATA', data} as const)
 
 export const getAuthUserData = () => (dispatch: AppThunkDispatch) => {
-    authAPI.me()
+    return authAPI.me()
         .then((res) => {
             if (res.data.resultCode === 0) {
                 const {id, login, email, isAuth} = res.data.data

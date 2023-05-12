@@ -2,23 +2,18 @@ import React from "react";
 import {StoreType} from "../../redux/redux-store";
 import {Header} from "./Header";
 import {connect} from "react-redux";
-import {AuthDataType, getAuthUserData, logout} from "../../redux/auth-reducer";
+import {AuthDataType, logout} from "../../redux/auth-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
 
 type PathParamsType = {}
 
 type MapStateToProps = {
-    // id: number | null
-    // email: string | null
-    // login: string | null
-    // isAuth: boolean
     auth: AuthDataType
 }
 
 type mapDispatchToPropsType = {
     //setUserData: (data: AuthDataType) => void
-    getAuthUserData: () => void
     logout: () => void
 }
 
@@ -28,9 +23,7 @@ type PropsType = RouteComponentProps<PathParamsType> & HeaderPropsType
 
 class HeaderContainer extends React.Component<PropsType, StoreType> {
 
-    componentDidMount() {
-        this.props.getAuthUserData()
-    }
+
 
     render() {
         return (
@@ -45,4 +38,4 @@ const MapStateToProps = (state: StoreType): MapStateToProps => ({
 
 })
 
-export default connect(MapStateToProps, {getAuthUserData, logout})(withRouter(HeaderContainer))
+export default connect(MapStateToProps, {logout})(withRouter(HeaderContainer))
