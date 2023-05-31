@@ -106,21 +106,45 @@ export const requestUsers = (page: number, pageSize: number) => async (dispatch:
 
 }
 
+
+// export const followUnfollow = async (userId: string, apiMethod: Function, dispatch: Dispatch) => {
+//
+//     dispatch(toggleFollowingProgress(true, userId))
+//
+//     const res = await apiMethod(userId)
+//     console.log({apiMethod})
+//     if (res.resultCode === 0) {
+//         dispatch(subscriptionChange(userId))
+//     }
+//     dispatch(toggleFollowingProgress(false, userId))
+// }
+//
+// export const follow = (userId: string) => async (dispatch: Dispatch) => {
+//
+//     await followUnfollow(userId, usersAPI.follow.bind(usersAPI), dispatch)
+//
+// }
+// export const unfollow = (userId: string) => async (dispatch: Dispatch) => {
+//
+//     await followUnfollow(userId, usersAPI.unfollow.bind(usersAPI), dispatch)
+// }
+
 export const follow = (userId: string) => async (dispatch: Dispatch) => {
 
+    dispatch(toggleFollowingProgress(true, userId))
     const res = await usersAPI.follow(userId)
     if (res.resultCode === 0) {
         dispatch(subscriptionChange(userId))
     }
     dispatch(toggleFollowingProgress(false, userId))
-
 }
+
 export const unfollow = (userId: string) => async (dispatch: Dispatch) => {
 
+    dispatch(toggleFollowingProgress(true, userId))
     const res = await usersAPI.unfollow(userId)
     if (res.resultCode === 0) {
         dispatch(subscriptionChange(userId))
     }
     dispatch(toggleFollowingProgress(false, userId))
-
 }
