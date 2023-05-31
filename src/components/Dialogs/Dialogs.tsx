@@ -6,7 +6,7 @@ import {DialogsPropsType} from "./DialogsContainer";
 import {AddMessagesFormRedux} from "./AddMessageForm";
 
 
-export const Dialogs = (props: DialogsPropsType) => {
+export const Dialogs = React.memo((props: DialogsPropsType) => {
 
 
     const addNewMessage = (value: { newMessageBody: string }) => {
@@ -26,7 +26,7 @@ export const Dialogs = (props: DialogsPropsType) => {
             </div>
         </div>
     )
-};
+})
 
 // export class Dialogs extends React.Component<DialogsPropsType, StoreType> {
 //     constructor(props: DialogsPropsType) {

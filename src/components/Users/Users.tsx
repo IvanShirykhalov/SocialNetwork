@@ -19,26 +19,26 @@ type UsersPropsType = {
     unfollow: (userId: string) => void
 }
 
-export const Users = (props: UsersPropsType) => {
+export const Users = React.memo((props: UsersPropsType) => {
 
 
-        return (
-            <div>
-                <div>{props.slicedPages.map(p => {
-                    return <button key={p}
-                                   onClick={() => {
-                                       props.onPageChanged(p)
-                                   }}
-                                   className={props.currentPage === p ? s.selectedPage : ''}
-                    >
-                        {p}
-                    </button>
-                })}
-                </div>
-                {props.users.map(u => {
+    return (
+        <div>
+            <div>{props.slicedPages.map(p => {
+                return <button key={p}
+                               onClick={() => {
+                                   props.onPageChanged(p)
+                               }}
+                               className={props.currentPage === p ? s.selectedPage : ''}
+                >
+                    {p}
+                </button>
+            })}
+            </div>
+            {props.users.map(u => {
 
-                    return (
-                        <div key={u.id}>
+                return (
+                    <div key={u.id}>
                         <span>
                             <div>
                                 <NavLink to={`/profile/${u.id}`}>
@@ -59,17 +59,16 @@ export const Users = (props: UsersPropsType) => {
                                         </button>
                                     </div>
                         </span>
-                            <span>
+                        <span>
                                 <span>
                                     <div>{u.name}</div>
                                     <div>{u.status}</div>
                                 </span>
                         </span>
-                        </div>
-                    )
-                })}
-            </div>
-        );
-    }
-;
+                    </div>
+                )
+            })}
+        </div>
+    );
+})
 

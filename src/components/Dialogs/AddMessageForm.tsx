@@ -9,7 +9,7 @@ type AddMessageFormDataType = {
 
 const maxLength = maxLengthCreator(100)
 
-const AddMessageForm = (props: InjectedFormProps<AddMessageFormDataType>) => {
+const AddMessageForm = React.memo((props: InjectedFormProps<AddMessageFormDataType>) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
@@ -26,5 +26,5 @@ const AddMessageForm = (props: InjectedFormProps<AddMessageFormDataType>) => {
         </form>
 
     )
-}
+})
 export const AddMessagesFormRedux = reduxForm<AddMessageFormDataType>({form: 'dialogAddMessageForm'})(AddMessageForm)
