@@ -8,7 +8,8 @@ type DialogsPageType = {
 }
 
 type ActionType =
-    ReturnType<typeof addMessage>
+    | ReturnType<typeof addMessage>
+    | ReturnType<typeof deleteMessage>
 
 const initialState: DialogsPageType = {
     dialogs: [
@@ -32,9 +33,15 @@ export const dialogsReducer = (state = initialState, action: ActionType): Dialog
                 ...state,
                 messages: [...state.messages, {id: v1(), message: action.newMessageBody}],
             }
+        case "DELETE-MESSAGE":
+            return {
+                ...state,
+                messages: [...state.messages.filter(m => m.id !== action.id)]
+            }
         default:
             return state
     }
 }
 
 export const addMessage = (newMessageBody: string) => ({type: 'ADD-MESSAGE', newMessageBody} as const)
+export const deleteMessage = (id: string) => ({type: 'DELETE-MESSAGE', id} as const)

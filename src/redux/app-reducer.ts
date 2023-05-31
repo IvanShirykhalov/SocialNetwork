@@ -1,13 +1,13 @@
 import {getAuthUserData} from "./auth-reducer";
 import {AppThunkDispatch} from "./redux-store";
 
-type InitialStateType = {
+export type InitialAppStateType = {
     initialized: boolean
 }
 
 type ActionType = ReturnType<typeof initializedSuccess>
 
-const initialState: InitialStateType = {
+const initialState: InitialAppStateType = {
     initialized: false
 }
 

@@ -43,7 +43,7 @@ type ActionType =
 //| ReturnType<typeof follow>
 //| ReturnType<typeof unfollow>
 
-export const UserReducer = (state = initialState, action: ActionType): UsersPageType => {
+export const userReducer = (state = initialState, action: ActionType): UsersPageType => {
     switch (action.type) {
         case "SET-USERS":
             return {
