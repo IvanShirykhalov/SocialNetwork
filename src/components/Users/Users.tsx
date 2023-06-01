@@ -3,6 +3,8 @@ import s from "./Users.module.css";
 import userPhoto from "../../img/1.png";
 import {UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import {Paginator} from "../common/Paginator/Paginator";
+import {User} from "./User";
 
 
 type UsersPropsType = {
@@ -21,51 +23,19 @@ type UsersPropsType = {
 
 export const Users = React.memo((props: UsersPropsType) => {
 
-
     return (
         <div>
-            <div>{props.slicedPages.map(p => {
-                return <button key={p}
-                               onClick={() => {
-                                   props.onPageChanged(p)
-                               }}
-                               className={props.currentPage === p ? s.selectedPage : ''}
-                >
-                    {p}
-                </button>
-            })}
-            </div>
+            <Paginator slicedPages={props.slicedPages}
+                       onPageChanged={props.onPageChanged}
+                       currentPage={props.currentPage}/>
             {props.users.map(u => {
-
                 return (
-                    <div key={u.id}>
-                        <span>
-                            <div>
-                                <NavLink to={`/profile/${u.id}`}>
-                                    <img className={s.usersPhoto}
-                                         src={u.photos.small ? u.photos.small : userPhoto}
-                                         alt="user avatar"
-                                    />
-                                </NavLink>
-                                </div>
-                                    <div>
-                                        <button disabled={props.followingInProgress.some(id => id === u.id)}
-                                                onClick={() => {
-                                                    props.toggleFollowingProgress(true, u.id)
-                                                    !u.followed ? props.follow(u.id) : props.unfollow(u.id)
-                                                }
-                                                }>
-                                            {!u.followed ? 'subscribed' : 'unsubscribed'}
-                                        </button>
-                                    </div>
-                        </span>
-                        <span>
-                                <span>
-                                    <div>{u.name}</div>
-                                    <div>{u.status}</div>
-                                </span>
-                        </span>
-                    </div>
+                    <User key={u.id}
+                          user={u}
+                          followingInProgress={props.followingInProgress}
+                          toggleFollowingProgress={props.toggleFollowingProgress}
+                          follow={props.follow}
+                          unfollow={props.unfollow}/>
                 )
             })}
         </div>

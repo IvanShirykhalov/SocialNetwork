@@ -15,7 +15,6 @@ import {initializeApp} from "./redux/app-reducer";
 import {Preloader} from "./components/common/Preloader";
 
 
-type PathParamsType = {}
 
 type MapStateToProps = {
     initialized: boolean
@@ -24,7 +23,7 @@ type MapStateToProps = {
 type mapDispatchToPropsType = {
     initializeApp: () => void
 }
-type PropsType = RouteComponentProps<PathParamsType> & mapDispatchToPropsType & MapStateToProps
+type PropsType = RouteComponentProps & mapDispatchToPropsType & MapStateToProps
 
 class App extends React.Component<PropsType, StoreType> {
 
