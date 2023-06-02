@@ -32,8 +32,10 @@ export const Paginator = (props: PaginatorPropsType) => {
 
     return (
         <div>
-            {portionNumber > 1 ? <button onClick={() => setPortionNumber(portionNumber - 1)}>PREV</button> :
-                <button disabled>PREV</button>}
+            {portionNumber > 1
+                ? <button onClick={() => setPortionNumber(portionNumber - 1)}>PREV</button>
+                : <button disabled>PREV</button>
+            }
             {pages
                 .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                 .map(p => {
@@ -46,7 +48,10 @@ export const Paginator = (props: PaginatorPropsType) => {
                         {p}
                     </button>
                 })}
-            {portionNumber && <button onClick={() => setPortionNumber(portionNumber + 1)}>NEXT</button>}
+            {portionCount > portionNumber
+                ? <button onClick={() => setPortionNumber(portionNumber + 1)}>NEXT</button>
+                : <button disabled>PREV</button>
+            }
         </div>
     )
 };
