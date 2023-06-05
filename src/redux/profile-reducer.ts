@@ -5,8 +5,8 @@ import {Dispatch} from "redux";
 
 
 export type UserProfileType = null | {
-    aboutMe: string
-    contacts: {
+    aboutMe?: string
+    contacts?: {
         facebook: string
         website: string
         vk: string
@@ -16,10 +16,10 @@ export type UserProfileType = null | {
         github: string
         mainLink: string
     },
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    userId: number
+    lookingForAJob?: boolean
+    lookingForAJobDescription?: string
+    fullName?: string
+    userId?: number
     photos: {
         small: string
         large: string
@@ -37,7 +37,9 @@ const initialState: ProfilePageType = {
         {id: v1(), message: `What's up dude`, likeCount: 2},
     ],
     profile: null,
-    status: ''
+    status: '',
+
+
 }
 
 type ActionType =
@@ -45,6 +47,7 @@ type ActionType =
     | ReturnType<typeof deletePost>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
+    | ReturnType<typeof setPhoto>
 //  | ReturnType<typeof changeNewPostText>
 
 
@@ -66,6 +69,10 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
             }
         case "SET-STATUS":
             return {...state, status: action.status}
+        case "SET-PHOTO":
+            return {
+                ...state, profile: {...state.profile, photos: action.photos}
+            }
         default:
             return state
     }
@@ -76,6 +83,7 @@ export const deletePost = (id: string) => ({type: 'DELETE-POST', id} as const)
 // export const changeNewPostText = (newPostText: string) => ({type: 'CHANGE-NEW-POST-TEXT', newPostText} as const)
 export const setUserProfile = (profile: UserProfileType) => ({type: 'SET-USER-PROFILE', profile} as const)
 export const setStatus = (status: string) => ({type: 'SET-STATUS', status} as const)
+export const setPhoto = (photos: { small: string, large: string }) => ({type: 'SET-PHOTO', photos} as const)
 
 
 export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
@@ -98,4 +106,13 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
     if (res.data.resultCode === 0) {
         dispatch(setStatus(status))
     }
+}
+
+export const savePhoto = (photo: File) => async (dispatch: Dispatch) => {
+
+    const res = await profileAPI.savePhoto(photo)
+    if (res.data.resultCode === 0) {
+        dispatch(setPhoto(res.data.data.photos))
+    }
+
 }
