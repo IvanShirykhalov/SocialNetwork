@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from "../../Users/Users.module.css";
 
 
@@ -29,6 +29,8 @@ export const Paginator = (props: PaginatorPropsType) => {
     // let curPF = ((curP - 5) < 0) ? 0 : curP - 5;
     // let curPL = curP + 5;
     // let slicedPages = pages.slice(curPF, curPL);
+
+    useEffect(() => setPortionNumber(Math.ceil(props.currentPage / portionSize)), [props.currentPage]);
 
     return (
         <div>
