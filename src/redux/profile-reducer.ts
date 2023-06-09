@@ -2,6 +2,7 @@ import {PostPropsType} from "../components/Profile/MyPosts/Post/Post";
 import {v1} from "uuid";
 import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {AppThunkDispatch, store, StoreType} from "./redux-store";
 
 
 export type UserProfileType = {
@@ -87,7 +88,6 @@ export const setPhoto = (photos: { small: string, large: string }) => ({type: 'S
 
 
 export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
-
     profileAPI.getUserProfile(userId).then(res => dispatch(setUserProfile(res.data))
     )
 
@@ -116,11 +116,11 @@ export const savePhoto = (photo: File) => async (dispatch: Dispatch) => {
     }
 }
 
-export const saveProfile = (profile: UserProfileType) => async (dispatch: Dispatch) => {
-
+export const saveProfile = (profile: UserProfileType) => async (dispatch: AppThunkDispatch, getState: () => StoreType) => {
+    const userId = getState().auth.id
     const res = await profileAPI.saveProfile(profile)
     if (res.data.resultCode === 0) {
-        dispatch(setUserProfile(profile))
+        dispatch(getUserProfile(userId))
     }
 
 }
