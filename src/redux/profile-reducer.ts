@@ -4,27 +4,27 @@ import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
 
 
-export type UserProfileType = null | {
-    aboutMe?: string
+export type UserProfileType = {
+    aboutMe?: string | null
     contacts?: {
-        facebook: string
-        website: string
-        vk: string
-        twitter: string
-        instagram: string
-        youtube: string
-        github: string
-        mainLink: string
+        facebook: string | null
+        website: string | null
+        vk: string | null
+        twitter: string | null
+        instagram: string | null
+        youtube: string | null
+        github: string | null
+        mainLink: string | null
     },
     lookingForAJob?: boolean
-    lookingForAJobDescription?: string
-    fullName?: string
+    lookingForAJobDescription?: string | null
+    fullName?: string | null
     userId?: number
     photos: {
-        small: string
-        large: string
+        small: string | null
+        large: string | null
     }
-}
+} | null
 
 export type ProfilePageType = {
     posts: PostPropsType[]
@@ -86,10 +86,10 @@ export const setStatus = (status: string) => ({type: 'SET-STATUS', status} as co
 export const setPhoto = (photos: { small: string, large: string }) => ({type: 'SET-PHOTO', photos} as const)
 
 
-export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
+export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
 
-    const res = await profileAPI.getUserProfile(userId)
-    dispatch(setUserProfile(res.data))
+    profileAPI.getUserProfile(userId).then(res => dispatch(setUserProfile(res.data))
+    )
 
 }
 
@@ -113,6 +113,14 @@ export const savePhoto = (photo: File) => async (dispatch: Dispatch) => {
     const res = await profileAPI.savePhoto(photo)
     if (res.data.resultCode === 0) {
         dispatch(setPhoto(res.data.data.photos))
+    }
+}
+
+export const saveProfile = (profile: UserProfileType) => async (dispatch: Dispatch) => {
+
+    const res = await profileAPI.saveProfile(profile)
+    if (res.data.resultCode === 0) {
+        dispatch(setUserProfile(profile))
     }
 
 }

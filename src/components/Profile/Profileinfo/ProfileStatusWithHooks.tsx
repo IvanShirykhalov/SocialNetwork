@@ -31,7 +31,7 @@ export const ProfileStatusWithHooks = React.memo((props: ProfileStatusType) => {
             {!editMode
                 ?
                 <div>
-                    <span onDoubleClick={toggleEditMode}>{props.status || 'No status'}</span>
+                    <b>Status :</b><span onDoubleClick={toggleEditMode}>{props.status || 'No status'}</span>
                 </div>
                 :
                 <div>

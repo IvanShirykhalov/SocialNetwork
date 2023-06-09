@@ -24,12 +24,6 @@ export const Paginator = (props: PaginatorPropsType) => {
     const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
     const rightPortionPageNumber = portionNumber * portionSize
 
-
-    // let curP = props.currentPage;
-    // let curPF = ((curP - 5) < 0) ? 0 : curP - 5;
-    // let curPL = curP + 5;
-    // let slicedPages = pages.slice(curPF, curPL);
-
     useEffect(() => setPortionNumber(Math.ceil(props.currentPage / portionSize)), [props.currentPage]);
 
     return (
