@@ -1,5 +1,4 @@
 import axios from "axios";
-import {saveProfile} from "../redux/profile-reducer";
 
 const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.0/`,
@@ -48,13 +47,18 @@ export const authAPI = {
     me() {
         return instance.get(`auth/me`, {withCredentials: true})
     },
-    login(email: string, password: string, rememberMe: boolean = false) {
-        return instance.post(`auth/login`, {email, password, rememberMe})
+    login(email: string, password: string, rememberMe: boolean = false, captcha: null | string = null) {
+        return instance.post(`auth/login`, {email, password, rememberMe, captcha})
     },
     logout() {
         return instance.delete(`auth/login`)
     },
+}
 
+export const securityAPI = {
+    captcha(){
+        return instance.get(`security/get-captcha-url`)
+    }
 }
 
 

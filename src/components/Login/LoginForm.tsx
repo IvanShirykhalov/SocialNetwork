@@ -1,34 +1,35 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {createField, Input} from "../common/FormsControls/FormsControls";
+import {createField, GetStringKeys, Input} from "../common/FormsControls/FormsControls";
 import {requiredField} from "../../utils/validators/validators";
 import s from '../../components/common/FormsControls/FormsControls.module.css'
+import {UserProfileType} from "../../redux/profile-reducer";
 
-export type LoginFormDataType = {
-    email: string
-    password: string
-    rememberMe: boolean
+type LoginFormOwnProps = {
+    captchaUrl: string | null
 }
 
-const LoginForm = (props: InjectedFormProps<LoginFormDataType>) => {
+export type LoginFormValuesType = {
+    captcha: string
+    rememberMe: boolean
+    password: string
+    email: string
+}
+
+type LoginFormValuesTypeKeys = GetStringKeys<LoginFormValuesType>
+
+const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps> & LoginFormOwnProps> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field placeholder={'Email'} component={Input} name={'email'} validate={[requiredField]}/>
-            </div>
-            <div>
-                <Field type={"password"} placeholder={'password'} component={Input} name={'password'}
-                       validate={[requiredField]}/>
-            </div>
-            <div>
-                remember me
-                <Field type={'checkbox'} component={Input} name={'rememberMe'}/>
-            </div>
-            {props.error &&
-                <div className={s.formSummeryError}>
-                    {props.error}
-                </div>
-            }
+            {createField('Email', 'email', [requiredField], Input)}
+            {createField('password', 'password', [requiredField], Input, {type: 'password'})}
+            {createField('', 'rememberMe', [], Input, {type: 'checkbox'}, 'Remember me')}
+
+
+            {props.captchaUrl && <img src={`${props.captchaUrl}`} alt="captcha"/>}
+            {props.captchaUrl && createField('Symbols from image', 'captcha', [requiredField], Input)}
+
+            {props.error && <div className={s.formSummeryError}>{props.error}</div>}
             <div>
                 <button>Login</button>
             </div>
@@ -37,4 +38,4 @@ const LoginForm = (props: InjectedFormProps<LoginFormDataType>) => {
 };
 
 
-export const LoginReduxForm = reduxForm<LoginFormDataType>({form: 'login'})(LoginForm)
+export const LoginReduxForm = reduxForm<LoginFormValuesType, LoginFormOwnProps>({form: 'login'})(LoginForm)
