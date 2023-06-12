@@ -9,3 +9,9 @@
 .contact {
     padding-left: 15px;
 }
+
+.formSummeryError {
+    border: 1px solid red;
+    padding: 5px;
+    color: red;
+}

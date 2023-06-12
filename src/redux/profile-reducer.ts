@@ -3,6 +3,7 @@ import {v1} from "uuid";
 import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
 import {AppThunkDispatch, StoreType} from "./redux-store";
+import {stopSubmit} from "redux-form";
 
 
 export type UserProfileType = {
@@ -124,6 +125,8 @@ export const saveProfile = (profile: UserProfileType) => async (dispatch: AppThu
     const res = await profileAPI.saveProfile(profile)
     if (res.data.resultCode === 0) {
         dispatch(getUserProfile(userId))
+    } else {
+        dispatch(stopSubmit('edit-profile', {_error: res.data.messages[0]}))
+        return Promise.reject(res.data.messages[0])
     }
-
 }

@@ -10,7 +10,7 @@ type ProfilePropsType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (photo: File) => void
-    saveProfile: (formData: UserProfileType) => void
+    saveProfile: (formData: UserProfileType) => Promise<any>
 }
 
 export const Profile = React.memo((props: ProfilePropsType) => {
