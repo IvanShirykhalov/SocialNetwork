@@ -39,7 +39,7 @@ test('set user profile', () => {
         lookingForAJob: false,
         lookingForAJobDescription: 'string',
         fullName: 'string',
-        userId: 1,
+        userId: '1',
         photos: {
             small: 'string',
             large: 'string',

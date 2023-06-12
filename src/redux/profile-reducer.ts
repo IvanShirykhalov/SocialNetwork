@@ -2,28 +2,28 @@ import {PostPropsType} from "../components/Profile/MyPosts/Post/Post";
 import {v1} from "uuid";
 import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
-import {AppThunkDispatch, store, StoreType} from "./redux-store";
+import {AppThunkDispatch, StoreType} from "./redux-store";
 
 
 export type UserProfileType = {
-    aboutMe?: string | null
+    aboutMe?: string
     contacts?: {
-        facebook: string | null
-        website: string | null
-        vk: string | null
-        twitter: string | null
-        instagram: string | null
-        youtube: string | null
-        github: string | null
-        mainLink: string | null
+        facebook: string
+        website: string
+        vk: string
+        twitter: string
+        instagram: string
+        youtube: string
+        github: string
+        mainLink: string
     },
     lookingForAJob?: boolean
-    lookingForAJobDescription?: string | null
-    fullName?: string | null
-    userId?: number
+    lookingForAJobDescription?: string
+    fullName?: string
+    userId?: string
     photos: {
-        small: string | null
-        large: string | null
+        small: string
+        large: string
     }
 } | null
 
@@ -116,7 +116,10 @@ export const savePhoto = (photo: File) => async (dispatch: Dispatch) => {
     }
 }
 
+
 export const saveProfile = (profile: UserProfileType) => async (dispatch: AppThunkDispatch, getState: () => StoreType) => {
+
+    // @ts-ignore
     const userId = getState().auth.id
     const res = await profileAPI.saveProfile(profile)
     if (res.data.resultCode === 0) {

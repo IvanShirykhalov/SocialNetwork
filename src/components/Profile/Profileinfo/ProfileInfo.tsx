@@ -46,13 +46,11 @@ export const ProfileInfo = React.memo((props: ProfileInfoPropsType) => {
                     {props.isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
                 </div>
                 {editMode
-                    ? <ProfileDataFormReduxForm onSubmit={onSubmit} initialValues={props.profile}/>
+                    ? <ProfileDataFormReduxForm onSubmit={onSubmit} initialValues={props.profile} profile={props.profile} />
                     : <ProfileData profile={props.profile} isOwner={props.isOwner}
                                    goToEditMode={() => setEditMode(true)}/>
                 }
-
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
-
             </div>
         </div>
     );
