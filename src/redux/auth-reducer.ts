@@ -1,6 +1,7 @@
 import {authAPI, securityAPI} from "../api/api";
 import {AppThunkDispatch} from "./redux-store";
 import {stopSubmit} from "redux-form";
+import {AxiosError} from "axios";
 
 type ActionType = ReturnType<typeof setUserData> | ReturnType<typeof getCaptchaSuccess>
 
@@ -72,7 +73,10 @@ export const logout = () => async (dispatch: AppThunkDispatch) => {
 }
 
 export const getCaptchaUrl = () => async (dispatch: AppThunkDispatch) => {
-    const res = await securityAPI.captcha()
-    dispatch(getCaptchaSuccess(res.data.url))
-
+    try {
+        const res = await securityAPI.captcha()
+        dispatch(getCaptchaSuccess(res.data.url))
+    } catch (e){
+        alert((e as Error))
+    }
 }

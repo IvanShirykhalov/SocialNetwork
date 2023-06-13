@@ -1,12 +1,9 @@
 import React, {Suspense} from 'react';
 import './App.css';
 import {Navbar} from "./components/Navbar/Navbar";
-import {Route, RouteComponentProps, withRouter} from "react-router-dom";
+import {Redirect, Route, RouteComponentProps, withRouter} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
-//import DialogsContainer from "./components/Dialogs/DialogsContainer";
-//import UsersContainer from "./components/Users/UsersContainer";
-//import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
@@ -30,9 +27,19 @@ const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileCo
 
 class App extends React.Component<PropsType, StoreType> {
 
+    catchAllUnhandledErrors = (promiseRejectionEvent: any) => {
+        alert('promiseRejectionEvent')
+    }
+
     componentDidMount() {
         this.props.initializeApp()
+        window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
     }
+
+    componentWillUnmount() {
+        window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors);
+    }
+
 
     render() {
         if (!this.props.initialized) {
@@ -50,6 +57,7 @@ class App extends React.Component<PropsType, StoreType> {
                             <Route render={() => <Login/>} path={'/login'}/>
                             <Route render={() => <Music/>} path={'/music'}/>
                             <Route render={() => <News/>} path={'/news'}/>
+                            <Route render={() => <div>404</div>} path={'/*'}/>
                         </Suspense>
                     </div>
                 </div>
