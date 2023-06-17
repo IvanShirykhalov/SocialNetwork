@@ -1,7 +1,6 @@
 import {authAPI, securityAPI} from "../api/api";
 import {AppThunkDispatch} from "./redux-store";
 import {stopSubmit} from "redux-form";
-import {AxiosError} from "axios";
 
 type ActionType = ReturnType<typeof setUserData> | ReturnType<typeof getCaptchaSuccess>
 
@@ -13,8 +12,9 @@ export type AuthDataType = {
     captchaUrl: null | string
 }
 
+
 const initialState = {
-    id: null as number | null,
+    id: null,
     email: null,
     login: null,
     isAuth: false,
@@ -22,13 +22,13 @@ const initialState = {
 }
 
 
-export const authReducer = (state = initialState, action: ActionType) => {
+export const authReducer = (state = initialState, action: ActionType): AuthDataType => {
     switch (action.type) {
         case "SET-USER-DATA":
         case "GET-CAPTCHA-SUCCESS":
             return {
                 ...state,
-                ...action.data
+                ...action.payload
             }
         default:
             return state
@@ -37,8 +37,8 @@ export const authReducer = (state = initialState, action: ActionType) => {
 }
 
 
-export const setUserData = (data: AuthDataType) => ({type: 'SET-USER-DATA', data} as const)
-export const getCaptchaSuccess = (captchaUrl: string) => ({type: 'GET-CAPTCHA-SUCCESS', data: {captchaUrl}} as const)
+export const setUserData = (payload: AuthDataType) => ({type: 'SET-USER-DATA', payload} as const)
+export const getCaptchaSuccess = (captchaUrl: string) => ({type: 'GET-CAPTCHA-SUCCESS', payload: {captchaUrl}} as const)
 
 export const getAuthUserData = () => async (dispatch: AppThunkDispatch) => {
 
@@ -76,7 +76,7 @@ export const getCaptchaUrl = () => async (dispatch: AppThunkDispatch) => {
     try {
         const res = await securityAPI.captcha()
         dispatch(getCaptchaSuccess(res.data.url))
-    } catch (e){
+    } catch (e) {
         alert((e as Error))
     }
 }

@@ -4,15 +4,15 @@ import {AppThunkDispatch} from "./redux-store";
 export type InitialAppStateType = {
     initialized: boolean
 }
-
 type ActionType = ReturnType<typeof initializedSuccess>
+
 
 const initialState: InitialAppStateType = {
     initialized: false
 }
 
 
-export const appReducer = (state = initialState, action: ActionType) => {
+export const appReducer = (state = initialState, action: ActionType): InitialAppStateType => {
     switch (action.type) {
         case "INITIALIZED-SUCCESS":
             return {
@@ -28,7 +28,7 @@ export const initializedSuccess = () => ({type: 'INITIALIZED-SUCCESS'} as const)
 
 export const initializeApp = () => async (dispatch: AppThunkDispatch) => {
 
-    const res = await dispatch(getAuthUserData())
+    await dispatch(getAuthUserData())
     dispatch(initializedSuccess())
 
 }

@@ -51,13 +51,14 @@ class App extends React.Component<PropsType, StoreType> {
                     <Navbar/>
                     <div className={'app-wrapper-content'}>
                         <Suspense fallback={<Preloader/>}>
+                            <Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>
                             <Route render={() => <ProfileContainer/>} path={'/profile/:userId?'}/>
                             <Route render={() => <DialogsContainer/>} path={'/dialogs'}/>
                             <Route render={() => <UsersContainer/>} path={'/users'}/>
                             <Route render={() => <Login/>} path={'/login'}/>
                             <Route render={() => <Music/>} path={'/music'}/>
                             <Route render={() => <News/>} path={'/news'}/>
-                            <Route render={() => <div>404</div>} path={'/*'}/>
+                            <Route render={() => <div>404</div>} path={'/**'}/>
                         </Suspense>
                     </div>
                 </div>

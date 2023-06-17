@@ -7,24 +7,24 @@ import {stopSubmit} from "redux-form";
 
 
 export type UserProfileType = {
-    aboutMe?: string
+    aboutMe?: string | null
     contacts?: {
-        facebook: string
-        website: string
-        vk: string
-        twitter: string
-        instagram: string
-        youtube: string
-        github: string
-        mainLink: string
+        facebook: string | null
+        website: string | null
+        vk: string | null
+        twitter: string | null
+        instagram: string | null
+        youtube: string | null
+        github: string | null
+        mainLink: string | null
     },
     lookingForAJob?: boolean
-    lookingForAJobDescription?: string
+    lookingForAJobDescription?: string | null
     fullName?: string
     userId?: string
     photos: {
-        small: string
-        large: string
+        small: string | null
+        large: string | null
     }
 } | null
 
@@ -34,11 +34,12 @@ export type ProfilePageType = {
     status: string
 }
 
+
 const initialState: ProfilePageType = {
     posts: [
         {id: v1(), message: `What's up dude`, likeCount: 2},
     ],
-    profile: null,
+    profile: null as UserProfileType | null,
     status: '',
 
 

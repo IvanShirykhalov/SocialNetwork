@@ -23,9 +23,11 @@ export type UsersPageType = {
     followingInProgress: string[]
 }
 
+//export type UsersPageType = typeof initialState
+
 
 const initialState: UsersPageType = {
-    users: [],
+    users: [] as UserType[],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
@@ -43,7 +45,7 @@ type ActionType =
 //| ReturnType<typeof follow>
 //| ReturnType<typeof unfollow>
 
-export const userReducer = (state = initialState, action: ActionType): UsersPageType => {
+export const userReducer = (state = initialState, action: ActionType) => {
     switch (action.type) {
         case "SET-USERS":
             return {
